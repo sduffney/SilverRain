@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class TutoriialBehaviour : MonoBehaviour
+public class TutorialBehaviour : MonoBehaviour
 {
     [SerializeField]
     public GameObject mainUI;
