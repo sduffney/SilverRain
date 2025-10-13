@@ -1074,6 +1074,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 817a64761e85648479dfe8839eed8338, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SwitchScenes
+  levelSelector: {fileID: 504077986}
 --- !u!4 &886904711
 Transform:
   m_ObjectHideFlags: 0
