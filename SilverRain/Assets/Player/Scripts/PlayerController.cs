@@ -1,12 +1,11 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement Settings")]
     public float moveSpeed = 5f;
-    public float jumpHeight = 2f;
+    public float jumpForce = 7f;
     public float mouseSensitivity = 2f;
     public float groundCheckDistance = 0.3f;
 
@@ -15,7 +14,6 @@ public class PlayerController : MonoBehaviour
     public float minVerticalAngle = -90f;
     public float maxVerticalAngle = 90f;
     
-    private CharacterController characterController;
     private Rigidbody rb;
     private Vector2 movementInput;
     private Vector2 lookInput;
@@ -27,9 +25,22 @@ public class PlayerController : MonoBehaviour
     
     public LayerMask groundLayerMask;
 
+    private InputSystem_Actions controls;
+
+    private void Awake()
+    {
+        controls = new InputSystem_Actions();
+        controls.Player.Move.performed += OnMove;
+        controls.Player.Move.canceled += OnMove;
+        controls.Player.Look.performed += OnLook;
+        controls.Player.Look.canceled += OnLook;
+        controls.Player.Jump.performed += OnJump;
+        controls.Player.Jump.canceled += OnJump;
+        controls.Player.Interact.performed += ctx => { /* Handle interaction */ };
+    }
+
     private void Start()
     {
-        characterController = GetComponent<CharacterController>();
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         rb.useGravity = true;
@@ -64,29 +75,31 @@ public class PlayerController : MonoBehaviour
 
     private void HandleGroundCheck()
     {
-        isGrounded = characterController.isGrounded;
+        // Check if the player is grounded using a raycast
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundLayerMask);
+        Debug.DrawRay(transform.position, Vector3.down * groundCheckDistance, isGrounded ? Color.green : Color.red);
+        Debug.Log("Is Grounded: " + isGrounded);
     }
 
     private void HandleMovement()
     {
         Vector3 moveDirection = transform.right * movementInput.x + transform.forward * movementInput.y;
-        characterController.Move(moveDirection * moveSpeed * Time.fixedDeltaTime);
+        velocity = moveDirection.normalized * moveSpeed;
+        transform.Translate(velocity * Time.fixedDeltaTime, Space.World);
     }
 
     private void HandleJump()
     {
         if (jumpInput && isGrounded)
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y);
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            jumpInput = false;
         }
+    }
 
-        if (isGrounded && velocity.y < 0)
-        {
-            velocity.y = -2f; // Small negative value to keep grounded
-        }
+    private void HandleInteract()
+    {
 
-        velocity.y += Physics.gravity.y * Time.fixedDeltaTime;
-        characterController.Move(velocity * Time.fixedDeltaTime);
     }
 
     // Input System Callbacks
@@ -105,6 +118,7 @@ public class PlayerController : MonoBehaviour
         if (context.performed)
         {
             jumpInput = true;
+            Debug.Log("Jump input received");
         }
     }
 
