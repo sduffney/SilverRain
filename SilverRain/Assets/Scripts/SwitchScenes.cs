@@ -31,4 +31,9 @@ public class SwitchScenes : MonoBehaviour
             SceneManager.LoadScene($"Level{levelSelector.selectedLevel + 1}");
         }
     }
+
+    public void GoToUpgrades()
+    {
+        SceneManager.LoadScene("Upgrades");
+    }
 }

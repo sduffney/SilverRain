@@ -5,18 +5,18 @@ public class PermanentUpgrade : ScriptableObject
 {
     public string id;                 // unique key
     public string displayName;        
-    public string bonusUnit;          // e.g. "% dmg", "HP", "movespeed"
+    public string bonusUnit;          
     public int maxLevel = 10;
     public string description;
     public string cachedDetailLine;
 
     [Header("Pricing")]
     public int baseCost = 100;
-    public float costAdder = 100f;        // e.g. +50 each level 
+    public float costAdder = 100f;         
     public int currentCost;
 
     [Header("Bonus")]
-    public float baseBonus = 5f;       // e.g. +5%
+    public float baseBonus = 5f;       
     public float bonusPerLevel = 5f;   // increment per level
 
     public int GetPriceForLevel(int level)

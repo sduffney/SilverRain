@@ -10,7 +10,7 @@ public class UpgradeButton : MonoBehaviour
     [SerializeField] private Button buyButton;
     [SerializeField] private TMP_Text buyButtonText;
 
-    private void Start()
+    private void Awake()
     {
         //if (currentSelectedView == null)
         //{
@@ -20,6 +20,9 @@ public class UpgradeButton : MonoBehaviour
         {
             Debug.LogError("GoldManager reference is missing.");
         }
+
+        currentSelectedView = null;
+        UpdateBuyButtonState();
     }
 
     public void SelectUpgrades(UpgradeDetailsView clickedView)
@@ -91,10 +94,17 @@ public class UpgradeButton : MonoBehaviour
         }
     }
 
-    private void UpdateBuyButtonState()
+    public void UpdateBuyButtonState()
     {
-        if (currentSelectedView == null) return;
+        if (currentSelectedView == null)
+        {
+            buyButtonText.text = "BUY";
+            buyButton.interactable = false;
+            return;
+        }
+
         int currentLevel = currentSelectedView.upgradeData.GetCurrentLevel();
+
         if (currentLevel >= currentSelectedView.upgradeData.maxLevel)
         {
             buyButtonText.text = "MAX";

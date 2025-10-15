@@ -2,6 +2,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ResetButton : MonoBehaviour
 {
@@ -10,15 +11,19 @@ public class ResetButton : MonoBehaviour
     //public UpgradeDetailsView upgradeDetailsView;
     public int currentLevel;
     private int totalRefund;
+    public UpgradeButton upgradeButton;
 
     [SerializeField] private TMP_Text nameText;
     [SerializeField] private TMP_Text lvText;
     [SerializeField] private TMP_Text costText;
     [SerializeField] private TMP_Text detailsBody;
+    [SerializeField] private TMP_Text[] miniLvs;
+
 
     public void ResetAllProgress()
     {
-        
+        totalRefund = 0;
+
         foreach (var upgrade in upgrades)
         {
             //calculate total refund
@@ -45,5 +50,13 @@ public class ResetButton : MonoBehaviour
         lvText.text = "Lv";
         costText.text = "Cost";
         detailsBody.text = "";
+
+        upgradeButton.currentSelectedView = null;
+        upgradeButton.UpdateBuyButtonState();
+
+        foreach (var miniLv in miniLvs)
+        {
+            miniLv.text = "0";
+        }
     }
 }

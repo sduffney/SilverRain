@@ -9,6 +9,7 @@ public class UpgradeDetailsView : MonoBehaviour
     [SerializeField] private TMP_Text lvText;
     [SerializeField] private TMP_Text costText;
     [SerializeField] private TMP_Text detailsBody;
+    [SerializeField] public TMP_Text miniLvText;
 
     void Start()
     {
@@ -22,6 +23,7 @@ public class UpgradeDetailsView : MonoBehaviour
         int currentLevel = upgradeData.GetCurrentLevel();
         nameText.text = upgradeData.displayName;
         lvText.text = $"{currentLevel}/{upgradeData.maxLevel}";
+        miniLvText.text = $"{currentLevel}";
         costText.text = currentLevel >= upgradeData.maxLevel ? "MAX" : $"{upgradeData.GetPriceForLevel(currentLevel + 1)} G";
         detailsBody.text = $"{upgradeData.description}";
     }
