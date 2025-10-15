@@ -34,7 +34,13 @@ public class HUDController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        UpdateTimer(Time.time.ToString("F2"));
+
+        float healthPercent = FindAnyObjectByType<PlayerHealth>().GetHealthPercentage();
+        UpdateHealth(healthPercent);
+
+        float expPercent = FindAnyObjectByType<PlayerLevel>().GetXPPercentage();
+        UpdateExp(expPercent);
     }
 
     void Initialize()
@@ -92,14 +98,14 @@ public class HUDController : MonoBehaviour
         }
     }
 
-    public void SpownKillInfo(string killType)
+    public void SpownKillInfo(string enemyType)
     {
-        switch (killType)
+        switch (enemyType)
         {
-            case "killType1":
+            case "Type1":
                 {
                     GameObject newKillInfo = Instantiate(killInfoPrefab, killInfo.transform);
-                    newKillInfo.GetComponent<TextMeshPro>().text = "killType 1";
+                    newKillInfo.GetComponent<TextMeshPro>().text = "Type 1  100";
                     break;
                 }
             case "Melee":

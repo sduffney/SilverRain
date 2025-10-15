@@ -39,7 +39,6 @@ public class PlayerHealth : MonoBehaviour
     private void Die()
     {
         OnDie?.Invoke();
-        // ´¦ÀíÍæ¼ÒËÀÍöÂß¼­
         Debug.Log("Player Died");
     }
 

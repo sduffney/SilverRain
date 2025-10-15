@@ -1,44 +1,46 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement Settings")]
     public float moveSpeed = 5f;
-    public float jumpForce = 7f;
+    public float jumpHeight = 2f;
     public float mouseSensitivity = 2f;
-    public float groundCheckDistance = 0.1f;
-    public LayerMask groundLayerMask = 1;
+    public float groundCheckDistance = 0.3f;
 
     [Header("Looking Settings")]
     public Transform cameraTransform;
     public float minVerticalAngle = -90f;
     public float maxVerticalAngle = 90f;
     
+    private CharacterController characterController;
     private Rigidbody rb;
     private Vector2 movementInput;
     private Vector2 lookInput;
     private bool jumpInput;
+    private bool isGrounded;
+    private Vector3 velocity;
     private float xRotation = 0f;
-    private bool isGrounded = false;
     private bool enableMovement = true;
-
-    public bool IsGrounded => isGrounded;
-    public Vector3 Velocity => rb.linearVelocity;
+    
+    public LayerMask groundLayerMask;
 
     private void Start()
     {
+        characterController = GetComponent<CharacterController>();
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
-        rb.useGravity = false;
-        //Cursor.lockState = CursorLockMode.Locked;
-        //Cursor.visible = false;
+        rb.useGravity = true;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void Update()
     {
-        HandleCheckGround();
         HandleLook();
+        HandleGroundCheck();
     }
 
     private void FixedUpdate()
@@ -46,12 +48,6 @@ public class PlayerController : MonoBehaviour
         if (!enableMovement) return;
         HandleMovement();
         HandleJump();
-    }
-
-    private void HandleCheckGround()
-    {
-        Vector3 rayStart = transform.position + Vector3.up * 0.1f;
-        isGrounded = Physics.Raycast(rayStart, Vector3.down, groundCheckDistance + 0.1f, groundLayerMask);
     }
 
     private void HandleLook()
@@ -66,41 +62,31 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void HandleGroundCheck()
+    {
+        isGrounded = characterController.isGrounded;
+    }
+
     private void HandleMovement()
     {
         Vector3 moveDirection = transform.right * movementInput.x + transform.forward * movementInput.y;
-        Vector3 horizontalVelocity = moveDirection * moveSpeed;
-
-        Vector3 currentVelocity = rb.linearVelocity;
-
-        if (jumpInput && isGrounded)
-        {
-            currentVelocity.y = jumpForce;
-            jumpInput = false;
-        }
-
-        if (!isGrounded)
-        {
-            currentVelocity.y += Physics.gravity.y * Time.fixedDeltaTime;
-        }
-        else if (currentVelocity.y < 0)
-        {
-            currentVelocity.y = 0;
-        }
-
-        currentVelocity.x = horizontalVelocity.x;
-        currentVelocity.z = horizontalVelocity.z;
-
-        rb.linearVelocity = currentVelocity;
+        characterController.Move(moveDirection * moveSpeed * Time.fixedDeltaTime);
     }
 
     private void HandleJump()
     {
         if (jumpInput && isGrounded)
         {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
-            jumpInput = false;
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y);
         }
+
+        if (isGrounded && velocity.y < 0)
+        {
+            velocity.y = -2f; // Small negative value to keep grounded
+        }
+
+        velocity.y += Physics.gravity.y * Time.fixedDeltaTime;
+        characterController.Move(velocity * Time.fixedDeltaTime);
     }
 
     // Input System Callbacks
