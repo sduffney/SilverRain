@@ -4,9 +4,9 @@ using TMPro;
 
 public class HUDController : MonoBehaviour
 {
-    [SerializeField] private TextMeshPro timer;
-    [SerializeField] private TextMeshPro score;
-    [SerializeField] private TextMeshPro level;
+    [SerializeField] private TextMeshProUGUI timer;
+    [SerializeField] private TextMeshProUGUI score;
+    [SerializeField] private TextMeshProUGUI level;
 
     [SerializeField] private GameObject buffsList;
     [SerializeField] private GameObject killInfo;
