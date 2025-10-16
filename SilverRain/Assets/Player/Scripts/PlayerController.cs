@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
@@ -22,8 +23,13 @@ public class PlayerController : MonoBehaviour
     private Vector3 velocity;
     private float xRotation = 0f;
     private bool enableMovement = true;
-    
+
+    [Space]
     public LayerMask groundLayerMask;
+
+    [Header("Events")]
+    public UnityEvent onEnemyKill;
+    public UnityEvent onAddBuff;
 
     private InputSystem_Actions controls;
 
@@ -36,7 +42,6 @@ public class PlayerController : MonoBehaviour
         controls.Player.Look.canceled += OnLook;
         controls.Player.Jump.performed += OnJump;
         controls.Player.Jump.canceled += OnJump;
-        controls.Player.Interact.performed += ctx => { /* Handle interaction */ };
     }
 
     private void Start()
@@ -97,11 +102,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void HandleInteract()
-    {
-
-    }
-
     // Input System Callbacks
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -150,4 +150,13 @@ public class PlayerController : MonoBehaviour
         rb.linearVelocity = Vector3.zero;
     }
 
+    public void EnemyKilled(string enemyType)
+    {
+        onEnemyKill?.Invoke();
+    }
+
+    public void AddBuff(string buff)
+    {
+        onAddBuff?.Invoke();
+    }
 }

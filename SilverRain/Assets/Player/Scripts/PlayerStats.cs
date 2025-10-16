@@ -74,6 +74,46 @@ public class PlayerStats : MonoBehaviour
         {
             playerHealth.HealDamage(healthRegen * Time.deltaTime);
         }
+
+        // For testing purposes only
+        TestUIPart();
+    }
+
+    // Testing purposes only
+    public int score = 0;
+    private void TestUIPart()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            playerHealth.TakeDamage(20f);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            playerHealth.HealDamage(20f);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            playerLevel.GainXP(50);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            playerController.AddBuff("buff");
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            playerController.EnemyKilled("Type1");
+            score += 100;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            playerController.EnemyKilled("Type2");
+            score += 150;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            playerController.EnemyKilled("Type3");
+            score += 250;
+        }
     }
 }
 

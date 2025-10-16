@@ -4,15 +4,15 @@ using UnityEngine.Events;
 public class PlayerHealth : MonoBehaviour
 {
     [Header("Health Settings")]
-    public float maxHealth = 100f;
+    public float maxHealth;
     public float currentHealth;
 
     [Header("Events")]
-    public UnityEvent<float> OnHealthChanged;
-    public UnityEvent OnDie;
+    public UnityEvent onDie;
 
     private void Start()
     {
+        maxHealth = FindAnyObjectByType<PlayerStats>().maxHealth;
         currentHealth = maxHealth;
     }
 
@@ -20,8 +20,6 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth -= amount;
         currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
-
-        OnHealthChanged?.Invoke(currentHealth / maxHealth);
 
         if (currentHealth <= 0f)
         {
@@ -33,12 +31,12 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth += amount;
         currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
-        OnHealthChanged?.Invoke(currentHealth / maxHealth);
     }
 
     private void Die()
     {
-        OnDie?.Invoke();
+        // Death logic here
+        onDie?.Invoke();
         Debug.Log("Player Died");
     }
 

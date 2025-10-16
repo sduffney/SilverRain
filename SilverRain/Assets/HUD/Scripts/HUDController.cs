@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
 public class HUDController : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class HUDController : MonoBehaviour
     [SerializeField] private Slider healthBar;
     [SerializeField] private Slider expBar;
 
-    HUDController instance;
+    public HUDController instance;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -34,13 +35,15 @@ public class HUDController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateTimer(Time.time.ToString("F2"));
+        UpdateTimer(Time.time.ToString("00:00"));
 
         float healthPercent = FindAnyObjectByType<PlayerHealth>().GetHealthPercentage();
         UpdateHealth(healthPercent);
 
         float expPercent = FindAnyObjectByType<PlayerLevel>().GetXPPercentage();
         UpdateExp(expPercent);
+
+        UpdateScore(FindAnyObjectByType<PlayerStats>().score);
     }
 
     void Initialize()
@@ -100,32 +103,46 @@ public class HUDController : MonoBehaviour
 
     public void SpownKillInfo(string enemyType)
     {
+        string infoText = "";
         switch (enemyType)
         {
             case "Type1":
-                {
-                    GameObject newKillInfo = Instantiate(killInfoPrefab, killInfo.transform);
-                    newKillInfo.GetComponent<TextMeshPro>().text = "Type 1  100";
-                    break;
-                }
-            case "Melee":
-                {
-                    GameObject newKillInfo = Instantiate(killInfoPrefab, killInfo.transform);
-                    newKillInfo.GetComponent<TextMeshPro>().text = "Melee Kill!";
-                    break;
-                }
-            case "Explosion":
-                {
-                    GameObject newKillInfo = Instantiate(killInfoPrefab, killInfo.transform);
-                    newKillInfo.GetComponent<TextMeshPro>().text = "Explosion Kill!";
-                    break;
-                }
+                infoText = "Type 1  100";
+                break;
+            case "Type2":
+                infoText = "Type 2  150";
+                break;
+            case "Type3":
+                infoText = "Type 3  250";
+                break;
             default:
-                {
-                    GameObject newKillInfo = Instantiate(killInfoPrefab, killInfo.transform);
-                    newKillInfo.GetComponent<TextMeshPro>().text = "Kill!";
-                    break;
-                }
+                return;
         }
+
+        if (killInfo.transform.childCount >= 5)
+        {
+            Destroy(killInfo.transform.GetChild(0).gameObject);
+        }
+
+        GameObject newKillInfo = Instantiate(killInfoPrefab, killInfo.transform);
+        var tmp = newKillInfo.GetComponent<TextMeshProUGUI>();
+        tmp.text = infoText;
+        StartCoroutine(FadeAndDestroyKillInfo(tmp, newKillInfo, 1f, 0.5f));
+    }
+
+    private IEnumerator FadeAndDestroyKillInfo(TextMeshProUGUI tmp, GameObject obj, float showTime, float fadeTime)
+    {
+        yield  return new WaitForSeconds(showTime);
+
+        Color color = tmp.color;
+        float elapsed = 0f;
+        while (elapsed < fadeTime)
+        {
+            elapsed += Time.deltaTime;
+            color.a = Mathf.Lerp(1f, 0f, elapsed / fadeTime);
+            tmp.color = color;
+            yield return null;
+        }
+        Destroy(obj);
     }
 }
