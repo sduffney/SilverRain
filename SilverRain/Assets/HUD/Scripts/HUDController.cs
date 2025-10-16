@@ -106,13 +106,13 @@ public class HUDController : MonoBehaviour
         string infoText = "";
         switch (enemyType)
         {
-            case "Type1":
+            case "1":
                 infoText = "Type 1  100";
                 break;
-            case "Type2":
+            case "2":
                 infoText = "Type 2  150";
                 break;
-            case "Type3":
+            case "3":
                 infoText = "Type 3  250";
                 break;
             default:

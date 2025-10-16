@@ -2351,6 +2351,7 @@ MonoBehaviour:
   experienceMod: 1
   maxHealth: 100
   armor: 0
+  score: 0
 --- !u!114 &1621955094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2409,48 +2410,6 @@ MonoBehaviour:
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  onEnemyKill:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 116872439}
-        m_TargetAssemblyTypeName: HUDController, Assembly-CSharp
-        m_MethodName: SpownKillInfo
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Type1
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1621955094}
-        m_TargetAssemblyTypeName: PlayerLevel, Assembly-CSharp
-        m_MethodName: GainXP
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 100
-          m_StringArgument: Type1
-          m_BoolArgument: 0
-        m_CallState: 2
-  onAddBuff:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 116872439}
-        m_TargetAssemblyTypeName: HUDController, Assembly-CSharp
-        m_MethodName: AddBuff
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: buff
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!54 &1621955097
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -101,17 +101,20 @@ public class PlayerStats : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
-            playerController.EnemyKilled("Type1");
+            playerController.EnemyKilled("1");
+            playerLevel.GainXP(20);
             score += 100;
         }
         if (Input.GetKeyDown(KeyCode.Alpha6))
         {
-            playerController.EnemyKilled("Type2");
+            playerController.EnemyKilled("2");
+            playerLevel.GainXP(50);
             score += 150;
         }
         if (Input.GetKeyDown(KeyCode.Alpha7))
         {
-            playerController.EnemyKilled("Type3");
+            playerController.EnemyKilled("3");
+            playerLevel.GainXP(100);
             score += 250;
         }
     }

@@ -27,10 +27,6 @@ public class PlayerController : MonoBehaviour
     [Space]
     public LayerMask groundLayerMask;
 
-    [Header("Events")]
-    public UnityEvent onEnemyKill;
-    public UnityEvent onAddBuff;
-
     private InputSystem_Actions controls;
 
     private void Awake()
@@ -152,11 +148,11 @@ public class PlayerController : MonoBehaviour
 
     public void EnemyKilled(string enemyType)
     {
-        onEnemyKill?.Invoke();
+        FindAnyObjectByType<HUDController>().SpownKillInfo(enemyType);
     }
 
     public void AddBuff(string buff)
     {
-        onAddBuff?.Invoke();
+        FindAnyObjectByType<HUDController>().AddBuff(buff);
     }
 }
