@@ -14,7 +14,7 @@ public class TutorialBehaviour : MonoBehaviour
         }
         else if (pasueUI != null)
         {
-            pasueUI.SetActive(false);
+            pasueUI.SetActive(true);
         }
         gameObject.SetActive(false);
     }
