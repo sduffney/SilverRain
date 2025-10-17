@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int scoreValue;
     [SerializeField] private int xpValue;
     [SerializeField] private float damage;
-    private Renderer renderer;
+    private Renderer[] renderers;
 
     private void OnEnable()
     {
@@ -25,11 +25,26 @@ public class Enemy : MonoBehaviour
     }
     public void Reveal()
     {
-        Component.renderer.enabled = true;
+        foreach (var r in renderers) 
+        { 
+            r.enabled = true;
+        }
     }
 
     public void Hide()
     {
-        renderer.enabled = false;
+        foreach (var r in renderers)
+        {
+            r.enabled = false;
+        }
+    }
+
+    private void Start()
+    {
+        health = GetComponent<EnemyHealth>();
+        controller = GetComponent<EnemyController>();
+        renderers = GetComponentsInChildren<Renderer>();
+
+        Hide();
     }
 }

@@ -4,7 +4,9 @@ public class BloodSplatterReveal : MonoBehaviour
 {
     private void OnParticleCollision(GameObject other)
     {
-        //EnemyController enemy = other.GetComponent<EnemyController>;
+        Enemy enemy = other.GetComponent<Enemy>();
+        if (enemy != null) return; 
+        else enemy.Reveal();
 
     }
 }
