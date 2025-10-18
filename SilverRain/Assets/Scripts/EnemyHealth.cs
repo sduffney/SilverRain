@@ -23,7 +23,9 @@ public class EnemyHealth : MonoBehaviour
         }
 
         //Instatntiate BloodSplatter
-        var bloodSplatter = Instantiate(bloodSplatterPrefab, transform.position, Quaternion.identity);
+        Vector3 bloodSplatterSpawn = transform.position;
+        bloodSplatterSpawn.y += 2;
+        var bloodSplatter = Instantiate(bloodSplatterPrefab, bloodSplatterSpawn, Quaternion.identity);
 
         bloodSplatter.Play();
         Destroy(bloodSplatter, bloodSplatter.main.duration);
@@ -38,11 +40,6 @@ public class EnemyHealth : MonoBehaviour
     {
         Destroy(gameObject);
         //Play death animation
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q)) { TakeDamage(10); }
     }
 
 }
