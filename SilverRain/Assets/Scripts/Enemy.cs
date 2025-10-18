@@ -1,4 +1,4 @@
-using UnityEngine;
+//using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
@@ -9,15 +9,15 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float damage;
     private Renderer[] renderers;
 
-    private void OnEnable()
-    {
-        //Subscribe to reveal all event
-    }
+//    private void OnEnable()
+//    {
+//        //Subscribe to reveal all event
+//    }
 
-    private void OnDisable()
-    {
-        //Unsubscribe to reveal all event
-    }
+//    private void OnDisable()
+//    {
+//        //Unsubscribe to reveal all event
+//    }
 
     private void Update()
     {
