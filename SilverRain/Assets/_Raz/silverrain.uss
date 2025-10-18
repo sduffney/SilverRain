@@ -4,8 +4,8 @@
 }
 
 .unity-button {
-    height: 36px;
-    color: rgb(233, 241, 246);
+    height: 60px;
+    color: rgb(16, 16, 16);
     background-color: rgb(27, 36, 48);
     border-width: 1px;
     border-color: rgb(34, 48, 65);
@@ -20,16 +20,21 @@
     margin-bottom: 10px;
     transition-timing-function: ease-out-bounce;
     transition-duration: 0.35s;
+    background-image: url("project://database/Assets/UI/Cute-GUI-Pack-Lite/PNG/18_roulette/01/gacha_button_bg.png?fileID=2800000&guid=bf5c2e5f3219089469172a59b4bf8e42&type=3#gacha_button_bg");
+    font-size: 20px;
+    -unity-font-style: bold;
+    -unity-background-scale-mode: scale-and-crop;
 }
 
 .unity-group-box {
-    background-color: rgb(21, 28, 36);
+    background-color: rgb(171, 210, 255);
     border-width: 1px;
     border-color: rgb(34, 48, 65);
     border-radius: 12px;
     padding: 8px;
     width: 100%;
     max-width: 520px;
+    color: rgb(255, 255, 255);
 }
 
 .tittle-label {
@@ -55,7 +60,7 @@
     background-color: rgb(0, 190, 163);
     -unity-font-style: bold;
     color: rgb(2, 11, 68);
-    font-size: 22px;
+    font-size: 36px;
 }
 
 .unity-button:active {
