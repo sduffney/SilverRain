@@ -5,7 +5,7 @@ TagManager:
   serializedVersion: 3
   tags: []
   tags:
-  - CinemachineTarget
+  - Ground
   layers:
   - Default
   - TransparentFX
