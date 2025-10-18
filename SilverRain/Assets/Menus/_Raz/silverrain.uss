@@ -38,7 +38,7 @@
     -unity-font-style: bold;
     margin-bottom: 8px;
     -unity-text-align: middle-center;
-    font-size: 22px;
+    font-size: 120px;
     margin-bottom: 12px;
 }
 
@@ -51,8 +51,16 @@
 }
 
 .unity-button:hover {
+    scale: 1.04 1.15 1.4;
+    background-color: rgb(0, 190, 163);
+    -unity-font-style: bold;
+    color: rgb(2, 11, 68);
+    font-size: 22px;
+}
+
+.unity-button:active {
     scale: 1.1 1.1;
-    background-color: rgb(148, 255, 240);
+    background-color: rgb(186, 255, 246);
     -unity-font-style: bold;
     color: rgb(2, 11, 68);
     font-size: 22px;
