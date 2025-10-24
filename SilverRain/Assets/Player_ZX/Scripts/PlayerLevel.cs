@@ -34,7 +34,7 @@ public class PlayerLevel : MonoBehaviour
         CalculateMaxXP();
 
         OnLevelUp?.Invoke(playerLevel);
-        Debug.Log($"Level Up! Current Level: {playerLevel}");
+        //Debug.Log($"Level Up! Current Level: {playerLevel}");
     }
 
     private void CalculateMaxXP()

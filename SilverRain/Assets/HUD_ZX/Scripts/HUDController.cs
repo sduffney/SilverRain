@@ -17,33 +17,21 @@ public class HUDController : MonoBehaviour
     [SerializeField] private Slider healthBar;
     [SerializeField] private Slider expBar;
 
-    public HUDController instance;
+    [SerializeField] private Image damageOverlay;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if (instance == null)
-        {
-            instance = this;
-            Initialize();
-        }
-        else
-        {
-            Destroy(this);
-        }
+        Initialize();
     }
 
     // Update is called once per frame
     void Update()
     {
-        UpdateTimer(Time.time.ToString("00:00"));
-
-        float healthPercent = FindAnyObjectByType<PlayerHealth>().GetHealthPercentage();
-        UpdateHealth(healthPercent);
-
-        float expPercent = FindAnyObjectByType<PlayerLevel>().GetXPPercentage();
-        UpdateExp(expPercent);
-
-        UpdateScore(FindAnyObjectByType<PlayerStats>().score);
+        timer.text = Time.time.ToString("00:00");
+        healthBar.value = FindAnyObjectByType<PlayerHealth>().GetHealthPercentage();
+        expBar.value = FindAnyObjectByType<PlayerLevel>().GetXPPercentage();
+        score.text = FindAnyObjectByType<PlayerStats>().score.ToString();
     }
 
     void Initialize()
@@ -62,31 +50,6 @@ public class HUDController : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
-    }
-
-    public void UpdateTimer(string time)
-    {
-        timer.text = time;
-    }
-
-    public void UpdateScore(int newScore)
-    {
-        score.text = newScore.ToString();
-    }
-
-    public void UpdateLevel(string newLevel)
-    {
-        level.text = newLevel;
-    }
-
-    public void UpdateHealth(float healthPercent)
-    {
-        healthBar.value = healthPercent;
-    }
-
-    public void UpdateExp(float expPercent)
-    {
-        expBar.value = expPercent;
     }
 
     public void AddBuff(string buffName)
@@ -144,5 +107,32 @@ public class HUDController : MonoBehaviour
             yield return null;
         }
         Destroy(obj);
+    }
+
+    public void ShowDamageEffect(float duration = 0.3f, float maxAlpha = 0.5f)
+    {
+        if (damageOverlay != null)
+        {
+            StopCoroutine(nameof(FadeDamageOverlay));
+            StartCoroutine(FadeDamageOverlay(duration, maxAlpha));
+        }
+    }
+
+    private IEnumerator FadeDamageOverlay(float duration, float maxAlpha)
+    {
+        Color color = damageOverlay.color;
+        color.a = maxAlpha;
+        damageOverlay.color = color;
+
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            color.a = Mathf.Lerp(maxAlpha, 0f, elapsed / duration);
+            damageOverlay.color = color;
+            yield return null;
+        }
+        color.a = 0f;
+        damageOverlay.color = color;
     }
 }

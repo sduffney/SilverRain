@@ -1,21 +1,37 @@
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class PlayerStats : MonoBehaviour
 {
-    public float attackDamage = 10f;
-    public float projectileSpeed = 20f;
-    public float duration = 5f;
-    public float cooldown = 0.5f;
-    public float size = 10f;
-    public float moveSpeed = 5f;
-    public float healthRegen = 0f;
-    public float experienceMod = 1f;
-    public float maxHealth = 100f;
-    public float armor = 0f;
+    public static PlayerStats Instance { get; private set; }
+
+    public float attackDamage = 1f;     // Base attack damage multiplier
+    public float projectileSpeed = 1f;  // Base projectile speed multiplier
+    public float duration = 1f;         // Base duration multiplier <---------------- ?
+    public float cooldown = 1f;         // Base weapon cooldown multiplier
+    public float size = 1f;             // Base attack size multiplier
+    public float moveSpeed = 1f;        // Base movement speed multiplier
+    public float healthRegen = 0f;      // Health regeneration per second
+    public float experienceMod = 1f;    // Experience gain multiplier
+    public float maxHealth = 1f;        // Max health multiplier
+    public float armor = 1f;            // Damage reduction multiplier
 
     private PlayerHealth playerHealth;
     private PlayerController playerController;
     private PlayerLevel playerLevel;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+    }
 
     private void Start()
     {

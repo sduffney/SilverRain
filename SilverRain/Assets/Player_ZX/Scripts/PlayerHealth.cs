@@ -8,11 +8,12 @@ public class PlayerHealth : MonoBehaviour
     public float currentHealth;
 
     [Header("Events")]
+    public UnityEvent onTakeDamage;
     public UnityEvent onDie;
 
     private void Start()
     {
-        maxHealth = FindAnyObjectByType<PlayerStats>().maxHealth;
+        maxHealth = 100f * FindAnyObjectByType<PlayerStats>().maxHealth;
         currentHealth = maxHealth;
     }
 
@@ -20,6 +21,7 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth -= amount;
         currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
+        onTakeDamage?.Invoke();
 
         if (currentHealth <= 0f)
         {
