@@ -16,9 +16,13 @@ public class PlayerStats : MonoBehaviour
     public float maxHealth = 1f;        // Max health multiplier
     public float armor = 1f;            // Damage reduction multiplier
 
+    public int score = 0;
+
     private PlayerHealth playerHealth;
     private PlayerController playerController;
     private PlayerLevel playerLevel;
+
+    private ConsoleManager consoleManager;
 
     private void Awake()
     {
@@ -40,6 +44,31 @@ public class PlayerStats : MonoBehaviour
         playerLevel = GetComponent<PlayerLevel>();
 
         ApplyStatModifiers();
+        
+        consoleManager = FindAnyObjectByType<ConsoleManager>();
+        if (consoleManager != null)
+        {
+            consoleManager.RegisterCommand("earnxp", args =>
+            {
+                if (playerLevel != null)
+                {
+                    if (args.Length > 0 && float.TryParse(args[0], out float xpAmount))
+                    {
+                        playerLevel.GainXP(xpAmount);
+                        consoleManager.AppendOutput($"Gained {xpAmount} XP.");
+                    }
+                    else if (args.Length == 0)
+                    {
+                        playerLevel.GainXP(100f);
+                        consoleManager.AppendOutput("Gained 100 XP.");
+                    }
+                    else
+                    {
+                        consoleManager.AppendOutput("Invalid XP amount.");
+                    }
+                }
+            });
+        }
     }
 
     public void RaiseStat(float amount, StatType statType)
@@ -92,48 +121,48 @@ public class PlayerStats : MonoBehaviour
         }
 
         // For testing purposes only
-        TestUIPart();
+        //TestUIPart();
     }
 
     // Testing purposes only
-    public int score = 0;
-    private void TestUIPart()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            playerHealth.TakeDamage(20f);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            playerHealth.HealDamage(20f);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            playerLevel.GainXP(50);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            playerController.AddBuff("buff");
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            playerController.EnemyKilled("1");
-            playerLevel.GainXP(20);
-            score += 100;
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha6))
-        {
-            playerController.EnemyKilled("2");
-            playerLevel.GainXP(50);
-            score += 150;
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha7))
-        {
-            playerController.EnemyKilled("3");
-            playerLevel.GainXP(100);
-            score += 250;
-        }
-    }
+    //public int score = 0;
+    //private void TestUIPart()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Alpha1))
+    //    {
+    //        playerHealth.TakeDamage(20f);
+    //    }
+    //    if (Input.GetKeyDown(KeyCode.Alpha2))
+    //    {
+    //        playerHealth.HealDamage(20f);
+    //    }
+    //    if (Input.GetKeyDown(KeyCode.Alpha3))
+    //    {
+    //        playerLevel.GainXP(50);
+    //    }
+    //    if (Input.GetKeyDown(KeyCode.Alpha4))
+    //    {
+    //        playerController.AddBuff("buff");
+    //    }
+    //    if (Input.GetKeyDown(KeyCode.Alpha5))
+    //    {
+    //        playerController.EnemyKilled("1");
+    //        playerLevel.GainXP(20);
+    //        score += 100;
+    //    }
+    //    if (Input.GetKeyDown(KeyCode.Alpha6))
+    //    {
+    //        playerController.EnemyKilled("2");
+    //        playerLevel.GainXP(50);
+    //        score += 150;
+    //    }
+    //    if (Input.GetKeyDown(KeyCode.Alpha7))
+    //    {
+    //        playerController.EnemyKilled("3");
+    //        playerLevel.GainXP(100);
+    //        score += 250;
+    //    }
+    //}
 }
 
 public enum StatType

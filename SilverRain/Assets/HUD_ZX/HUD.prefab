@@ -190,6 +190,7 @@ GameObject:
   - component: {fileID: 8228243816045784561}
   - component: {fileID: 7359618004730968156}
   - component: {fileID: 6956279161055955919}
+  - component: {fileID: 1522968847722275671}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
@@ -309,6 +310,25 @@ MonoBehaviour:
   healthBar: {fileID: 1596896694856238520}
   expBar: {fileID: 1640421972000258159}
   damageOverlay: {fileID: 7375862584653299869}
+--- !u!114 &1522968847722275671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 927384464625162390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c82c36535a50d79419a85dd9bba3c6da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ConsoleManager
+  consolePanel: {fileID: 0}
+  inputField: {fileID: 0}
+  outputField: {fileID: 0}
+  toggleKey: 96
+  startHidden: 1
+  pauseWhileOpen: 1
+  isEnabled: 1
 --- !u!1 &1023866181649131038
 GameObject:
   m_ObjectHideFlags: 0
