@@ -109,12 +109,12 @@ public class HUDController : MonoBehaviour
         Destroy(obj);
     }
 
-    public void ShowDamageEffect(float duration = 0.3f, float maxAlpha = 0.5f)
+    public void ShowDamageEffect()
     {
         if (damageOverlay != null)
         {
             StopCoroutine(nameof(FadeDamageOverlay));
-            StartCoroutine(FadeDamageOverlay(duration, maxAlpha));
+            StartCoroutine(FadeDamageOverlay(0.3f, 0.5f));
         }
     }
 
