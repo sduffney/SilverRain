@@ -21,11 +21,14 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;
     private float xRotation = 0f;
 
+    private PlayerInput playerInput;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         rb.useGravity = true;
+        playerInput = GetComponent<PlayerInput>();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -50,16 +53,20 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (Time.timeScale == 0f) FreezePlayer(); else UnfreezePlayer();
+        //if (Time.timeScale == 0f) FreezePlayer(); else UnfreezePlayer();
     }
 
-    private void FreezePlayer()
+    public void FreezePlayer()
     {
+        ResetVelocity();
+        playerInput.enabled = false;
         rb.isKinematic = true;
         rb.constraints = RigidbodyConstraints.FreezeAll;
     }
-    private void UnfreezePlayer()
+    public void UnfreezePlayer()
     {
+        ResetVelocity();
+        playerInput.enabled = true;
         rb.isKinematic = false;
         rb.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX;
     }

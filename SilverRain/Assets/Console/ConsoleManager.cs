@@ -24,9 +24,11 @@ public class ConsoleManager : MonoBehaviour
     private Dictionary<string, string> commandDescriptions = new Dictionary<string, string>();
     private bool isOpen = false;
     private float previousTimeScale = 1f;
+    private string lastCommand = string.Empty;
 
     private ScrollRect scrollRect;
-    private PlayerInput playerInput;
+    //private PlayerInput playerInput;
+    private PlayerController playerController;
 
 
     private void Awake()
@@ -34,7 +36,8 @@ public class ConsoleManager : MonoBehaviour
         if (!isEnabled) return;
         RegisterDefaultCommands();
         //scrollRect = outputField.GetComponentInParent<ScrollRect>();
-        playerInput = GameObject.FindWithTag("Player")?.GetComponent<PlayerInput>();
+        //playerInput = GameObject.FindWithTag("Player")?.GetComponent<PlayerInput>();
+        playerController = GameObject.FindAnyObjectByType<PlayerController>();
 
         if (consolePanel != null)
         {
@@ -57,10 +60,15 @@ public class ConsoleManager : MonoBehaviour
             {
                 string line = inputField.text.Trim();
                 ExecuteInput(line);
+                lastCommand = line;
                 inputField.text = "";
                 EventSystem.current.SetSelectedGameObject(inputField.gameObject, null);
                 inputField.OnPointerClick(new PointerEventData(EventSystem.current));
             }
+        }
+        if (isOpen && Input.GetKeyDown(KeyCode.UpArrow) && lastCommand != string.Empty)
+        {
+            inputField.text = lastCommand;
         }
     }
 
@@ -73,22 +81,25 @@ public class ConsoleManager : MonoBehaviour
             if (scrollRect == null) scrollRect = outputField.GetComponentInParent<ScrollRect>();
         }
 
-        if (pauseWhileOpen && playerInput)
+        if (pauseWhileOpen && playerController)
         {
             if (isOpen)
             {
-                playerInput.enabled = false;
+                //playerInput.enabled = false;
+                playerController.FreezePlayer();
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
-                previousTimeScale = Time.timeScale;
-                Time.timeScale = 0f;
+                
+                //previousTimeScale = Time.timeScale;
+                //Time.timeScale = 0f;
             }
             else
             {
-                playerInput.enabled = true;
+                //playerInput.enabled = true;
+                playerController.UnfreezePlayer();
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
-                Time.timeScale = previousTimeScale;
+                //Time.timeScale = previousTimeScale;
             }
         }
 
