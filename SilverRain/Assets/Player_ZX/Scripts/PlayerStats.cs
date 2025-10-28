@@ -139,6 +139,26 @@ public class PlayerStats : MonoBehaviour
                 consoleManager.AppendOutput($"Invalid enemy type entered");
             }
         }, "<enemyType> - kill one enemy");
+        consoleManager.RegisterCommand("damage", args =>
+        {
+            if (playerHealth != null)
+            {
+                if (args.Length > 0 && float.TryParse(args[0], out float damageValue))
+                {
+                    playerHealth.TakeDamage(damageValue);
+                    consoleManager.AppendOutput($"Player takes {damageValue} damage.");
+                }
+                else if(args.Length == 0)
+                {
+                    playerHealth.TakeDamage(20);
+                    consoleManager.AppendOutput($"Player takes 20 damage.");
+                }
+                else
+                {
+                    consoleManager.AppendOutput("Invalid damage amount.");
+                }
+            }
+        },"<value> - damage player");
     }
 
     // Testing purposes only
