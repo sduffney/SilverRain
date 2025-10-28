@@ -4,40 +4,32 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    public List<Weapon> weapons = new List<Weapon>();
+    public List<TemporaryItem> tempItems = new List<TemporaryItem>();
 
-    public void AddWeapon(Weapon newWeapon)
+    public void PickItem(TemporaryItem newItem)
     {
-        if (!weapons.Contains(newWeapon))
+        if (!tempItems.Contains(newItem))
         {
-            weapons.Add(newWeapon);
-            Debug.Log($"Added weapon: {newWeapon.name}");
+            tempItems.Add(newItem);
         }
         else
         {
-            Debug.Log($"Weapon {newWeapon.name} already in inventory.");
+            ItemUpgrade(newItem);
         }
+
     }
 
-    public void WeaponUpgrade(Weapon weapon)
+    private void ItemUpgrade(TemporaryItem item)
     {
-        if (!weapons.Contains(weapon))
+        if (!tempItems.Contains(item))
         {
-            Debug.Log($"Weapon {weapon.name} not found in inventory.");
             return;
         }
-        weapon.level += 1;
+        item.LevelUp();
     }
 
-    public void RemoveWeapon(Weapon newWeapon) {
-        if (weapons.Contains(newWeapon))
-        {
-            weapons.Remove(newWeapon);
-            Debug.Log($"Removed weapon: {newWeapon.name}");
-        }
-        else
-        {
-            Debug.Log($"Weapon {newWeapon.name} not found in inventory.");
-        }
+    public void ClearAllItems()
+    {
+        tempItems.Clear();
     }
 }

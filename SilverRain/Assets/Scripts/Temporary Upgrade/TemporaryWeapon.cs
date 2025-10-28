@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "TemporaryWeapon", menuName = "Scriptable Objects/TemporaryWeapon")]
 public class TemporaryWeapon : TemporaryItem
 {
-    [Header("Weapon Stats")]      
+    [Header("TemporaryItem Stats")]      
     public float baseDamage;   
     public float damagePerLevel; 
     public float baseCooldown = 1f;  

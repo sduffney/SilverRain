@@ -26,4 +26,13 @@ public class BuffCardUI : MonoBehaviour
             levelText.text = $"Level: {upgrade.GetCurrentLevel()}/{upgrade.maxLevel}\n{upgrade.GetDetailLine(upgrade.GetCurrentLevel())}";
         }
     }
+
+    // Called when the card is clicked
+    public void OnCardClicked()
+    {
+        if (data != null && buffManager != null)
+        {
+            buffManager.ApplyBuff(data);
+        }
+    }
 }

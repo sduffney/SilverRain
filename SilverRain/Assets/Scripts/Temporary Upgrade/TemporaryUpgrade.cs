@@ -28,4 +28,10 @@ public class TemporaryUpgrade : TemporaryItem
     {
         SetCurrentLevel(0);
     }
+
+    public new void LevelUp()
+    {
+        base.LevelUp();
+        GetBonusAtLevel(currentLevel);
+    }
 }
