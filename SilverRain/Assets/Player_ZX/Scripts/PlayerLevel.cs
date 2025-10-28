@@ -10,7 +10,7 @@ public class PlayerLevel : MonoBehaviour
     public float xpGrowthFactor = 1.5f;
 
     [Header("Events")]
-    public UnityEvent<int> OnLevelUp;
+    public UnityEvent OnLevelUp;
 
     private void Start()
     {
@@ -33,7 +33,7 @@ public class PlayerLevel : MonoBehaviour
         currentXP -= maxXP;
         CalculateMaxXP();
 
-        OnLevelUp?.Invoke(playerLevel);
+        OnLevelUp?.Invoke();
         //Debug.Log($"Level Up! Current Level: {playerLevel}");
     }
 
