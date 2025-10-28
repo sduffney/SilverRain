@@ -20,7 +20,8 @@ public class ConsoleManager : MonoBehaviour
     public bool isEnabled = true;
 
 
-    private Dictionary<string, Action<string[]>> commands = new Dictionary<string, Action<string[]>>();
+    private Dictionary<string, Action<string[]> > commands = new Dictionary<string, Action<string[]> >();
+    private Dictionary<string, string> commandDescriptions = new Dictionary<string, string>();
     private bool isOpen = false;
     private float previousTimeScale = 1f;
 
@@ -139,10 +140,14 @@ public class ConsoleManager : MonoBehaviour
         if (!commands.ContainsKey(name))
         {
             commands.Add(name, callback);
+            commandDescriptions.Add(name, description);
+            
         }
         else
         {
             commands[name] = callback;
+            commandDescriptions[name] = description;
+            
         }
     }
 
@@ -151,17 +156,17 @@ public class ConsoleManager : MonoBehaviour
         Register("help", args =>
         {
             AppendOutput("Available Commands:");
-            AppendOutput("help - Show Help");
-            AppendOutput("clear - Empty the console");
-            AppendOutput("god - Toggle invincibility");
-            AppendOutput("sethealth <value> - Setting the player's blood level");
-            AppendOutput("teleport <x> <y> <z> - Teleport the player to the coordinates");
-        });
+            foreach (var cmd in commandDescriptions)
+            {
+                AppendOutput($"{cmd.Key} - {cmd.Value}");
+            }
+        },"List all available commands");
 
         Register("clear", args =>
         {
             outputField.text = "";
-        });
+        },
+        "Empty the console");
 
         Register("god", args =>
         {
@@ -171,7 +176,7 @@ public class ConsoleManager : MonoBehaviour
             if (ph == null) { AppendOutput("Player does not implement the PlayerHealth component"); return; }
             ph.isInvincible = !ph.isInvincible;
             AppendOutput($"Invincible has switched to {ph.isInvincible}");
-        });
+        }, "Set player to invincible");
 
         Register("sethealth", args =>
         {
@@ -183,7 +188,7 @@ public class ConsoleManager : MonoBehaviour
             if (ph == null) { AppendOutput("Player does not implement the PlayerHealth component"); return; }
             ph.SetHealth(v);
             AppendOutput($"Health has been set to {ph.currentHealth}");
-        });
+        }, "<value> - Set health of player");
 
         Register("teleport", args =>
         {
@@ -199,7 +204,7 @@ public class ConsoleManager : MonoBehaviour
             if (player == null) { AppendOutput("Not Found Player"); return; }
             player.transform.position = new Vector3(x, y, z);
             AppendOutput($"The player has been transported to {x}, {y}, {z}");
-        });
+        }, "<x> <y> <z> - Teleport player to location");
 
     }
     #endregion
@@ -265,9 +270,9 @@ public class ConsoleManager : MonoBehaviour
     /// <param name="name">the command name</param>
     /// <param name="callback">the callback to invoke when the command is executed</param>
 
-    public void RegisterCommand(string name, Action<string[]> callback)
+    public void RegisterCommand(string name, Action<string[]> callback, string description = "")
     {
-        Register(name, callback);
+        Register(name, callback, description);
     }
     #endregion
 }
