@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class BuffManager : MonoBehaviour
 {
-    public List<TemporaryWeapon> weaponPool;
-    public List<TemporaryUpgrade> buffPool;
+    public List<TemporaryItem> allTempItems;
     public GameObject buffCardPrefab;
     public Transform cardParent;
 
@@ -16,11 +15,11 @@ public class BuffManager : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+
         // Shuffle and pick 3 unique buffs
         List<TemporaryItem> options = new List<TemporaryItem>();
-        List<TemporaryItem> combinedPool = new List<TemporaryItem>();
-        combinedPool.AddRange(weaponPool);
-        combinedPool.AddRange(buffPool);
+        List<TemporaryItem> combinedPool = allTempItems.FindAll(item => !item.isMaxLevel());
+
         System.Random rand = new System.Random();
         while (options.Count < 3 && combinedPool.Count > 0)
         {
@@ -28,6 +27,7 @@ public class BuffManager : MonoBehaviour
             options.Add(combinedPool[index]);
             combinedPool.RemoveAt(index);
         }
+
         // Instantiate buff cards
         foreach (var item in options)
         {
@@ -38,5 +38,11 @@ public class BuffManager : MonoBehaviour
                 buffCard.Setup(item, this);
             }
         }
+    }
+       
+    public void ApplyBuff(TemporaryItem item)
+    {
+        item.LevelUp();
+        Debug.Log($"Applied buff: {item.displayName} to level {item.GetCurrentLevel()}");
     }
 }
