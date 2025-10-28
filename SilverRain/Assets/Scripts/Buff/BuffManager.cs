@@ -6,15 +6,23 @@ public class BuffManager : MonoBehaviour
     public List<TemporaryItem> allTempItems;
     public GameObject buffCardPrefab;
     public Transform cardParent;
+    
+    private PlayerInventory playerInventory;
 
     //when player levels up, show 3 random buffs to choose from
     public void ShowBuffOptions()
     {
+        cardParent.gameObject.SetActive(true);
+        
         // Clear existing cards
         foreach (Transform child in cardParent)
         {
             Destroy(child.gameObject);
         }
+
+        // Get player inventory
+        playerInventory = FindAnyObjectByType<PlayerInventory>();
+        allTempItems = playerInventory.tempItems;
 
         // Shuffle and pick 3 unique buffs
         List<TemporaryItem> options = new List<TemporaryItem>();
