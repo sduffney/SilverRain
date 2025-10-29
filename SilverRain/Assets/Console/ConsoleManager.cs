@@ -217,6 +217,30 @@ public class ConsoleManager : MonoBehaviour
             AppendOutput($"The player has been transported to {x}, {y}, {z}");
         }, "<x> <y> <z> - Teleport player to location");
 
+        Register("addxp", args =>
+        {
+            if (args.Length < 1)
+            {
+                AppendOutput("Usage: addxp <amount>");
+                return;
+            }
+            if (!float.TryParse(args[0], out float amount))
+            {
+                AppendOutput("Invalid XP amount.");
+                return;
+            }
+
+            var playerLevel = GameObject.FindAnyObjectByType<PlayerLevel>();
+            if (playerLevel == null)
+            {
+                AppendOutput("No PlayerLevel component found.");
+                return;
+            }
+
+            playerLevel.GainXP(amount);
+            AppendOutput($"Added {amount} XP. Current XP: {playerLevel.currentXP}/{playerLevel.maxXP}");
+        }, "<amount> - Add XP to player");
+
     }
     #endregion
 

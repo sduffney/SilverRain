@@ -4,24 +4,25 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    public List<TemporaryItem> tempItems = new List<TemporaryItem>();
+    public List<TemporaryItem> ownedItems = new List<TemporaryItem>();
+    public BuffManager buffManager;
 
     public void PickItem(TemporaryItem newItem)
     {
-        if (!tempItems.Contains(newItem))
+        if (!ownedItems.Contains(newItem))
         {
-            tempItems.Add(newItem);
+            ownedItems.Add(newItem);
+            newItem.SetCurrentLevel(1);
         }
         else
         {
             ItemUpgrade(newItem);
         }
-
     }
 
     private void ItemUpgrade(TemporaryItem item)
     {
-        if (!tempItems.Contains(item))
+        if (!ownedItems.Contains(item))
         {
             return;
         }
@@ -30,6 +31,6 @@ public class PlayerInventory : MonoBehaviour
 
     public void ClearAllItems()
     {
-        tempItems.Clear();
+        ownedItems.Clear();
     }
 }

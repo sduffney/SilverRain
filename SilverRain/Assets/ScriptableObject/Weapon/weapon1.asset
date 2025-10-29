@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb3a1081da876314c883d8802d17cc63, type: 3}
   m_Name: weapon1
   m_EditorClassIdentifier: 
-  displayName: 
-  description: 
+  id: 1
+  displayName: weapon1
+  description: test1
   currentLevel: 0
   maxLevel: 5
   baseDamage: 0

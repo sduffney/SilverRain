@@ -1,5 +1,8 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 
 public class BuffManager : MonoBehaviour
 {
@@ -9,9 +12,31 @@ public class BuffManager : MonoBehaviour
     
     private PlayerInventory playerInventory;
 
+    void Start()
+    {
+        playerInventory = FindAnyObjectByType<PlayerInventory>();
+    }
+
     //when player levels up, show 3 random buffs to choose from
     public void ShowBuffOptions()
     {
+        var playerController = FindAnyObjectByType<PlayerController>();
+        if (playerController != null)
+        {
+            playerController.UnfreezePlayer(); 
+            Debug.Log("Unfreezing Player for Buff Selection");
+        }
+
+        var playerInput = GameObject.FindAnyObjectByType<PlayerInput>();
+        if (playerInput != null)
+        {
+            playerInput.enabled = true;
+        }
+
+        EventSystem.current.SetSelectedGameObject(null);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
         cardParent.gameObject.SetActive(true);
         
         // Clear existing cards
@@ -19,10 +44,6 @@ public class BuffManager : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
-
-        // Get player inventory
-        playerInventory = FindAnyObjectByType<PlayerInventory>();
-        allTempItems = playerInventory.tempItems;
 
         // Shuffle and pick 3 unique buffs
         List<TemporaryItem> options = new List<TemporaryItem>();
@@ -50,7 +71,12 @@ public class BuffManager : MonoBehaviour
        
     public void ApplyBuff(TemporaryItem item)
     {
-        item.LevelUp();
+        playerInventory.PickItem(item);
         Debug.Log($"Applied buff: {item.displayName} to level {item.GetCurrentLevel()}");
+
+        cardParent.gameObject.SetActive(false);
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 }
