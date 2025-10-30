@@ -6175,9 +6175,25 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6184144324102844957, guid: 861ba8a6cd70075428a708b0b8320158, type: 3}
+      propertyPath: onTakeDamage.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6184144324102844957, guid: 861ba8a6cd70075428a708b0b8320158, type: 3}
       propertyPath: onTakeDamage.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 813414130}
+      objectReference: {fileID: 813414129}
+    - target: {fileID: 6184144324102844957, guid: 861ba8a6cd70075428a708b0b8320158, type: 3}
+      propertyPath: onTakeDamage.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ShowDamageEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 6184144324102844957, guid: 861ba8a6cd70075428a708b0b8320158, type: 3}
+      propertyPath: onTakeDamage.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: HUDController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6184144324102844957, guid: 861ba8a6cd70075428a708b0b8320158, type: 3}
+      propertyPath: onTakeDamage.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10470,16 +10486,72 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 790806640413441382, guid: b0e659607863aa14298dfc133c3ed858, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 790806640413441382, guid: b0e659607863aa14298dfc133c3ed858, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 790806640413441382, guid: b0e659607863aa14298dfc133c3ed858, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 790806640413441382, guid: b0e659607863aa14298dfc133c3ed858, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 927384464625162390, guid: b0e659607863aa14298dfc133c3ed858, type: 3}
       propertyPath: m_Name
       value: HUD
       objectReference: {fileID: 0}
+    - target: {fileID: 2129825516677113028, guid: b0e659607863aa14298dfc133c3ed858, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2129825516677113028, guid: b0e659607863aa14298dfc133c3ed858, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2129825516677113028, guid: b0e659607863aa14298dfc133c3ed858, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2129825516677113028, guid: b0e659607863aa14298dfc133c3ed858, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2693338422017952689, guid: b0e659607863aa14298dfc133c3ed858, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2693338422017952689, guid: b0e659607863aa14298dfc133c3ed858, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4446916158807912921, guid: b0e659607863aa14298dfc133c3ed858, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 4446916158807912921, guid: b0e659607863aa14298dfc133c3ed858, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 4453042811554631050, guid: b0e659607863aa14298dfc133c3ed858, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4453042811554631050, guid: b0e659607863aa14298dfc133c3ed858, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4453042811554631050, guid: b0e659607863aa14298dfc133c3ed858, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4453042811554631050, guid: b0e659607863aa14298dfc133c3ed858, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5817177978285214058, guid: b0e659607863aa14298dfc133c3ed858, type: 3}
@@ -10490,6 +10562,46 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6818560473223793820, guid: b0e659607863aa14298dfc133c3ed858, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 6818560473223793820, guid: b0e659607863aa14298dfc133c3ed858, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 6956279161055955919, guid: b0e659607863aa14298dfc133c3ed858, type: 3}
+      propertyPath: killInfoPrefab
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956279161055955919, guid: b0e659607863aa14298dfc133c3ed858, type: 3}
+      propertyPath: 'buffPrefabs.Array.data[0]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7019398012821938880, guid: b0e659607863aa14298dfc133c3ed858, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7019398012821938880, guid: b0e659607863aa14298dfc133c3ed858, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7019398012821938880, guid: b0e659607863aa14298dfc133c3ed858, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7019398012821938880, guid: b0e659607863aa14298dfc133c3ed858, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7107725435973028758, guid: b0e659607863aa14298dfc133c3ed858, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 7107725435973028758, guid: b0e659607863aa14298dfc133c3ed858, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 8853622542619657099, guid: b0e659607863aa14298dfc133c3ed858, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -10575,11 +10687,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0e659607863aa14298dfc133c3ed858, type: 3}
---- !u!1 &813414130 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 927384464625162390, guid: b0e659607863aa14298dfc133c3ed858, type: 3}
+--- !u!114 &813414129 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6956279161055955919, guid: b0e659607863aa14298dfc133c3ed858, type: 3}
   m_PrefabInstance: {fileID: 813414128}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d00eeda2644d9974b90130d3d36d12d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HUDController
 --- !u!1001 &817836191
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27647,3 +27765,15 @@ SceneRoots:
   - {fileID: 488453299}
   - {fileID: 449891703}
   - {fileID: 813414128}
+  - {fileID: 927649721}
+  - {fileID: 604908046}
+  - {fileID: 717692962}
+  - {fileID: 1131802391}
+  - {fileID: 1963167476}
+  - {fileID: 434296712}
+  - {fileID: 630648207}
+  - {fileID: 385803053}
+  - {fileID: 344325362}
+  - {fileID: 2007548236}
+  - {fileID: 1820345501}
+  - {fileID: 1665295439}

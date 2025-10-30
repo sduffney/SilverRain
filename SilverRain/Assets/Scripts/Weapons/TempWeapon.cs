@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class TempWeapon : MonoBehaviour
+public abstract class TempWeapon : TemporaryItem
 {
     public WeaponStats stats;
     public int currentLevel = 1;
@@ -26,4 +26,11 @@ public abstract class TempWeapon : MonoBehaviour
     }
 
     public abstract void Attack();
+
+    //stats
+    //updateStats()
+    //Attack()
+    //AttackCoroutine();
+    //Cooldown()
+    //CoroutineAttackCooldown()
 }
