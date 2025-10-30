@@ -28,7 +28,6 @@ public class EnemyHealth : MonoBehaviour
         var bloodSplatter = Instantiate(bloodSplatterPrefab, bloodSplatterSpawn, Quaternion.identity);
 
         bloodSplatter.Play();
-        Destroy(bloodSplatter, bloodSplatter.main.duration);
 
         //Reveal this enemy
         enemy.Reveal();

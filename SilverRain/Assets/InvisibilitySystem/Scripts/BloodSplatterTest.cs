@@ -4,12 +4,18 @@ public class BloodSplatterTest : MonoBehaviour
 {
     [SerializeField]
     private ParticleSystem bloodSplatterPrefab;
+    public EnemyHealth enemy;
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
             TestBloodSplatter();
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            enemy.TakeDamage(1);
         }
     }
 
