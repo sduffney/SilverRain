@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a96e03f1e9b7ca1429ba5a82ab4f8c9f, type: 3}
+  m_Name: Armour
+  m_EditorClassIdentifier: Assembly-CSharp::PermanentUpgrade
+  id: upgrade_armour
+  displayName: Armour
+  bonusUnit: '%'
+  maxLevel: 10
+  description: "Increases player armour from 0% \u2192 5%."
+  cachedDetailLine: "0% \u2192 5%"
+  baseCost: 150
+  costAdder: 120
+  currentCost: 0
+  baseBonus: 5
+  bonusPerLevel: 3
