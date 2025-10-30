@@ -5,7 +5,7 @@
 
 .unity-button {
     height: 60px;
-    color: rgb(16, 16, 16);
+    color: rgb(1, 1, 1);
     background-color: rgb(27, 36, 48);
     border-width: 1px;
     border-color: rgb(34, 48, 65);
@@ -24,6 +24,7 @@
     font-size: 20px;
     -unity-font-style: bold;
     -unity-background-scale-mode: scale-and-crop;
+    -unity-font-definition: url("project://database/Assets/UI/Simasart/Hungry%20Bat/Fonts/Files/gomarice_rocks.ttf?fileID=12800000&guid=5b4c71e3d031e114b935523eab6a05e8&type=3#gomarice_rocks");
 }
 
 .unity-group-box {
@@ -45,6 +46,7 @@
     -unity-text-align: middle-center;
     font-size: 120px;
     margin-bottom: 12px;
+    -unity-font-definition: url("project://database/Assets/UI/Simasart/Hungry%20Bat/Fonts/Files/gomarice_rocks.ttf?fileID=12800000&guid=5b4c71e3d031e114b935523eab6a05e8&type=3#gomarice_rocks");
 }
 
 .visual-element {
