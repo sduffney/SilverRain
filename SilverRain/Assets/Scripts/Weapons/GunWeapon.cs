@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GunWeapon : TempWeapon
+public class GunWeapon : TemporaryWeapon
 {
     public Transform firePoint;
     public GameObject projectilePrefab;
@@ -11,7 +11,7 @@ public class GunWeapon : TempWeapon
 
         var projObj = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
         var proj = projObj.GetComponent<Projectile>();
-        proj.Init(GetDamage(), firePoint.forward, stats.projectileSpeed);
+        proj.Init(GetDamage(), firePoint.forward, projectileSpeed);
 
         ResetCooldown();
     }
