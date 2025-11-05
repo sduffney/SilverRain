@@ -1,30 +1,13 @@
-using NUnit.Framework;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class BloodSplatterReveal : MonoBehaviour
+public class BloodSplatter : MonoBehaviour
 {
-    private ParticleSystem ps;
-    private List<ParticleSystem.Particle> particles = new List<ParticleSystem.Particle>();
-
-    private List<GameObject> enemies = new List<GameObject>();
-
-    private void Awake()
-    {
-        ps = GetComponent<ParticleSystem>();
-    }
-
-    private void Start()
-    {
-        Destroy(this.gameObject, ps.main.duration);
-    }
-
     private void OnParticleCollision(GameObject other)
     {
-        Enemy enemy = other.GetComponent<Enemy>();
-        if (enemy != null) 
+        var enemy = other.GetComponent<Enemy>();
+        if (enemy != null)
         {
-            enemies.Add(other);
+            enemy.Reveal();
         }
     }
     //private void OnParticleTrigger()
