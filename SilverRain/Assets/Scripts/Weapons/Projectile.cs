@@ -25,12 +25,12 @@ public class Projectile : MonoBehaviour
         if (isExplosive)
         {
             Collider[] hits = Physics.OverlapSphere(transform.position, aoeRadius);
-            foreach (var h in hits)
-                h.GetComponent<IDamageable>()?.ApplyDamage(new DamagePayload { rawDamage = damage, instigator = gameObject });
+            //foreach (var h in hits)
+            //    h.GetComponent<IDamageable>()?.ApplyDamage(new DamagePayload { rawDamage = damage, instigator = gameObject });
         }
         else
         {
-            col.collider.GetComponent<IDamageable>()?.ApplyDamage(new DamagePayload { rawDamage = damage, instigator = gameObject });
+            //col.collider.GetComponent<IDamageable>()?.ApplyDamage(new DamagePayload { rawDamage = damage, instigator = gameObject });
         }
 
         Destroy(gameObject);

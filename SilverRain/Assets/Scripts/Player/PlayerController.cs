@@ -23,6 +23,11 @@ public class PlayerController : MonoBehaviour
 
     private PlayerInput playerInput;
 
+    [Header("Weapons")]
+    public SwordWeaponController swordPrefab;
+    //public GunWeaponController gunController;      // Angelica added 
+    //public GrenadeWeaponController grenadeController;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -54,7 +59,27 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         //if (Time.timeScale == 0f) FreezePlayer(); else UnfreezePlayer();
+
+        if (Keyboard.current.digit1Key.wasPressedThisFrame)
+        {
+            print("Sword Activated!!!");
+            var sword = Instantiate(swordPrefab, transform.position, Quaternion.identity);
+            sword.player = transform;
+            sword.Activate();
+        }
+            
+
+        if (Keyboard.current.digit2Key.wasPressedThisFrame)
+        {
+            //gunController.Activate();
+        }
+
+        if (Keyboard.current.digit3Key.wasPressedThisFrame)
+        {
+            //grenadeController.Activate();
+        }
     }
+
 
     public void FreezePlayer()
     {

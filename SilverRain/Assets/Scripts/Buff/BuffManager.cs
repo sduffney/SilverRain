@@ -15,6 +15,8 @@ public class BuffManager : MonoBehaviour
     void Start()
     {
         playerInventory = FindAnyObjectByType<PlayerInventory>();
+        ResetBuff(allTempItems);
+        SyncBuffLevelsWithInventory();
     }
 
     //when player levels up, show 3 random buffs to choose from
@@ -79,4 +81,30 @@ public class BuffManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
+
+    public void ResetBuff(List<TemporaryItem> allTempItems)
+    {
+         foreach (var item in allTempItems)
+         {
+             item.ResetLevel();
+        }
+    }
+
+    public void SyncBuffLevelsWithInventory()
+    {
+        if (playerInventory == null)
+            playerInventory = FindAnyObjectByType<PlayerInventory>();
+
+        foreach (var buff in allTempItems)
+        {
+            if (buff == null) continue;
+            TemporaryItem owned = playerInventory.ownedItems.Find(item => item.id == buff.id);
+            if (owned != null)
+            {
+                buff.SetCurrentLevel(owned.GetCurrentLevel());
+                Debug.Log($"Sync: {buff.displayName} set to level {buff.GetCurrentLevel()}");
+            }
+        }
+    }
+
 }

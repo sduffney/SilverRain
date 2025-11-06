@@ -37,4 +37,9 @@ public class TemporaryItem : ScriptableObject
     {
         return currentLevel >= maxLevel;
     }
+
+    public void ResetLevel()
+    {
+        currentLevel = 0;
+    }
 }
