@@ -4,29 +4,67 @@ using UnityEngine.AI;
 
 public class MeleeEnemyController : EnemyController
 {
+    private float meleeTimer = 0f;
+    [SerializeField]
+    private float timeBetweenAttacks = 1f;
+
     private void Start()
     {
+        enemy = GetComponent<Enemy>();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody>();
     }
     private void OnCollisionStay(Collision collision)
     {
-        //Attack
-        //Add timer to deal damage
+        Debug.Log("We have entered");
+        //Check if player
+        if (collision.gameObject.GetComponent<PlayerHealth>()) 
+        {
+            PlayerHealth player = collision.gameObject.GetComponent<PlayerHealth>();
+            Debug.Log("Found Health");
+            //Add timer to deal damage
+            meleeTimer += Time.deltaTime;
+
+            //Check if time has passed;
+            if (meleeTimer >= timeBetweenAttacks)
+            {
+                Debug.Log("Timer passed");
+                //Attack
+                Attack(player);
+                
+            }
+
+        }
+
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        animator.SetBool("isAttcking", false);
+        meleeTimer = 0f;
     }
 
     private void Update()
     {
         Move();
     }
-    public override void Attack(Transform player)
+    public override void Attack(PlayerHealth player)
     {
+        Debug.Log("Now Attacking");
         //Deal damage
+        player.TakeDamage(enemy.damage);
+        //Reset timer
+        meleeTimer = 0;
     }
 
     public override void Move()
     {
         //Move towards the player
         agent.SetDestination(targetPlayer.transform.position);
+        float speed = 0f;
+        speed = rb.angularVelocity.magnitude;
+        animator.SetFloat("speed", speed);
     }
+
 }

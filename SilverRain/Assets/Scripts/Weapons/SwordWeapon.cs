@@ -34,7 +34,7 @@ public class SwordWeapon : TemporaryWeapon
     public Transform player;
     public GameObject swordPrefab;
     public LayerMask hitMask;
-    public GameObject swordPrefab;
+    //public GameObject swordPrefab;
 
     private GameObject swordInstance;
     private float activeUntil = -1f; // when the sword stops spinning
@@ -62,17 +62,17 @@ public class SwordWeapon : TemporaryWeapon
 
     public override void Attack()
     {
-        if (!IsOffCooldown()) return;
+        //if (!IsOffCooldown()) return;
 
-        // Spawn sword if not already active
-        if (swordInstance == null)
-        {
-            swordInstance = Instantiate(swordPrefab, player.position, Quaternion.identity);
-        }
+        //// Spawn sword if not already active
+        //if (swordInstance == null)
+        //{
+        //    swordInstance = Instantiate(swordPrefab, player.position, Quaternion.identity);
+        //}
 
-        // Set active duration
-        if (baseDuration > 0)
-            activeUntil = Time.time + baseDuration;
+        //// Set active duration
+        //if (baseDuration > 0)
+        //    activeUntil = Time.time + baseDuration;
 
         ResetCooldown();
     }

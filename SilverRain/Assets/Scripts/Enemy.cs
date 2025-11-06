@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
     EnemyController controller;
     [SerializeField] private int scoreValue;
     [SerializeField] private int xpValue;
-    [SerializeField] private float damage;
+    [SerializeField] public float damage;
     private Renderer[] renderers;
 
 //    private void OnEnable()
@@ -25,6 +25,7 @@ public class Enemy : MonoBehaviour
     }
     public void Reveal()
     {
+        Debug.Log("Enemy is Revealing");
         foreach (var r in renderers) 
         { 
             r.enabled = true;

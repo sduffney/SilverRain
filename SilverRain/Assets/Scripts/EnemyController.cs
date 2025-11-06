@@ -7,6 +7,8 @@ public abstract class EnemyController : MonoBehaviour
     public GameObject targetPlayer;
     public NavMeshAgent agent;
     public Animator animator;
+    public Enemy enemy;
+    public Rigidbody rb;
     public abstract void Move();
-    public abstract void Attack(Transform player);
+    public abstract void Attack(PlayerHealth player);
 }
