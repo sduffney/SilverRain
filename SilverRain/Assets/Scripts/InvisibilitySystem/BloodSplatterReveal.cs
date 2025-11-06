@@ -5,9 +5,9 @@ using UnityEngine;
 public class BloodSplatterReveal : MonoBehaviour
 {
     private ParticleSystem ps;
-    private List<ParticleSystem.Particle> particles = new List<ParticleSystem.Particle>();
+    //private List<ParticleSystem.Particle> particles = new List<ParticleSystem.Particle>();
 
-    private List<GameObject> enemies = new List<GameObject>();
+    //private List<GameObject> enemies = new List<GameObject>();
 
     private void Awake()
     {
@@ -24,7 +24,7 @@ public class BloodSplatterReveal : MonoBehaviour
         Enemy enemy = other.GetComponent<Enemy>();
         if (enemy != null) 
         {
-            enemies.Add(other);
+           enemy.Reveal();
         }
     }
     //private void OnParticleTrigger()
