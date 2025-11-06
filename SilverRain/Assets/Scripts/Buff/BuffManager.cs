@@ -15,7 +15,7 @@ public class BuffManager : MonoBehaviour
     void Start()
     {
         playerInventory = FindAnyObjectByType<PlayerInventory>();
-        ResetBuff(allTempItems);
+        //ResetBuff(allTempItems);
         SyncBuffLevelsWithInventory();
     }
 

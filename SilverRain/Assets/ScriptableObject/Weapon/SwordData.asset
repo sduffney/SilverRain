@@ -10,19 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 105077b378d0ff04688a23c3a018d861, type: 3}
-  m_Name: Sword
+  m_Name: SwordData
   m_EditorClassIdentifier: Assembly-CSharp::SwordData
-  id: 
-  displayName: 
+  id: 1
+  displayName: 'Sword number one '
   description: 
-  currentLevel: 0
+  currentLevel: 2
   maxLevel: 5
   baseDamage: 10
-  baseCooldown: 100
-  baseDuration: 5
-  cooldownReduction: 1
-  damagePerLevel: 10
-  currentLevel: 0
-  projectileSpeed: 20
-  baseSize: 10
-  throwAngle: 0
+  baseCooldown: 0
+  baseDuration: 15
+  cooldownReduction: 10
+  damagePerLevel: 5
+  projectileSpeed: 10
+  baseSize: 5
+  throwAngle: 10

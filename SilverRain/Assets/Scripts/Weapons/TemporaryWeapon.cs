@@ -1,4 +1,3 @@
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "TemporaryWeapon", menuName = "Scriptable Objects/TemporaryWeapon")]
@@ -11,14 +10,11 @@ public abstract class TemporaryWeapon : TemporaryItem
     public float cooldownReduction;
     public float damagePerLevel;
 
-    public int currentLevel = 0;
     public float projectileSpeed;
-    public float baseSize;  //Size (Zibing stats)
+    public float baseSize;      // orbit radius
     public int throwAngle;
-    private float lastAttackTime = -999f;
-    public enum WeaponType { Sword, Gun, Grenade }
 
-    
+    private float lastAttackTime = -999f;
 
     protected override void OnEnable()
     {
@@ -52,7 +48,6 @@ public abstract class TemporaryWeapon : TemporaryItem
     }
 
     public abstract void Attack();
-
 
     //stats
     //updateStats()

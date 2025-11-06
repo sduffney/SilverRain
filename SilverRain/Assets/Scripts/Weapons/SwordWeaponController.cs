@@ -2,23 +2,31 @@ using UnityEngine;
 
 public class SwordWeaponController : MonoBehaviour
 {
-    public TemporaryWeapon weaponData;   // ScriptableObject with stats
-    public Transform player;             // assign Player transform in Inspector
+    public SwordData weaponData;     // assign in code or Inspector
+    public Transform player;         // auto-resolved if null
 
     private float activeUntil;
     private float angle;
 
+    private void Awake()
+    {
+        if (player == null)
+        {
+            var go = GameObject.FindGameObjectWithTag("Player");
+            if (go != null) player = go.transform;
+        }
+    }
+
     private void Update()
     {
-        // If sword expired, destroy it
-        if (weaponData.baseDuration > 0 && Time.time > activeUntil)
+        if (Time.time > activeUntil)
         {
             Destroy(gameObject);
             return;
         }
 
-        // Orbit logic
-        angle += 180f * Time.deltaTime; // orbit speed
+        // Orbit around player
+        angle += 180f * Time.deltaTime;
         float rad = angle * Mathf.Deg2Rad;
         Vector3 offset = new Vector3(Mathf.Cos(rad), 0, Mathf.Sin(rad)) * weaponData.baseSize;
         transform.position = player.position + offset;
