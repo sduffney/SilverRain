@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 //using UnityEngine;
 
 //public class SwordWeapon : TempWeapon
@@ -27,7 +26,7 @@
 //        ResetCooldown();
 //    }
 //}
-=======
+
 using UnityEngine;
 
 public class SwordWeapon : TemporaryWeapon
@@ -86,4 +85,3 @@ public class SwordWeapon : TemporaryWeapon
         }
     }
 }
->>>>>>> main
