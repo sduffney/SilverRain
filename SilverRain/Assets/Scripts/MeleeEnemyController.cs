@@ -7,6 +7,7 @@ public class MeleeEnemyController : EnemyController
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
     }
     private void OnCollisionStay(Collision collision)
     {
