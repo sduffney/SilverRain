@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Looking Settings")]
     public Transform cameraTransform;
+    public float rotationSmoothSpeed = 10f;
     public float minVerticalAngle = -90f;
     public float maxVerticalAngle = 90f;
     
@@ -80,6 +81,24 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        Vector3 moveDirection = transform.right * movementInput.x + transform.forward * movementInput.y;
+        Vector3 targetVelocity = moveDirection.normalized * moveSpeed;
+        Vector3 velocityChange = targetVelocity - rb.linearVelocity;
+        rb.AddForce(velocityChange, ForceMode.VelocityChange);
+
+        if (lookInput.magnitude > 0.1f)
+        {
+            transform.Rotate(Vector3.up * lookInput.x * mouseSensitivity);
+
+            xRotation -= lookInput.y * mouseSensitivity;
+            xRotation = Mathf.Clamp(xRotation, minVerticalAngle, maxVerticalAngle);
+            Quaternion targetRotation = Quaternion.Euler(xRotation, 0f, 0f);
+            cameraTransform.localRotation = Quaternion.Lerp(cameraTransform.localRotation, targetRotation, Time.deltaTime * rotationSmoothSpeed);
+        }
+    }
+
 
     public void FreezePlayer()
     {
@@ -101,23 +120,11 @@ public class PlayerController : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         movementInput = context.ReadValue<Vector2>();
-        Vector3 moveDirection = transform.right * movementInput.x + transform.forward * movementInput.y;
-        Vector3 targetVelocity = moveDirection.normalized * moveSpeed;
-        Vector3 velocityChange = targetVelocity - rb.linearVelocity;
-        rb.AddForce(velocityChange, ForceMode.VelocityChange);
     }
 
     public void OnLook(InputAction.CallbackContext context)
     {
         lookInput = context.ReadValue<Vector2>();
-        if (lookInput.magnitude > 0.1f)
-        {
-            transform.Rotate(Vector3.up * lookInput.x * mouseSensitivity);
-
-            xRotation -= lookInput.y * mouseSensitivity;
-            xRotation = Mathf.Clamp(xRotation, minVerticalAngle, maxVerticalAngle);
-            cameraTransform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-        }
     }
 
     public void OnJump(InputAction.CallbackContext context)
