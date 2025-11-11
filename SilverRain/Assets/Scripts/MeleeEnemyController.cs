@@ -14,8 +14,9 @@ public class MeleeEnemyController : EnemyController
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody>();
+        targetPlayer = GameObject.FindGameObjectWithTag("Player");
     }
-    private void OnCollisionStay(Collision collision)
+    private void OnCollisionStay(UnityEngine.Collision collision)
     {
         
         Debug.Log("We have entered");
@@ -65,7 +66,7 @@ public class MeleeEnemyController : EnemyController
         //Move towards the player
         agent.SetDestination(targetPlayer.transform.position);
         float speed = 0f;
-        speed = rb.linearVelocity.magnitude;
+        speed = agent.velocity.magnitude;
         animator.SetFloat("speed", speed);
     }
 
