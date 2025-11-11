@@ -547,7 +547,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4032216552956473110, guid: ed9978dcbfdf861449a54c440d43deab, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.97
+      value: 1.61
       objectReference: {fileID: 0}
     - target: {fileID: 4032216552956473110, guid: ed9978dcbfdf861449a54c440d43deab, type: 3}
       propertyPath: m_LocalPosition.y
@@ -684,7 +684,7 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 3947342669037753380, guid: 861ba8a6cd70075428a708b0b8320158, type: 3}
   m_PrefabInstance: {fileID: 1434097578}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &4659901673670377155
+--- !u!1001 &2412014104003022313
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -692,59 +692,59 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4879391844672960675, guid: ca61df61fbd39274b8de26d7add39831, type: 3}
-      propertyPath: targetPlayer
-      value: 
-      objectReference: {fileID: 82951573}
-    - target: {fileID: 4923864010027258517, guid: ca61df61fbd39274b8de26d7add39831, type: 3}
+    - target: {fileID: 3286643137425952069, guid: c98890e5d7e3f1844bd9bcfc8f08e3f2, type: 3}
+      propertyPath: m_Name
+      value: GoblinEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 5602041070419055799, guid: c98890e5d7e3f1844bd9bcfc8f08e3f2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4923864010027258517, guid: ca61df61fbd39274b8de26d7add39831, type: 3}
+    - target: {fileID: 5602041070419055799, guid: c98890e5d7e3f1844bd9bcfc8f08e3f2, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4923864010027258517, guid: ca61df61fbd39274b8de26d7add39831, type: 3}
+    - target: {fileID: 5602041070419055799, guid: c98890e5d7e3f1844bd9bcfc8f08e3f2, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4923864010027258517, guid: ca61df61fbd39274b8de26d7add39831, type: 3}
+    - target: {fileID: 5602041070419055799, guid: c98890e5d7e3f1844bd9bcfc8f08e3f2, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4923864010027258517, guid: ca61df61fbd39274b8de26d7add39831, type: 3}
+    - target: {fileID: 5602041070419055799, guid: c98890e5d7e3f1844bd9bcfc8f08e3f2, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4923864010027258517, guid: ca61df61fbd39274b8de26d7add39831, type: 3}
+    - target: {fileID: 5602041070419055799, guid: c98890e5d7e3f1844bd9bcfc8f08e3f2, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4923864010027258517, guid: ca61df61fbd39274b8de26d7add39831, type: 3}
+    - target: {fileID: 5602041070419055799, guid: c98890e5d7e3f1844bd9bcfc8f08e3f2, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4923864010027258517, guid: ca61df61fbd39274b8de26d7add39831, type: 3}
+    - target: {fileID: 5602041070419055799, guid: c98890e5d7e3f1844bd9bcfc8f08e3f2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4923864010027258517, guid: ca61df61fbd39274b8de26d7add39831, type: 3}
+    - target: {fileID: 5602041070419055799, guid: c98890e5d7e3f1844bd9bcfc8f08e3f2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4923864010027258517, guid: ca61df61fbd39274b8de26d7add39831, type: 3}
+    - target: {fileID: 5602041070419055799, guid: c98890e5d7e3f1844bd9bcfc8f08e3f2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8494870779597140052, guid: ca61df61fbd39274b8de26d7add39831, type: 3}
-      propertyPath: m_Name
-      value: Goblin
-      objectReference: {fileID: 0}
+    - target: {fileID: 6850935498896519798, guid: c98890e5d7e3f1844bd9bcfc8f08e3f2, type: 3}
+      propertyPath: targetPlayer
+      value: 
+      objectReference: {fileID: 82951573}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: ca61df61fbd39274b8de26d7add39831, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: c98890e5d7e3f1844bd9bcfc8f08e3f2, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -752,6 +752,6 @@ SceneRoots:
   - {fileID: 501058971}
   - {fileID: 629960476}
   - {fileID: 939260462}
-  - {fileID: 4659901673670377155}
   - {fileID: 1434097578}
   - {fileID: 1106067146}
+  - {fileID: 2412014104003022313}
