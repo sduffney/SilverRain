@@ -115,7 +115,6 @@ public class PlayerController : MonoBehaviour
         rb.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX;
     }
 
-
     // Input System Callbacks
     public void OnMove(InputAction.CallbackContext context)
     {
