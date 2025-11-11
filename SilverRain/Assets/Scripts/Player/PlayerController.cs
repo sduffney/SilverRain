@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 moveDirection = transform.right * movementInput.x + transform.forward * movementInput.y;
         Vector3 targetVelocity = moveDirection.normalized * moveSpeed;
-        Vector3 velocityChange = targetVelocity - rb.linearVelocity;
+        Vector3 velocityChange = new(targetVelocity.x - rb.linearVelocity.x, 0, targetVelocity.z - rb.linearVelocity.z);
         rb.AddForce(velocityChange, ForceMode.VelocityChange);
 
         if (lookInput.magnitude > 0.1f)
