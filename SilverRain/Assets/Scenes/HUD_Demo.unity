@@ -1601,12 +1601,22 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1664412125}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 38370804fa92a0a4286679efe13d87bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuffManager
-  allTempItems: []
+  allTempItems:
+  - {fileID: 11400000, guid: e9ddb2f99e047704ba3718179fa39576, type: 2}
+  - {fileID: 11400000, guid: 67a0e1838158f7a4ba236ede9144b2ad, type: 2}
+  - {fileID: 11400000, guid: 460b06e5b06b6b8459d619211fd42428, type: 2}
+  - {fileID: 11400000, guid: e1f32c3428a6aec46a9702d7f5af8353, type: 2}
+  - {fileID: 11400000, guid: e9542198a5c123343b090b95358ccb77, type: 2}
+  - {fileID: 11400000, guid: 9f17469c81c18354e94364e5a5564bc1, type: 2}
+  - {fileID: 11400000, guid: 04875db123407704994dc2cccd30ae9f, type: 2}
+  - {fileID: 11400000, guid: ab746e7b90b2ad24ebb53d224a14ac79, type: 2}
+  - {fileID: 11400000, guid: 4867d2d574e2e3e45826272f6d3fc74d, type: 2}
+  - {fileID: 11400000, guid: 005aa280653c7fe4cbfd41a40ef8fcbd, type: 2}
   buffCardPrefab: {fileID: 8358269796294553481, guid: e5ef082151bb979478f52c079dc1c94d, type: 3}
   cardParent: {fileID: 1259393046}
 --- !u!4 &1664412128
@@ -2054,11 +2064,11 @@ PrefabInstance:
     - target: {fileID: 4446916158807912921, guid: b0e659607863aa14298dfc133c3ed858, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 70956447234d33b40b396b67314a5843, type: 2}
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 4446916158807912921, guid: b0e659607863aa14298dfc133c3ed858, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: -5263338218149616523, guid: 70956447234d33b40b396b67314a5843, type: 2}
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 4446916158807912921, guid: b0e659607863aa14298dfc133c3ed858, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
@@ -2110,11 +2120,11 @@ PrefabInstance:
     - target: {fileID: 6818560473223793820, guid: b0e659607863aa14298dfc133c3ed858, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 914bdd14ee6179647977adb5ac747cf3, type: 2}
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 6818560473223793820, guid: b0e659607863aa14298dfc133c3ed858, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: -5263338218149616523, guid: 914bdd14ee6179647977adb5ac747cf3, type: 2}
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 6818560473223793820, guid: b0e659607863aa14298dfc133c3ed858, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
@@ -2142,11 +2152,11 @@ PrefabInstance:
     - target: {fileID: 7107725435973028758, guid: b0e659607863aa14298dfc133c3ed858, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 70956447234d33b40b396b67314a5843, type: 2}
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 7107725435973028758, guid: b0e659607863aa14298dfc133c3ed858, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: -5263338218149616523, guid: 70956447234d33b40b396b67314a5843, type: 2}
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 7107725435973028758, guid: b0e659607863aa14298dfc133c3ed858, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
@@ -2263,6 +2273,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 392942201862323568, guid: 861ba8a6cd70075428a708b0b8320158, type: 3}
+      propertyPath: playerInventory
+      value: 
+      objectReference: {fileID: 293584769}
     - target: {fileID: 1181775529053628865, guid: 861ba8a6cd70075428a708b0b8320158, type: 3}
       propertyPath: m_Name
       value: Player

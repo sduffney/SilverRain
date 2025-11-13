@@ -76,6 +76,11 @@ public class BuffManager : MonoBehaviour
         playerInventory.PickItem(item);
         Debug.Log($"Applied buff: {item.displayName} to level {item.GetCurrentLevel()}");
 
+        if (PlayerStats.Instance != null)
+        {
+            PlayerStats.Instance.ApplyTemporaryUpgrades();
+        }
+
         cardParent.gameObject.SetActive(false);
 
         Cursor.lockState = CursorLockMode.Locked;

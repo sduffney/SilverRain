@@ -4,6 +4,7 @@ using UnityEngine.Playables;
 public class PlayerStats : MonoBehaviour
 {
     public static PlayerStats Instance { get; private set; }
+    public PlayerInventory playerInventory;
 
     public float attackDamage = 1f;     // Base attack damage multiplier
     public float projectileSpeed = 1f;  // Base projectile speed multiplier
@@ -104,6 +105,117 @@ public class PlayerStats : MonoBehaviour
         // For testing purposes only
         //TestUIPart();
     }
+
+    public void ApplyPermanentUpgrades()
+    {
+        var allPermanentUpgrades = Resources.LoadAll<PermanentUpgrade>("PermanentUpgrade");
+        if (allPermanentUpgrades == null)
+        {
+            Debug.LogWarning("No permanent upgrades found in Resources/PermanentUpgrade.");
+            return;
+        }
+
+        foreach (var upgrade in allPermanentUpgrades)
+        {
+            int level = upgrade.GetCurrentLevel();
+            if (level <= 0) continue;
+
+            float bonus = upgrade.GetBonusAtLevel(level);
+
+            switch (upgrade.displayName)
+            {
+                case "Attack Damage":
+                    attackDamage += bonus;
+                    break;
+                case "Projectile Speed":
+                    projectileSpeed += bonus;
+                    break;
+                case "Duration":
+                    duration += bonus;
+                    break;
+                case "Cooldown":
+                    cooldown -= bonus; 
+                    break;
+                case "Size":
+                    size += bonus;
+                    break;
+                case "Movement Speed":
+                    moveSpeed += bonus;
+                    break;
+                case "Health Regen":
+                    healthRegen += bonus;
+                    break;
+                case "XP Amount":
+                    experienceMod += bonus;
+                    break;
+                case "Max Health":
+                    maxHealth += bonus;
+                    break;
+                case "Armour":
+                    armor += bonus;
+                    break;
+            }
+        }
+    }
+
+    public void ApplyTemporaryUpgrades()
+    {
+        if (playerInventory == null)
+            playerInventory = FindAnyObjectByType<PlayerInventory>();
+        if (playerInventory == null) return;
+
+        foreach (var item in playerInventory.ownedItems)
+        {
+            if (item == null) continue;
+            int level = item.GetCurrentLevel();
+            if (level <= 0) continue;
+
+            if (item is TemporaryUpgrade tempUpgrade)
+            {
+                float bonus = tempUpgrade.GetBonusAtLevel(level);
+
+                switch (tempUpgrade.displayName)
+                {
+                    case "Attack Damage":
+                        attackDamage += bonus;
+                        break;
+                    case "Projectile Speed":
+                        projectileSpeed += bonus;
+                        break;
+                    case "Duration":
+                        duration += bonus;
+                        break;
+                    case "Cooldown":
+                        cooldown -= bonus;
+                        break;
+                    case "Size":
+                        size += bonus;
+                        break;
+                    case "Movement Speed":
+                        moveSpeed += bonus;
+                        break;
+                    case "Health Regen":
+                        healthRegen += bonus;
+                        break;
+                    case "XP Amount":
+                        experienceMod += bonus;
+                        break;
+                    case "Max Health":
+                        maxHealth += bonus;
+                        break;
+                    case "Armour":
+                        armor += bonus;
+                        break;
+                }
+            }
+
+            else if (item is TemporaryWeapon)
+            {
+                continue;
+            }
+        }
+    }
+
 
     private void RegisterCommands()
     {
