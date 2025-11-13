@@ -103,16 +103,20 @@ public class PlayerController : MonoBehaviour
     public void FreezePlayer()
     {
         Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         //ResetVelocity();
-        //playerInput.enabled = false;
+        playerInput.enabled = false;
         //rb.isKinematic = true;
         //rb.constraints = RigidbodyConstraints.FreezeAll;
     }
     public void UnfreezePlayer()
     {
         Time.timeScale = 1f;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         //ResetVelocity();
-        //playerInput.enabled = true;
+        playerInput.enabled = true;
         //rb.isKinematic = false;
         //rb.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX;
     }
