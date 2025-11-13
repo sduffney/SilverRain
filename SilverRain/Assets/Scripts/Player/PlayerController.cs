@@ -102,17 +102,19 @@ public class PlayerController : MonoBehaviour
 
     public void FreezePlayer()
     {
-        ResetVelocity();
-        playerInput.enabled = false;
-        rb.isKinematic = true;
-        rb.constraints = RigidbodyConstraints.FreezeAll;
+        Time.timeScale = 0f;
+        //ResetVelocity();
+        //playerInput.enabled = false;
+        //rb.isKinematic = true;
+        //rb.constraints = RigidbodyConstraints.FreezeAll;
     }
     public void UnfreezePlayer()
     {
-        ResetVelocity();
-        playerInput.enabled = true;
-        rb.isKinematic = false;
-        rb.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX;
+        Time.timeScale = 1f;
+        //ResetVelocity();
+        //playerInput.enabled = true;
+        //rb.isKinematic = false;
+        //rb.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX;
     }
 
     // Input System Callbacks

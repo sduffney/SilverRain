@@ -110,12 +110,14 @@ public class EnemySpawner : MonoBehaviour
 
     void TrySpawnOnce()
     {
+        //Check that we have enemies to spawn
         if (enemyPrefabs == null || enemyPrefabs.Count == 0)
         {
             Debug.LogWarning("EnemySpawner: No enemy prefabs assigned.");
             return;
         }
 
+        //Ensure we have a player reference
         if (player == null)
         {
             var p = GameObject.FindGameObjectWithTag(playerTag);
