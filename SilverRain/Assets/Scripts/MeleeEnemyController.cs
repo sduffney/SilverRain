@@ -12,11 +12,13 @@ public class MeleeEnemyController : EnemyController
     {
         enemy = GetComponent<Enemy>();
         agent = GetComponent<NavMeshAgent>();
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody>();
+        targetPlayer = GameObject.FindGameObjectWithTag("Player");
     }
-    private void OnCollisionStay(Collision collision)
+    private void OnCollisionStay(UnityEngine.Collision collision)
     {
+        
         Debug.Log("We have entered");
         //Check if player
         if (collision.gameObject.GetComponent<PlayerHealth>()) 
@@ -25,6 +27,7 @@ public class MeleeEnemyController : EnemyController
             Debug.Log("Found Health");
             //Add timer to deal damage
             meleeTimer += Time.deltaTime;
+            animator.SetBool("isAttacking", true);
 
             //Check if time has passed;
             if (meleeTimer >= timeBetweenAttacks)
@@ -41,7 +44,7 @@ public class MeleeEnemyController : EnemyController
 
     private void OnCollisionExit(Collision collision)
     {
-        animator.SetBool("isAttcking", false);
+        animator.SetBool("isAttacking", false);
         meleeTimer = 0f;
     }
 
@@ -63,7 +66,7 @@ public class MeleeEnemyController : EnemyController
         //Move towards the player
         agent.SetDestination(targetPlayer.transform.position);
         float speed = 0f;
-        speed = rb.angularVelocity.magnitude;
+        speed = agent.velocity.magnitude;
         animator.SetFloat("speed", speed);
     }
 

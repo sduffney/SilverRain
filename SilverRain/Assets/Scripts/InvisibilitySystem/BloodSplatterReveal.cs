@@ -27,6 +27,7 @@ public class BloodSplatterReveal : MonoBehaviour
            enemy.Reveal();
         }
     }
+
     //private void OnParticleTrigger()
     //{
     //    Debug.Log("Trigger");
