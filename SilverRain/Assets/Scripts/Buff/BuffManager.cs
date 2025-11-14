@@ -42,7 +42,8 @@ public class BuffManager : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(null);
         //Cursor.lockState = CursorLockMode.None;
         //Cursor.visible = true;
-        playerController.FreezePlayer();
+        //playerController.FreezePlayer();
+        GameManager.Instance.RequestPause();
 
 
         cardParent.gameObject.SetActive(true);
@@ -93,7 +94,8 @@ public class BuffManager : MonoBehaviour
         if (playerLevel.IsLevelUp()) ShowBuffOptions();
         //Cursor.lockState = CursorLockMode.Locked;
         //Cursor.visible = false;
-        playerController.UnfreezePlayer();
+        //playerController.UnfreezePlayer();
+        GameManager.Instance.ReleasePause();
     }
 
     public void ResetBuff(List<TemporaryItem> allTempItems)

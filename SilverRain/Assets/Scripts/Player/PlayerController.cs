@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;
     private float xRotation = 0f;
 
-    private PlayerInput playerInput;
+    //private PlayerInput playerInput;
 
     [Header("Weapons")]
     public SwordWeaponController swordPrefab;
@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         rb.useGravity = true;
-        playerInput = GetComponent<PlayerInput>();
+        //playerInput = GetComponent<PlayerInput>();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -100,26 +100,26 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    public void FreezePlayer()
-    {
-        Time.timeScale = 0f;
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-        //ResetVelocity();
-        playerInput.enabled = false;
-        //rb.isKinematic = true;
-        //rb.constraints = RigidbodyConstraints.FreezeAll;
-    }
-    public void UnfreezePlayer()
-    {
-        Time.timeScale = 1f;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        //ResetVelocity();
-        playerInput.enabled = true;
-        //rb.isKinematic = false;
-        //rb.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX;
-    }
+    //public void FreezePlayer()
+    //{
+    //    Time.timeScale = 0f;
+    //    Cursor.lockState = CursorLockMode.None;
+    //    Cursor.visible = true;
+    //    //ResetVelocity();
+    //    playerInput.enabled = false;
+    //    //rb.isKinematic = true;
+    //    //rb.constraints = RigidbodyConstraints.FreezeAll;
+    //}
+    //public void UnfreezePlayer()
+    //{
+    //    Time.timeScale = 1f;
+    //    Cursor.lockState = CursorLockMode.Locked;
+    //    Cursor.visible = false;
+    //    //ResetVelocity();
+    //    playerInput.enabled = true;
+    //    //rb.isKinematic = false;
+    //    //rb.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX;
+    //}
 
     // Input System Callbacks
     public void OnMove(InputAction.CallbackContext context)
