@@ -37,7 +37,7 @@ public class ConsoleManager : MonoBehaviour
         RegisterDefaultCommands();
         //scrollRect = outputField.GetComponentInParent<ScrollRect>();
         //playerInput = GameObject.FindWithTag("Player")?.GetComponent<PlayerInput>();
-        playerController = GameObject.FindAnyObjectByType<PlayerController>();
+        //playerController = GameObject.FindAnyObjectByType<PlayerController>();
 
         if (consolePanel != null)
         {
@@ -71,15 +71,15 @@ public class ConsoleManager : MonoBehaviour
             inputField.text = lastCommand;
         }
 
-        // Testing for levelup
-        if (Input.GetKey(KeyCode.V))
-        {
-            var playerLevel = GameObject.FindAnyObjectByType<PlayerLevel>();
-            if (playerLevel != null)
-            {
-                playerLevel.GainXP(50);
-            }
-        }
+        //// Testing for levelup
+        //if (Input.GetKey(KeyCode.V))
+        //{
+        //    var playerLevel = GameObject.FindAnyObjectByType<PlayerLevel>();
+        //    if (playerLevel != null)
+        //    {
+        //        playerLevel.GainXP(50);
+        //    }
+        //}
     }
 
     public void ToggleConsole()
@@ -91,23 +91,15 @@ public class ConsoleManager : MonoBehaviour
             if (scrollRect == null) scrollRect = outputField.GetComponentInParent<ScrollRect>();
         }
 
-        if (pauseWhileOpen && playerController)
+        if (pauseWhileOpen)
         {
             if (isOpen)
             {
-                //playerInput.enabled = false;
-                playerController.FreezePlayer();
-
-                
-                //previousTimeScale = Time.timeScale;
-                //Time.timeScale = 0f;
+                GameManager.Instance.RequestPause();
             }
             else
             {
-                //playerInput.enabled = true;
-                playerController.UnfreezePlayer();
-
-                //Time.timeScale = previousTimeScale;
+                GameManager.Instance.ReleasePause();
             }
         }
 

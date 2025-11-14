@@ -41018,6 +41018,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 2427643416664059218, guid: 861ba8a6cd70075428a708b0b8320158, type: 3}
+      propertyPath: OnLevelUp.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 249850067}
+    - target: {fileID: 2427643416664059218, guid: 861ba8a6cd70075428a708b0b8320158, type: 3}
+      propertyPath: OnLevelUp.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ShowBuffOptions
+      objectReference: {fileID: 0}
     - target: {fileID: 5560765201317892637, guid: 861ba8a6cd70075428a708b0b8320158, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -131777,7 +131785,7 @@ PrefabInstance:
       objectReference: {fileID: 1746435594}
     - target: {fileID: 4140437105863361888, guid: 22e35df70c35bfc4eb2a8c88d53d03f2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 27.10099
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4140437105863361888, guid: 22e35df70c35bfc4eb2a8c88d53d03f2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -131785,7 +131793,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4140437105863361888, guid: 22e35df70c35bfc4eb2a8c88d53d03f2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -18.70936
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4140437105863361888, guid: 22e35df70c35bfc4eb2a8c88d53d03f2, type: 3}
       propertyPath: m_LocalRotation.w
