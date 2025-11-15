@@ -16,7 +16,7 @@ public class MeleeEnemyController : EnemyController
         rb = GetComponent<Rigidbody>();
         targetPlayer = GameObject.FindGameObjectWithTag("Player");
     }
-    private void OnCollisionStay(UnityEngine.Collision collision)
+    private void OnTriggerStay(UnityEngine.Collider collision)
     {
         
         Debug.Log("We have entered");
@@ -42,7 +42,7 @@ public class MeleeEnemyController : EnemyController
 
     }
 
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerExit(Collider collision)
     {
         animator.SetBool("isAttacking", false);
         meleeTimer = 0f;
