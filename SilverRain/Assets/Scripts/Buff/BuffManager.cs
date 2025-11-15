@@ -11,33 +11,40 @@ public class BuffManager : MonoBehaviour
     public Transform cardParent;
     
     private PlayerInventory playerInventory;
+    private PlayerController playerController;
+    private PlayerLevel playerLevel;
 
     void Start()
     {
         playerInventory = FindAnyObjectByType<PlayerInventory>();
-        ResetBuff(allTempItems);
+        playerController = FindAnyObjectByType<PlayerController>();
+        playerLevel = FindAnyObjectByType<PlayerLevel>();
+        //ResetBuff(allTempItems);
         SyncBuffLevelsWithInventory();
     }
 
     //when player levels up, show 3 random buffs to choose from
     public void ShowBuffOptions()
     {
-        var playerController = FindAnyObjectByType<PlayerController>();
-        if (playerController != null)
-        {
-            playerController.UnfreezePlayer(); 
-            Debug.Log("Unfreezing Player for Buff Selection");
-        }
+        //var playerController = FindAnyObjectByType<PlayerController>();
+        //if (playerController != null)
+        //{
+        //    playerController.UnfreezePlayer(); 
+        //    Debug.Log("Unfreezing Player for Buff Selection");
+        //}
 
-        var playerInput = GameObject.FindAnyObjectByType<PlayerInput>();
-        if (playerInput != null)
-        {
-            playerInput.enabled = true;
-        }
+        //var playerInput = GameObject.FindAnyObjectByType<PlayerInput>();
+        //if (playerInput != null)
+        //{
+        //    playerInput.enabled = true;
+        //}
 
         EventSystem.current.SetSelectedGameObject(null);
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        //Cursor.lockState = CursorLockMode.None;
+        //Cursor.visible = true;
+        //playerController.FreezePlayer();
+        GameManager.Instance.RequestPause();
+
 
         cardParent.gameObject.SetActive(true);
         
@@ -76,10 +83,19 @@ public class BuffManager : MonoBehaviour
         playerInventory.PickItem(item);
         Debug.Log($"Applied buff: {item.displayName} to level {item.GetCurrentLevel()}");
 
-        cardParent.gameObject.SetActive(false);
+        if (PlayerStats.Instance != null)
+        {
+            PlayerStats.Instance.ApplyTemporaryUpgrades();
+        }
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        
+
+        cardParent.gameObject.SetActive(false);
+        if (playerLevel.IsLevelUp()) ShowBuffOptions();
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
+        //playerController.UnfreezePlayer();
+        GameManager.Instance.ReleasePause();
     }
 
     public void ResetBuff(List<TemporaryItem> allTempItems)

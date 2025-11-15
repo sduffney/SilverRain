@@ -21,10 +21,20 @@ public class PlayerLevel : MonoBehaviour
     {
         currentXP += amount;
 
+        if (IsLevelUp())
+        {
+            Debug.Log($"Level Up! Current Level: {playerLevel}");
+        }
+    }
+
+    public bool IsLevelUp()
+    {
         if (currentXP >= maxXP)
         {
             LevelUp();
+            return true;
         }
+        return false;
     }
 
     private void LevelUp()

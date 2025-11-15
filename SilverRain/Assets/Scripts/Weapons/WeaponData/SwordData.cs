@@ -5,7 +5,6 @@ public class SwordData : TemporaryWeapon
 {
     public override void Attack()
     {
-        // ScriptableObjects don’t run gameplay logic directly.
-        // Leave for debugging.
+        // ScriptableObjects hold stats; gameplay runs in MonoBehaviours.
     }
 }

@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Looking Settings")]
     public Transform cameraTransform;
+    public float rotationSmoothSpeed = 10f;
     public float minVerticalAngle = -90f;
     public float maxVerticalAngle = 90f;
     
@@ -21,7 +22,7 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;
     private float xRotation = 0f;
 
-    private PlayerInput playerInput;
+    //private PlayerInput playerInput;
 
     [Header("Weapons")]
     public SwordWeaponController swordPrefab;
@@ -33,7 +34,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         rb.useGravity = true;
-        playerInput = GetComponent<PlayerInput>();
+        //playerInput = GetComponent<PlayerInput>();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -80,44 +81,55 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
-    public void FreezePlayer()
+    private void FixedUpdate()
     {
-        ResetVelocity();
-        playerInput.enabled = false;
-        rb.isKinematic = true;
-        rb.constraints = RigidbodyConstraints.FreezeAll;
-    }
-    public void UnfreezePlayer()
-    {
-        ResetVelocity();
-        playerInput.enabled = true;
-        rb.isKinematic = false;
-        rb.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX;
-    }
-
-
-    // Input System Callbacks
-    public void OnMove(InputAction.CallbackContext context)
-    {
-        movementInput = context.ReadValue<Vector2>();
         Vector3 moveDirection = transform.right * movementInput.x + transform.forward * movementInput.y;
         Vector3 targetVelocity = moveDirection.normalized * moveSpeed;
-        Vector3 velocityChange = targetVelocity - rb.linearVelocity;
+        Vector3 velocityChange = new(targetVelocity.x - rb.linearVelocity.x, 0, targetVelocity.z - rb.linearVelocity.z);
         rb.AddForce(velocityChange, ForceMode.VelocityChange);
-    }
 
-    public void OnLook(InputAction.CallbackContext context)
-    {
-        lookInput = context.ReadValue<Vector2>();
         if (lookInput.magnitude > 0.1f)
         {
             transform.Rotate(Vector3.up * lookInput.x * mouseSensitivity);
 
             xRotation -= lookInput.y * mouseSensitivity;
             xRotation = Mathf.Clamp(xRotation, minVerticalAngle, maxVerticalAngle);
-            cameraTransform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+            Quaternion targetRotation = Quaternion.Euler(xRotation, 0f, 0f);
+            cameraTransform.localRotation = Quaternion.Lerp(cameraTransform.localRotation, targetRotation, Time.deltaTime * rotationSmoothSpeed);
         }
+    }
+
+
+    //public void FreezePlayer()
+    //{
+    //    Time.timeScale = 0f;
+    //    Cursor.lockState = CursorLockMode.None;
+    //    Cursor.visible = true;
+    //    //ResetVelocity();
+    //    playerInput.enabled = false;
+    //    //rb.isKinematic = true;
+    //    //rb.constraints = RigidbodyConstraints.FreezeAll;
+    //}
+    //public void UnfreezePlayer()
+    //{
+    //    Time.timeScale = 1f;
+    //    Cursor.lockState = CursorLockMode.Locked;
+    //    Cursor.visible = false;
+    //    //ResetVelocity();
+    //    playerInput.enabled = true;
+    //    //rb.isKinematic = false;
+    //    //rb.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX;
+    //}
+
+    // Input System Callbacks
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        movementInput = context.ReadValue<Vector2>();
+    }
+
+    public void OnLook(InputAction.CallbackContext context)
+    {
+        lookInput = context.ReadValue<Vector2>();
     }
 
     public void OnJump(InputAction.CallbackContext context)
