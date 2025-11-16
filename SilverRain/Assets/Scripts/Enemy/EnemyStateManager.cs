@@ -6,6 +6,7 @@ public class EnemyStateManager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
+    
     public Transform player;
 
     // declare states
@@ -18,6 +19,7 @@ public class EnemyStateManager : MonoBehaviour
     public EnemySenseState senseState = new EnemySenseState();
 
     // animator reference
+    [HideInInspector]
     public Animator animator;
 
     [Header("Idle State Settings")]
@@ -34,13 +36,13 @@ public class EnemyStateManager : MonoBehaviour
 
 
     [Header("Combat Settings")]
-    public float detectionRange = 20f;
-    public float attackRange = 10f;
-    public int attackDamage = 1;
+    public float detectionRange = 200f;
+    public float attackRange = 2.5f;
+    public float attackDamage = 1;
 
     [Header("Health")]
-    [SerializeField] public int maxHealth = 3;
-    [HideInInspector] public int currentHealth;
+    [SerializeField] public float maxHealth = 10f;
+    [HideInInspector] public float currentHealth;
     [SerializeField] public float deathShrinkSpeed = 2f;
 
 
@@ -57,6 +59,21 @@ public class EnemyStateManager : MonoBehaviour
         agent.speed = patrolSpeed;
         agent.stoppingDistance = attackRange;
         currentHealth = maxHealth;
+
+        //Autoassign player if not set in Inspector
+        if (player == null)
+        {
+            GameObject p = GameObject.FindGameObjectWithTag("Player");
+            if (p != null)
+            {
+                player = p.transform;
+            }
+            else
+            {
+                Debug.LogWarning($"[{name}] No object with tag 'Player' found. Enemy will not chase.");
+            }
+        }
+
     }
     void Start()
     {
