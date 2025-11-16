@@ -105,14 +105,17 @@ public class EnemyStateManager : MonoBehaviour
             currentHealth = 0;
             Die();
         }
+        Debug.Log($"Enemy took {amount} damage, current health: {currentHealth}");
     }
 
     public void Die()
     {
-        if (currentState != deadState)
+        if (currentState == deadState)
         {
             return; // Prevent multiple death triggers
         }
+
+
         SwitchState(deadState);
     }
 

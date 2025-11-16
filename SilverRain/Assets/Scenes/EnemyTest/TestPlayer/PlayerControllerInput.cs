@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.InputSystem;  
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerControllerInput : MonoBehaviour
@@ -17,6 +17,16 @@ public class PlayerControllerInput : MonoBehaviour
     public float minPitch = -30f;
     public float maxPitch = 60f;
 
+    [Header("Shooting Visuals")]
+    public LineRenderer shootLine;
+    public float shootLineDuration = 0.05f;
+
+    [Header("Shooting")]
+    public float shootRange = 50f;
+    public int shootDamage = 1;
+    public float shootCooldown = 0.25f;
+    public LayerMask shootMask = ~0; // everything by default
+
     private CharacterController controller;
     private PlayerInputActions inputActions;
 
@@ -28,19 +38,25 @@ public class PlayerControllerInput : MonoBehaviour
     private float yaw;
     private float pitch;
 
+    private float lastShootTime = -999f;
+
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
 
-        // Setup input actions
         inputActions = new PlayerInputActions();
+
+        if (shootLine != null)
+        {
+            shootLine.enabled = false;
+        }
+
     }
 
     private void OnEnable()
     {
         inputActions.Player.Enable();
 
-        // Subscribe to input callbacks if you want events
         inputActions.Player.Move.performed += OnMove;
         inputActions.Player.Move.canceled += OnMove;
 
@@ -48,6 +64,9 @@ public class PlayerControllerInput : MonoBehaviour
         inputActions.Player.Look.canceled += OnLook;
 
         inputActions.Player.Jump.performed += OnJump;
+
+        //  Fire
+        inputActions.Player.Fire.performed += OnFire;
     }
 
     private void OnDisable()
@@ -59,6 +78,8 @@ public class PlayerControllerInput : MonoBehaviour
         inputActions.Player.Look.canceled -= OnLook;
 
         inputActions.Player.Jump.performed -= OnJump;
+
+        inputActions.Player.Fire.performed -= OnFire;
 
         inputActions.Player.Disable();
     }
@@ -88,12 +109,12 @@ public class PlayerControllerInput : MonoBehaviour
 
     private void OnMove(InputAction.CallbackContext ctx)
     {
-        moveInput = ctx.ReadValue<Vector2>(); // x = horizontal, y = vertical
+        moveInput = ctx.ReadValue<Vector2>();
     }
 
     private void OnLook(InputAction.CallbackContext ctx)
     {
-        lookInput = ctx.ReadValue<Vector2>(); // x = mouseX, y = mouseY
+        lookInput = ctx.ReadValue<Vector2>();
     }
 
     private void OnJump(InputAction.CallbackContext ctx)
@@ -106,18 +127,23 @@ public class PlayerControllerInput : MonoBehaviour
         }
     }
 
+    private void OnFire(InputAction.CallbackContext ctx)
+    {
+        if (!ctx.performed) return;
+
+        TryShoot();
+    }
+
     // ===== MOVEMENT & CAMERA =====
 
     private void HandleMovement()
     {
-        // Ground check
         isGrounded = controller.isGrounded;
         if (isGrounded && velocity.y < 0f)
         {
             velocity.y = -2f;
         }
 
-        // Move relative to camera
         Vector3 forward = cameraTransform.forward;
         Vector3 right = cameraTransform.right;
         forward.y = 0f;
@@ -130,14 +156,12 @@ public class PlayerControllerInput : MonoBehaviour
 
         controller.Move(move * moveSpeed * Time.deltaTime);
 
-        // Rotate player to movement direction
         if (move.sqrMagnitude > 0.001f)
         {
             Quaternion targetRot = Quaternion.LookRotation(move);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * 10f);
         }
 
-        // Apply vertical velocity (gravity/jump in HandleGravity)
         controller.Move(velocity * Time.deltaTime);
     }
 
@@ -150,7 +174,6 @@ public class PlayerControllerInput : MonoBehaviour
     {
         if (cameraTransform == null) return;
 
-        // Look input (mouse / right stick)
         yaw += lookInput.x * lookSensitivity;
         pitch -= lookInput.y * lookSensitivity;
         pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
@@ -165,5 +188,59 @@ public class PlayerControllerInput : MonoBehaviour
         );
 
         cameraTransform.LookAt(transform.position + Vector3.up * 1.5f);
+    }
+
+    // ===== SHOOTING =====
+
+    private void TryShoot()
+    {
+        if (Time.time < lastShootTime + shootCooldown)
+            return;
+
+        lastShootTime = Time.time;
+
+        if (cameraTransform == null)
+        {
+            Debug.LogWarning("No cameraTransform assigned for shooting.");
+            return;
+        }
+
+        Ray ray = new Ray(cameraTransform.position, cameraTransform.forward);
+        Vector3 endPoint = ray.origin + ray.direction * shootRange;
+
+        if (Physics.Raycast(ray, out RaycastHit hit, shootRange, shootMask, QueryTriggerInteraction.Ignore))
+        {
+            endPoint = hit.point;
+
+            Debug.Log($"Hit: {hit.collider.name}");
+
+            var enemy = hit.collider.GetComponentInParent<EnemyStateManager>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(shootDamage);
+            }
+        }
+
+        // Debug line in Scene view
+        Debug.DrawRay(ray.origin, ray.direction * shootRange, Color.red, 0.25f);
+
+        // Visible line in Game view via LineRenderer
+        if (shootLine != null)
+        {
+            StartCoroutine(ShowShootLine(ray.origin, endPoint));
+        }
+
+
+    }
+    private System.Collections.IEnumerator ShowShootLine(Vector3 start, Vector3 end)
+    {
+        shootLine.positionCount = 2;
+        shootLine.SetPosition(0, start);
+        shootLine.SetPosition(1, end);
+        shootLine.enabled = true;
+
+        yield return new WaitForSeconds(shootLineDuration);
+
+        shootLine.enabled = false;
     }
 }

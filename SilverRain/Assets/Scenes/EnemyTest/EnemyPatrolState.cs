@@ -11,9 +11,8 @@ public class EnemyPatrolState : EnemyBaseState
     private const float REACH_THRESHOLD = 0.2f;
     public override void EnterState(EnemyStateManager enemy)
     {
-        Debug.Log("Entering Patrol State");
-        // Initialize patrol behavior, set waypoints, etc.
-        enemy.animator.SetFloat("speed", 1.1f); // Example: Set animation speed for patrolling
+       
+        enemy.animator.SetFloat("speed", 1.1f); 
         hasTarget = false;
         elapsedTime = 0f;
 
@@ -56,8 +55,8 @@ public class EnemyPatrolState : EnemyBaseState
 
     public override void ExitState(EnemyStateManager enemy)
     {
-        Debug.Log("Exiting Patrol State");
-        // Clean up patrol behavior if necessary
+        
+        
     }
 
     private void PickNewRandomTarget(EnemyStateManager enemy)

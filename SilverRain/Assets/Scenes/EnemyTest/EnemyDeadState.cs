@@ -5,8 +5,15 @@ public class EnemyDeadState : EnemyBaseState
 {
     private bool initialized;
     private Vector3 initialScale;
+
+
+    //needs a timer  because is not a monobehaviour script 
+    private float deathWaitTimer = 0f;
+    private const float DEATH_WAIT_DURATION = 1f;
+
     public override void EnterState(EnemyStateManager enemy)
     {
+        Debug.Log("Entering Dead State");
         initialized = false;
 
         // Stop NavMesh movement if present
@@ -22,9 +29,22 @@ public class EnemyDeadState : EnemyBaseState
         if (enemy.animator != null)
         {
 
-            enemy.animator.SetBool("isDead", true);
-            enemy.animator.SetFloat("speed", 0f);
+
+            bool alreadyDead = enemy.animator.GetBool("isDead");
+
+            
+            if (!alreadyDead)
+            {
+                Debug.Log("Playing death animation");
+                enemy.animator.SetBool("isDead", true);
+                enemy.animator.SetFloat("speed", 0f);
+            }
+
         }
+
+
+
+
 
         // Disable collider so it stops getting hit / blocking
         var col = enemy.GetComponent<Collider>();
@@ -35,10 +55,21 @@ public class EnemyDeadState : EnemyBaseState
         initialScale = enemy.transform.localScale;
         initialized = true;
 
+
+
     }
     public override void UpdateState(EnemyStateManager enemy)
     {
+        
         if (!initialized) return;
+
+        if (deathWaitTimer < DEATH_WAIT_DURATION)
+        {
+            deathWaitTimer += Time.deltaTime;
+            return; // just wait
+        }
+
+
 
         // Shrink towards zero over time
         float shrinkSpeed = enemy.deathShrinkSpeed;
