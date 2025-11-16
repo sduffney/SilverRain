@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.AI;
+
 
 public class EnemyStateManager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
+    public Transform player;
 
     // declare states
     EnemyBaseState currentState;
@@ -31,18 +34,29 @@ public class EnemyStateManager : MonoBehaviour
 
 
     [Header("Combat Settings")]
-    public Transform player;
     public float detectionRange = 20f;
     public float attackRange = 10f;
     public int attackDamage = 1;
 
+    [Header("Health")]
+    [SerializeField] public int maxHealth = 3;
+    [HideInInspector] public int currentHealth;
+    [SerializeField] public float deathShrinkSpeed = 2f;
 
 
+    [HideInInspector]
+    public NavMeshAgent agent;
 
     void Awake()
     {
         animator = GetComponent<Animator>();
+        agent = GetComponent<NavMeshAgent>();
+
         patrolPoint = transform.position;
+
+        agent.speed = patrolSpeed;
+        agent.stoppingDistance = attackRange;
+        currentHealth = maxHealth;
     }
     void Start()
     {
@@ -76,6 +90,30 @@ public class EnemyStateManager : MonoBehaviour
         {
             attacking.AttackAnimationEnd(this);
         }
+    }
+
+    public void TakeDamage(int amount)
+    {
+        if(currentHealth <= 0)
+        {
+            return; // Already dead
+        }
+
+        currentHealth -= amount;
+        if (currentHealth <= 0)
+        {
+            currentHealth = 0;
+            Die();
+        }
+    }
+
+    public void Die()
+    {
+        if (currentState != deadState)
+        {
+            return; // Prevent multiple death triggers
+        }
+        SwitchState(deadState);
     }
 
 }

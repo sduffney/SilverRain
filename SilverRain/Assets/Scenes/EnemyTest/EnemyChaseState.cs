@@ -5,56 +5,61 @@ public class EnemyChaseState : EnemyBaseState
     public override void EnterState(EnemyStateManager enemy)
     {
         enemy.animator.SetFloat("speed", enemy.patrolSpeed * 1.5f);
+
+        if (enemy.agent != null)
+        {
+            enemy.agent.isStopped = false;
+            enemy.agent.speed = enemy.patrolSpeed * 1.5f;
+            enemy.agent.stoppingDistance = enemy.attackRange;
+        }
+
     }
     public override void UpdateState(EnemyStateManager enemy)
     {
 
-        if (enemy.player == null)
+        if (enemy.player == null || enemy.agent == null)
         {
+            if (enemy.agent != null)
+                enemy.agent.ResetPath();
+
             enemy.SwitchState(enemy.idleState);
             return;
         }
 
-        Vector3 toPlayer = enemy.player.position - enemy.transform.position;
-        toPlayer.y = 0f; // Ignore vertical difference
-        float distanceToPlayer = toPlayer.magnitude;
+        float distanceToPlayer = Vector3.Distance(
+            enemy.transform.position,
+            enemy.player.position
+        );
 
-        // If player too far  go back to patrol
+        // Player too far back to patrol
         if (distanceToPlayer > enemy.detectionRange)
         {
+            enemy.agent.ResetPath();
             enemy.SwitchState(enemy.patrolState);
             return;
         }
 
-        // If close enough to attack  ENTER ATTACK STATE
+        // Close enough  attack
         if (distanceToPlayer <= enemy.attackRange)
         {
+            enemy.agent.ResetPath();
             enemy.SwitchState(enemy.attackingState);
             return;
         }
 
-        // Otherwise: move toward player
-        Vector3 direction = toPlayer.normalized;
-        enemy.transform.position += direction * (enemy.patrolSpeed * 3f) * Time.deltaTime;
-
-        // Rotate to face player
-        direction.y = 0f;
-        if (direction.sqrMagnitude > 0.0001f)
-        {
-            Quaternion targetRot = Quaternion.LookRotation(direction);
-            enemy.transform.rotation = Quaternion.Slerp(
-                enemy.transform.rotation,
-                targetRot,
-                Time.deltaTime * 5f
-            );
-        }
-
+        // Otherwise, chase via NavMesh
+        enemy.agent.SetDestination(enemy.player.position);
+       
     }
     public override void ExitState(EnemyStateManager enemy)
     {
-        
+
         // Reset chase animation
         //enemy.GetComponent<Animator>().SetBool("isChasing", false);
+
+        if (enemy.agent != null)
+            enemy.agent.ResetPath();
+
     }
 
 }
