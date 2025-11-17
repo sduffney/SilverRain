@@ -30,7 +30,10 @@ public class EnemyHealth : MonoBehaviour
         bloodSplatter.Play();
 
         //Reveal this enemy
-        enemy.Reveal();
+        if (!GlobalInvisibilityManager.Instance.isActive)
+        {
+            enemy.RevealTimed(5f);
+        }
 
 
         //Play hurt animation
