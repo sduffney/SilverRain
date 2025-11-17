@@ -235,6 +235,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3577922927071859781}
   - component: {fileID: 7442050115661319743}
+  - component: {fileID: -2399452831772723633}
+  - component: {fileID: 4774675846325277523}
+  - component: {fileID: -5922804624860730371}
   m_Layer: 0
   m_Name: MushroomAngryPA
   m_TagString: Untagged
@@ -281,6 +284,77 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!195 &-2399452831772723633
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4245915190017150719}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &4774675846325277523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4245915190017150719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 596b8212009348a4490beb83b6df3ad7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyStateManager
+  player: {fileID: 0}
+  animator: {fileID: 0}
+  idleDuration: 2
+  idleDurationVariance: 0.2
+  patrolRadius: 5
+  patrolSpeed: 2
+  patrolPoint: {x: 0, y: 0, z: 0}
+  detectionRange: 200
+  attackRange: 2.5
+  attackDamage: 1
+  maxHealth: 3
+  currentHealth: 0
+  deathShrinkSpeed: 2
+  agent: {fileID: 0}
+--- !u!136 &-5922804624860730371
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4245915190017150719}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5632524212304190485
 GameObject:
   m_ObjectHideFlags: 0
