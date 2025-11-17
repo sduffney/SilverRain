@@ -19,20 +19,26 @@ public class GoldManager : MonoBehaviour
         }
     }
 
-    void Start()
+    private void Start()
     {
+        //PlayerPrefs.DeleteAll(); // For testing purposes only. Remove this line in production.
+        currentGold = PlayerPrefs.GetInt("Gold", currentGold);  
         UpdateGoldText();
     }
 
     public void AddGold(int amount)
     {
         currentGold += amount;
+        PlayerPrefs.SetInt("Gold", currentGold);
         UpdateGoldText();
     }
 
-    public void RemoveGold(int amount) {
+    public void RemoveGold(int amount)
+    {
         currentGold -= amount;
         if (currentGold < 0) currentGold = 0;
+
+        PlayerPrefs.SetInt("Gold", currentGold);
         UpdateGoldText();
     }
 
