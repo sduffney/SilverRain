@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2954346946830193634}
   - component: {fileID: 6813249206803635683}
   m_Layer: 0
-  m_Name: PP_Theme_10_Dagger_002
+  m_Name: Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -149,10 +149,10 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a019fadd6aef1de4483e1e0edf4e87a7, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SwordKeySpawner
-  swordData: {fileID: 11400000, guid: 6cf196b45f01aa249ad06fc075e085a9, type: 2}
-  swordPrefab: {fileID: 323333351367080586, guid: 87b744073f89d274ea9986018a77d4e4, type: 3}
-  attackKey: 113
+  m_EditorClassIdentifier: Assembly-CSharp::GunKeySpawner
+  grenadeData: {fileID: 11400000, guid: 8e64750ff90e99d4bbf486c593c0d5f2, type: 2}
+  grenadeControllerPrefab: {fileID: 1698056052845220, guid: 3f93b755669667b468d96b4b2709a981, type: 3}
+  attackKey: 101
 --- !u!1 &416467521
 GameObject:
   m_ObjectHideFlags: 0
@@ -1572,6 +1572,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1582769752
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1582769754}
+  - component: {fileID: 1582769753}
+  m_Layer: 0
+  m_Name: GrenadeLauncher
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1582769753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1582769752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b4a59ac588b5147988ab90ff844ad0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GrenadeWeaponController
+  weaponData: {fileID: 11400000, guid: 8e64750ff90e99d4bbf486c593c0d5f2, type: 2}
+  grenadePrefab: {fileID: 1698056052845220, guid: 3f93b755669667b468d96b4b2709a981, type: 3}
+--- !u!4 &1582769754
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1582769752}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.27905, y: -11.08159, z: 1.12574}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1664412125
 GameObject:
   m_ObjectHideFlags: 0
@@ -2348,7 +2394,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5560765201317892637, guid: 861ba8a6cd70075428a708b0b8320158, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1.39
       objectReference: {fileID: 0}
     - target: {fileID: 5560765201317892637, guid: 861ba8a6cd70075428a708b0b8320158, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2438,3 +2484,4 @@ SceneRoots:
   - {fileID: 1906029847}
   - {fileID: 1149256623}
   - {fileID: 1664412128}
+  - {fileID: 1582769754}
