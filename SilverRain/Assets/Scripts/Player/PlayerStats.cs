@@ -51,6 +51,7 @@ public class PlayerStats : MonoBehaviour
         {
             RegisterCommands();
         }
+        ApplyPermanentUpgrades();
     }
 
     public void RaiseStat(float amount, StatType statType)

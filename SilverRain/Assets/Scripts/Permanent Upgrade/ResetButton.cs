@@ -19,6 +19,10 @@ public class ResetButton : MonoBehaviour
     [SerializeField] private TMP_Text detailsBody;
     [SerializeField] private TMP_Text[] miniLvs;
 
+    private void Start()
+    {
+        SyncMiniLevels();
+    }
 
     public void ResetAllProgress()
     {
@@ -59,4 +63,21 @@ public class ResetButton : MonoBehaviour
             miniLv.text = "0";
         }
     }
+
+    public void SyncMiniLevels()
+    {
+        for (int i = 0; i < upgrades.Count; i++)
+        {
+            if (upgrades[i] != null)
+            {
+                int lv = upgrades[i].GetCurrentLevel();
+                miniLvs[i].text = lv.ToString();
+            }
+            else
+            {
+                miniLvs[i].text = "0";
+            }
+        }
+    }
+
 }
