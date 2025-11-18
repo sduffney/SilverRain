@@ -12,6 +12,7 @@ public abstract class TemporaryWeapon : TemporaryItem
     public float projectileSpeed;
     public float baseSize;      // orbit radius
     public int throwAngle;
+    public PlayerStats playerStats;
 
     // Runtime-only state (do not serialize to asset)
     [System.NonSerialized]
@@ -28,6 +29,7 @@ public abstract class TemporaryWeapon : TemporaryItem
 
         // Reset runtime-only state every time the asset is reloaded/enabled
         lastAttackTime = -999f;
+        playerStats = GameManager.Instance.player.GetComponent<PlayerStats>();
 
         // If you are using a runtime-only currentLevel, reset it here:
         // runtimeCurrentLevel = 0;
@@ -55,7 +57,12 @@ public abstract class TemporaryWeapon : TemporaryItem
 
     public bool IsOffCooldown()
     {
-        return Time.time >= lastAttackTime + GetCooldown();
+        if (playerStats == null)
+        {
+            return false;
+        }
+        return Time.time >= lastAttackTime + GetCooldown() - playerStats.cooldown;
+        //Debug.Log($"New cooldown:{baseCooldown}");
     }
 
     public void ResetCooldown()

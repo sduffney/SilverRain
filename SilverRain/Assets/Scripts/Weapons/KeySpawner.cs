@@ -19,55 +19,56 @@ using UnityEngine;
 //        }
 //    }
 //}
-//public class GunKeySpawner : MonoBehaviour
-//{
-//    public TemporaryWeapon gunData;   // ScriptableObject configured for gun
-//    public GameObject gunPrefab;      // Prefab with GunWeaponController
-//    public KeyCode attackKey = KeyCode.E;
-
-//    private void Update()
-//    {
-//        if (Input.GetKeyDown(attackKey))
-//        {
-//            if (!gunData.IsOffCooldown()) return;
-//            var gun = Instantiate(gunPrefab, transform.position, Quaternion.identity);
-//            var controller = gun.GetComponent<GunWeaponController>();
-//            controller.weaponData = gunData;
-//            controller.Activate();  // controller will auto-find player via tag
-//        }
-//    }
-//}
-
-using UnityEngine;
-
-public class GrenadeKeySpawner : MonoBehaviour
+public class GunKeySpawner : MonoBehaviour
 {
-    public TemporaryWeapon grenadeData;   // ScriptableObject configured for grenade
-    public GameObject grenadeControllerPrefab; // Prefab with GrenadeWeaponController attached
-    public KeyCode attackKey = KeyCode.R;
-
-    private Transform cam;
-
-    private void Awake()
-    {
-        if (Camera.main != null) cam = Camera.main.transform;
-        else Debug.LogWarning("GrenadeKeySpawner: no Camera.main found.");
-    }
+    public TemporaryWeapon gunData;   // ScriptableObject configured for gun
+    public GameObject gunPrefab;      // Prefab with GunWeaponController
+    public KeyCode attackKey = KeyCode.E;
 
     private void Update()
     {
         if (Input.GetKeyDown(attackKey))
         {
-            if (cam == null || grenadeControllerPrefab == null || grenadeData == null) return;
-            if (!grenadeData.IsOffCooldown()) return;
-
-            // Spawn the controller in front of the camera
-            Vector3 spawnPos = cam.position + cam.forward * 1.2f;
-            var grenadeController = Instantiate(grenadeControllerPrefab, spawnPos, Quaternion.identity)
-                                     .GetComponent<GrenadeWeaponController>();
-
-            grenadeController.weaponData = grenadeData;
-            grenadeController.Activate();
+            if (!gunData.IsOffCooldown()) return;
+            var gun = Instantiate(gunPrefab, transform.position, Quaternion.identity);
+            var controller = gun.GetComponent<GunWeaponController>();
+            controller.weaponData = gunData;
+            controller.Activate();  // controller will auto-find player via tag
         }
     }
 }
+
+//using UnityEngine;
+
+//public class GrenadeKeySpawner : MonoBehaviour
+//{
+//    public TemporaryWeapon grenadeData;   // ScriptableObject configured for grenade
+//    public GameObject grenadeControllerPrefab; // Prefab with GrenadeWeaponController attached
+//    public KeyCode attackKey = KeyCode.R;
+
+//    private Transform cam;
+
+//    private void Awake()
+//    {
+//        if (Camera.main != null) cam = Camera.main.transform;
+//        else Debug.LogWarning("GrenadeKeySpawner: no Camera.main found.");
+//    }
+
+//    private void Update()
+//    {
+//        if (Input.GetKeyDown(attackKey))
+//        {
+//            if (cam == null || grenadeControllerPrefab == null || grenadeData == null) return;
+//            if (!grenadeData.IsOffCooldown()) return;
+
+//            // Spawn the controller in front of the camera
+//            Vector3 spawnPos = cam.position + cam.forward * 1.2f;
+//            var grenade = Instantiate(grenadeControllerPrefab, spawnPos, Quaternion.identity);
+//            //REspawn the controller not just the prefab
+//            GrenadeWeaponController grenadeController = GameObject.FindAnyObjectByType<GrenadeWeaponController>().GetComponent<GrenadeWeaponController>();
+//            Debug.Log(grenadeController);
+//            grenadeController.weaponData = grenadeData;
+//            grenadeController.Activate();
+//        }
+//    }
+//}

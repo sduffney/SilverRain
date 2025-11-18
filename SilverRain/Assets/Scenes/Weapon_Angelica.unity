@@ -150,8 +150,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a019fadd6aef1de4483e1e0edf4e87a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GunKeySpawner
-  grenadeData: {fileID: 11400000, guid: 8e64750ff90e99d4bbf486c593c0d5f2, type: 2}
-  grenadeControllerPrefab: {fileID: 1698056052845220, guid: 3f93b755669667b468d96b4b2709a981, type: 3}
+  gunData: {fileID: 11400000, guid: 2fef6c30c08634d4d8ad7f67c3071988, type: 2}
+  gunPrefab: {fileID: 1694449805434718, guid: 1f6afd5c80ce45243b22ad61aa66093f, type: 3}
   attackKey: 101
 --- !u!1 &416467521
 GameObject:
@@ -1702,6 +1702,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51cfd2648e6df7e40b0c8b844300a7f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  player: {fileID: 293584758}
 --- !u!1 &1669719776
 GameObject:
   m_ObjectHideFlags: 0

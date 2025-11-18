@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
 
     // Singleton instance
     public static GameManager Instance { get; private set; }
+    public GameObject player;
 
     private void Awake()
     {
