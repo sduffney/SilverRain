@@ -6,7 +6,7 @@ using UnityEngine.InputSystem.UI;
 
 public class BuffManager : MonoBehaviour
 {
-    public List<TemporaryItem> allTempItems;
+    public List<TemporaryItem> allTempItems; // add three weapons
     public GameObject buffCardPrefab;
     public Transform cardParent;
     
@@ -21,6 +21,9 @@ public class BuffManager : MonoBehaviour
         playerLevel = FindAnyObjectByType<PlayerLevel>();
         //ResetBuff(allTempItems);
         SyncBuffLevelsWithInventory();
+
+        var defaultWeapon = allTempItems.Find(item => item.id == "sword");
+        playerInventory.PickItem(defaultWeapon);
     }
 
     //when player levels up, show 3 random buffs to choose from
