@@ -143,14 +143,10 @@ MonoBehaviour:
   spawnDelay: 1
   maxAttemptsPerSpawn: 20
   enemyPrefabs:
-  - {fileID: 7427070853888570003, guid: dcc982307a817354fafb192abcd9b917, type: 3}
-  - {fileID: 4245915190017150719, guid: cbc814ca6b730954b8a5e3641bde01c9, type: 3}
-  - {fileID: 264213370537990050, guid: 7162793d91fb69744a25a3a0371894ba, type: 3}
-  - {fileID: 100116, guid: cb2a63aa7e6bbda4b8127e31c18ef3e9, type: 3}
-  - {fileID: 100116, guid: c3b68bdc51549c94b901881e33c43c96, type: 3}
-  - {fileID: 100116, guid: 2a2eaaaaf202acc4291e6f046a2c6f5d, type: 3}
-  - {fileID: 61258325561811606, guid: dadecae318be19749ac4fbd62bd9a632, type: 3}
-  - {fileID: 16829958793894433, guid: 6be18c83797e9b14cb2dc9160b155d89, type: 3}
+  - {fileID: 8937696551812037509, guid: 0872d8daf510dba4cb3a892b62f17999, type: 3}
+  - {fileID: 7440275271134425223, guid: ab84c09aa40455a47815d52a29311496, type: 3}
+  - {fileID: 3286643137425952069, guid: c98890e5d7e3f1844bd9bcfc8f08e3f2, type: 3}
+  - {fileID: 4596657270728130862, guid: 912d934b029a9cf42afb6fa252d061aa, type: 3}
   spawnCheckRadius: 0.5
   blockingLayers:
     serializedVersion: 2
