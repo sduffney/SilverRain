@@ -11,7 +11,7 @@ public class HUDController : MonoBehaviour
 
     [SerializeField] private GameObject buffsList;
     [SerializeField] private GameObject killInfo;
-    [SerializeField] private GameObject[] buffPrefabs;
+    [SerializeField] private GameObject buffPrefab;
     [SerializeField] private GameObject killInfoPrefab;
 
     [SerializeField] private Slider healthBar;
@@ -52,17 +52,40 @@ public class HUDController : MonoBehaviour
         }
     }
 
-    public void AddBuff(string buffName)
+    public void UpdateInventoryIcons()
     {
-        foreach (GameObject prefab in buffPrefabs)
+        // Clear existing icons
+        foreach (Transform child in buffsList.transform)
         {
-            if (prefab.name == buffName)
-            {
-                GameObject newBuff = Instantiate(prefab, buffsList.transform);
-                return;
-            }
+            Destroy(child.gameObject);
+        }
+
+        // Get all owned items from PlayerInventory
+        var inventory = FindAnyObjectByType<PlayerInventory>();
+        if (inventory == null) return;
+        foreach (var item in inventory.ownedItems)
+        {
+            // intantiate corresponding buff prefab
+            var newBuff = Instantiate(buffPrefab, buffsList.transform);
+            var iconImage = newBuff.GetComponentInChildren<Image>();
+            iconImage.sprite = item.icon;
+            var tmp = newBuff.GetComponentInChildren<TextMeshProUGUI>();
+            tmp.text = item.currentLevel.ToString();
+
         }
     }
+
+    //public void AddBuff(string buffName)
+    //{
+    //    foreach (GameObject prefab in buffPrefabs)
+    //    {
+    //        if (prefab.name == buffName)
+    //        {
+    //            GameObject newBuff = Instantiate(prefab, buffsList.transform);
+    //            return;
+    //        }
+    //    }
+    //}
 
     public void SpownKillInfo(string enemyType)
     {
