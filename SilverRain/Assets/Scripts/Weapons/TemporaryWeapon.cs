@@ -1,3 +1,4 @@
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "TemporaryWeapon", menuName = "Scriptable Objects/TemporaryWeapon")]
@@ -29,7 +30,7 @@ public abstract class TemporaryWeapon : TemporaryItem
 
         // Reset runtime-only state every time the asset is reloaded/enabled
         lastAttackTime = -999f;
-        playerStats = GameManager.Instance.player.GetComponent<PlayerStats>();
+        playerStats = GameObject.FindWithTag("Player").GetComponent<PlayerStats>();
 
         // If you are using a runtime-only currentLevel, reset it here:
         // runtimeCurrentLevel = 0;
