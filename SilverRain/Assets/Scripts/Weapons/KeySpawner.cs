@@ -15,7 +15,7 @@ using UnityEngine;
 //            var sword = Instantiate(swordPrefab, transform.position, Quaternion.identity);
 //            var controller = sword.GetComponent<SwordWeaponController>();
 //            controller.weaponData = swordData;
-//            controller.Activate(); // player is auto-found via tag
+//            controller.Activate(); // playerTrans is auto-found via tag
 //        }
 //    }
 //}
@@ -29,16 +29,16 @@ public class GunKeySpawner : MonoBehaviour
     {
         if (Input.GetKeyDown(attackKey))
         {
-            if (!gunData.IsOffCooldown()) return;
+            Debug.Log("GunKeySpawner: Attack key pressed.");
+            if (!gunData.IsOffCooldown()) { Debug.Log(gunData.GetCooldown()); return; }
             var gun = Instantiate(gunPrefab, transform.position, Quaternion.identity);
+            Debug.Log(gun);
             var controller = gun.GetComponent<GunWeaponController>();
             controller.weaponData = gunData;
-            controller.Activate();  // controller will auto-find player via tag
+            controller.Activate();  // controller will auto-find playerTrans via tag
         }
     }
 }
-
-//using UnityEngine;
 
 //public class GrenadeKeySpawner : MonoBehaviour
 //{

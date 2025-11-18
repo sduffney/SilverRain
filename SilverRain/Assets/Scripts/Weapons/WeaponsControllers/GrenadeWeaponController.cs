@@ -30,7 +30,7 @@ public class GrenadeWeaponController : MonoBehaviour
     public void Activate()
     {
 
-        //add player states
+        //add playerTrans states
         if (weaponData == null || !weaponData.IsOffCooldown()) return;
 
         weaponData.ResetCooldown();

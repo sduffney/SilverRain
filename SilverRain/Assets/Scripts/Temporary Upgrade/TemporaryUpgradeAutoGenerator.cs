@@ -85,7 +85,7 @@ public static class TemporaryUpgradeAutoGenerator
         switch (name)
         {
             case "Attack Damage":
-                return $"Temporarily increases player attack power from {detailLine}.";
+                return $"Temporarily increases playerTrans attack power from {detailLine}.";
             case "Projectile Speed":
                 return $"Temporarily increases projectile speed from {detailLine}.";
             case "Duration":
@@ -95,7 +95,7 @@ public static class TemporaryUpgradeAutoGenerator
             case "Size":
                 return $"Temporarily increases attack or effect size from {detailLine}.";
             case "Movement Speed":
-                return $"Temporarily increases player movement speed from {detailLine}.";
+                return $"Temporarily increases playerTrans movement speed from {detailLine}.";
             case "Health Regen":
                 return $"Temporarily increases health regeneration rate from {detailLine}.";
             case "XP Amount":
@@ -103,9 +103,9 @@ public static class TemporaryUpgradeAutoGenerator
             case "Max Health":
                 return $"Temporarily increases maximum health from {detailLine}.";
             case "Armour":
-                return $"Temporarily increases player armour from {detailLine}.";
+                return $"Temporarily increases playerTrans armour from {detailLine}.";
             default:
-                return $"Temporarily improves player stats from {detailLine}.";
+                return $"Temporarily improves playerTrans stats from {detailLine}.";
         }
     }
 }

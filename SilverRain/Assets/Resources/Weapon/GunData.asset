@@ -18,10 +18,11 @@ MonoBehaviour:
   currentLevel: 1
   maxLevel: 5
   baseDamage: 5
-  baseCooldown: 1
-  baseDuration: 2
+  baseCooldown: 10
+  baseDuration: 5
   cooldownReduction: 1
   damagePerLevel: 2
   projectileSpeed: 1
   baseSize: 2
   throwAngle: 2
+  playerStats: {fileID: 0}

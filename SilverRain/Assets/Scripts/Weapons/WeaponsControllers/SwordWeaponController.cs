@@ -25,7 +25,7 @@ public class SwordWeaponController : MonoBehaviour
             return;
         }
 
-        // Orbit around player
+        // Orbit around playerTrans
         angle += 180f * Time.deltaTime;
         float rad = angle * Mathf.Deg2Rad;
         Vector3 offset = new Vector3(Mathf.Cos(rad), 0, Mathf.Sin(rad)) * weaponData.baseSize;

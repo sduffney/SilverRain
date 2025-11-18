@@ -41,13 +41,13 @@ public abstract class TemporaryWeapon : TemporaryItem
 
     public float GetDamage()
     {
-        return baseDamage + (currentLevel * damagePerLevel);
+        return baseDamage + (currentLevel * damagePerLevel) + playerStats.attackDamage;
     }
 
     public float GetCooldown()
     {
         if (baseCooldown <= 0f) Debug.LogWarning($"{name}: baseCooldown is zero or negative");
-        return Mathf.Max(0.1f, baseCooldown - (currentLevel * cooldownReduction));
+        return Mathf.Max(0.1f, baseCooldown - (currentLevel * cooldownReduction) - playerStats.cooldown);
     }
 
     public void ResetLevel()
@@ -58,12 +58,8 @@ public abstract class TemporaryWeapon : TemporaryItem
 
     public bool IsOffCooldown()
     {
-        if (playerStats == null)
-        {
-            return false;
-        }
-        return Time.time >= lastAttackTime + GetCooldown() - playerStats.cooldown;
-        //Debug.Log($"New cooldown:{baseCooldown}");
+        Debug.Log(Time.time + " >= " + lastAttackTime + " + " + GetCooldown());
+        return Time.time >= lastAttackTime + GetCooldown();
     }
 
     public void ResetCooldown()

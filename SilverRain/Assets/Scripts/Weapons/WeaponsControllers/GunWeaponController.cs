@@ -6,7 +6,7 @@ public class GunWeaponController : MonoBehaviour
     public Transform firePoint;          // optional; preferably a child at the muzzle
     public GameObject projectilePrefab;  // prefab with Projectile.cs
 
-    private Transform player;
+    private Transform playerTrans;
     private Transform cam;               // reference to the main camera
     private float activeUntil;
 
@@ -15,10 +15,11 @@ public class GunWeaponController : MonoBehaviour
     private float spawnOffsetUp = -0.4f;     // vertical offset relative to the camera
     private float muzzleOffset = 0.5f;       // if firePoint is missing, projectile spawns this far forward
 
+    private GameObject player;
     private void Awake()
     {
-        var go = GameObject.FindGameObjectWithTag("Player");
-        if (go != null) player = go.transform;
+        player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null) playerTrans = player.transform;
 
         if (Camera.main != null) cam = Camera.main.transform;
         else Debug.LogWarning("GunWeaponController: no Camera.main found. Ensure a camera has the MainCamera tag.");
@@ -48,11 +49,11 @@ public class GunWeaponController : MonoBehaviour
                 firePoint.rotation = transform.rotation;
             }
         }
-        else if (player != null)
+        else if (playerTrans != null)
         {
-            // Fallback: follow player rotation if no camera is available
-            transform.position = player.position + player.forward * spawnOffsetForward;
-            transform.rotation = player.rotation;
+            // Fallback: follow playerTrans rotation if no camera is available
+            transform.position = playerTrans.position + playerTrans.forward * spawnOffsetForward;
+            transform.rotation = playerTrans.rotation;
         }
     }
 
@@ -104,8 +105,11 @@ public class GunWeaponController : MonoBehaviour
 
         var projObj = Instantiate(projectilePrefab, spawnPos, spawnRot);
         var proj = projObj.GetComponent<Projectile>();
+        Debug.Log(proj);
         if (proj == null) { Debug.LogError("Projectile.cs not found on instantiated prefab"); Destroy(projObj); return; }
 
-        proj.Init(weaponData.GetDamage(), dir, weaponData.projectileSpeed);
+        var projectileSpeed = player.GetComponent<PlayerStats>().projectileSpeed;
+        proj.Init(weaponData.GetDamage(), dir, (weaponData.projectileSpeed + projectileSpeed));
+        Debug.Log($"Projectile damage:{weaponData.GetDamage()}");
     }
 }

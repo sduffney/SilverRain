@@ -239,7 +239,7 @@ public class PlayerStats : MonoBehaviour
                     consoleManager.AppendOutput("Invalid XP amount.");
                 }
             }
-        }, "<value> - Gain Xp to player");
+        }, "<value> - Gain Xp to playerTrans");
         consoleManager.RegisterCommand("enemykill", args =>
         {
             if (args[0] is string enemyType)
@@ -271,7 +271,7 @@ public class PlayerStats : MonoBehaviour
                     consoleManager.AppendOutput("Invalid damage amount.");
                 }
             }
-        },"<value> - damage player");
+        },"<value> - damage playerTrans");
     }
 
     // Testing purposes only

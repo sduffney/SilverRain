@@ -22,11 +22,11 @@ public class BuffManager : MonoBehaviour
         //ResetBuff(allTempItems);
         SyncBuffLevelsWithInventory();
 
-        var defaultWeapon = allTempItems.Find(item => item.id == "sword");
-        playerInventory.PickItem(defaultWeapon);
+        //var defaultWeapon = allTempItems.Find(item => item.id == "sword");
+        //playerInventory.PickItem(defaultWeapon);
     }
 
-    //when player levels up, show 3 random buffs to choose from
+    //when playerTrans levels up, show 3 random buffs to choose from
     public void ShowBuffOptions()
     {
         //var playerController = FindAnyObjectByType<PlayerController>();
