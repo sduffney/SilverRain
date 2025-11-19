@@ -25,6 +25,7 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         //Trigger reveal when reveal all event is called
+        health.DamageTest();
     }
     public void Reveal()
     {

@@ -44,8 +44,8 @@ public class RangedEnemyController : EnemyController
         enemy = GetComponent<Enemy>();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
-        rb = GetComponent<Rigidbody>();
         targetPlayer = GameObject.FindGameObjectWithTag("Player");
+        agent.speed = moveSpeed;
     }
 
     // Update is called once per frame

@@ -589,7 +589,6 @@ GameObject:
   - component: {fileID: 6246851165708670800}
   - component: {fileID: 4061326125157589883}
   - component: {fileID: 1393219349111478000}
-  - component: {fileID: 1164186938051526495}
   - component: {fileID: 2374057026307821745}
   - component: {fileID: 5859134246545887740}
   - component: {fileID: 7743628838712286303}
@@ -663,35 +662,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   maxHealth: 100
+  currentHealth: 0
   bloodSplatterPrefab: {fileID: 184970821379519350, guid: ed9978dcbfdf861449a54c440d43deab, type: 3}
   animator: {fileID: 0}
---- !u!54 &1164186938051526495
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7440275271134425223}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 80
-  m_CollisionDetection: 0
 --- !u!136 &2374057026307821745
 CapsuleCollider:
   m_ObjectHideFlags: 0
