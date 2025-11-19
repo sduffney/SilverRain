@@ -19,6 +19,8 @@ public class HUDController : MonoBehaviour
 
     [SerializeField] private Image damageOverlay;
 
+    [SerializeField] private GameObject GameOverScreen;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -31,7 +33,7 @@ public class HUDController : MonoBehaviour
         timer.text = Time.time.ToString("00:00");
         healthBar.value = FindAnyObjectByType<PlayerHealth>().GetHealthPercentage();
         expBar.value = FindAnyObjectByType<PlayerLevel>().GetXPPercentage();
-        score.text = FindAnyObjectByType<PlayerStats>().score.ToString();
+        //score.text = FindAnyObjectByType<PlayerStats>().score.ToString();
     }
 
     void Initialize()
@@ -50,6 +52,11 @@ public class HUDController : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+    }
+
+    public void UpdateScore(int newScore)
+    {
+        score.text = newScore.ToString();
     }
 
     public void UpdateInventoryIcons()
@@ -157,5 +164,22 @@ public class HUDController : MonoBehaviour
         }
         color.a = 0f;
         damageOverlay.color = color;
+    }
+
+    public void ShowGameOverScreen(bool isWin)
+    {
+        if (GameOverScreen != null)
+        {
+            GameOverScreen.SetActive(true);
+        }
+
+        if (isWin) 
+        {
+            // Show win message
+        }
+        else
+        {
+            // Show lose message
+        }
     }
 }
