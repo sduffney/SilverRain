@@ -662,7 +662,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeButton
   currentSelectedView: {fileID: 0}
-  goldManager: {fileID: 1525403953}
+  goldManager: {fileID: 1254122322}
   buyButton: {fileID: 241999964}
   buyButtonText: {fileID: 778984305}
 --- !u!1 &305266151
@@ -3586,7 +3586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7eda469ead0426f4aab001777c04bbb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ResetButton
-  goldManager: {fileID: 1525403953}
+  goldManager: {fileID: 1254122322}
   upgrades:
   - {fileID: 11400000, guid: 6dfdce0103e4f8648a1c2cec3b8fd474, type: 2}
   - {fileID: 11400000, guid: 341b82cc11c49c6488f0108838fa73c1, type: 2}
@@ -4076,6 +4076,25 @@ MonoBehaviour:
   costText: {fileID: 470141311}
   detailsBody: {fileID: 649011296}
   miniLvText: {fileID: 8468052}
+--- !u!1 &1254122321 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4679578675246524391, guid: 22e35df70c35bfc4eb2a8c88d53d03f2, type: 3}
+  m_PrefabInstance: {fileID: 1965316573}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1254122322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1254122321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94085b811b9045341bc2df2d25c5807f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GoldManager
+  currentGold: 10000
+  goldText: {fileID: 1379062028}
 --- !u!1 &1297046582
 GameObject:
   m_ObjectHideFlags: 0
@@ -4727,52 +4746,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1477316052}
   m_CullTransparentMesh: 1
---- !u!1 &1525403952
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1525403954}
-  - component: {fileID: 1525403953}
-  m_Layer: 0
-  m_Name: GoldManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1525403953
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525403952}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94085b811b9045341bc2df2d25c5807f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GoldManager
-  currentGold: 10000
-  goldText: {fileID: 1379062028}
---- !u!4 &1525403954
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525403952}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 914.90375, y: 514.7991, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1549835487
 GameObject:
   m_ObjectHideFlags: 0
@@ -5219,6 +5192,66 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1934536022}
   m_CullTransparentMesh: 1
+--- !u!1001 &1965316573
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4140437105863361888, guid: 22e35df70c35bfc4eb2a8c88d53d03f2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 304.955
+      objectReference: {fileID: 0}
+    - target: {fileID: 4140437105863361888, guid: 22e35df70c35bfc4eb2a8c88d53d03f2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4140437105863361888, guid: 22e35df70c35bfc4eb2a8c88d53d03f2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4796.698
+      objectReference: {fileID: 0}
+    - target: {fileID: 4140437105863361888, guid: 22e35df70c35bfc4eb2a8c88d53d03f2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4140437105863361888, guid: 22e35df70c35bfc4eb2a8c88d53d03f2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4140437105863361888, guid: 22e35df70c35bfc4eb2a8c88d53d03f2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4140437105863361888, guid: 22e35df70c35bfc4eb2a8c88d53d03f2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4140437105863361888, guid: 22e35df70c35bfc4eb2a8c88d53d03f2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4140437105863361888, guid: 22e35df70c35bfc4eb2a8c88d53d03f2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4140437105863361888, guid: 22e35df70c35bfc4eb2a8c88d53d03f2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679578675246524391, guid: 22e35df70c35bfc4eb2a8c88d53d03f2, type: 3}
+      propertyPath: m_Name
+      value: GameManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4679578675246524391, guid: 22e35df70c35bfc4eb2a8c88d53d03f2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1254122322}
+  m_SourcePrefab: {fileID: 100100000, guid: 22e35df70c35bfc4eb2a8c88d53d03f2, type: 3}
 --- !u!1 &2013015733
 GameObject:
   m_ObjectHideFlags: 0
@@ -5706,9 +5739,9 @@ CanvasRenderer:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1965316573}
   - {fileID: 847858953}
   - {fileID: 1837151576}
   - {fileID: 1637585347}
   - {fileID: 1357125266}
-  - {fileID: 1525403954}
   - {fileID: 149505851}

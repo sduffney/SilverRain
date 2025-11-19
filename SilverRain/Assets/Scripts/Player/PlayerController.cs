@@ -156,8 +156,8 @@ public class PlayerController : MonoBehaviour
         FindAnyObjectByType<HUDController>().SpownKillInfo(enemyType);
     }
 
-    public void AddBuff(string buff)
-    {
-        FindAnyObjectByType<HUDController>().AddBuff(buff);
-    }
+    //public void AddBuff(string buff)
+    //{
+    //    FindAnyObjectByType<HUDController>().AddBuff(buff);
+    //}
 }
