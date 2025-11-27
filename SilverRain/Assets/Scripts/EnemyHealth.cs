@@ -28,10 +28,12 @@ public class EnemyHealth : MonoBehaviour
         var bloodSplatter = Instantiate(bloodSplatterPrefab, bloodSplatterSpawn, Quaternion.identity);
 
         bloodSplatter.Play();
-        Destroy(bloodSplatter, bloodSplatter.main.duration);
 
         //Reveal this enemy
-        enemy.Reveal();
+        if (!GlobalInvisibilityManager.Instance.isActive)
+        {
+            enemy.RevealTimed(5f);
+        }
 
 
         //Play hurt animation
