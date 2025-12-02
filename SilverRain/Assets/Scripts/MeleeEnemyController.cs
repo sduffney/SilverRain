@@ -13,8 +13,8 @@ public class MeleeEnemyController : EnemyController
         enemy = GetComponent<Enemy>();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
-        rb = GetComponent<Rigidbody>();
         targetPlayer = GameObject.FindGameObjectWithTag("Player");
+        agent.speed = moveSpeed;
     }
     private void OnTriggerStay(UnityEngine.Collider collision)
     {
