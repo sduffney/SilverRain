@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -7,8 +8,13 @@ public class GameManager : MonoBehaviour
     // into the GameManager.
 
     private PlayerInput playerInput;
+    private HUDController hudController;
+    public GoldManager goldManager;
 
+    [SerializeField] private float goldMultiplier = 1.0f;
 
+    // Score and Money
+    public int Score { get; private set; } = 0;
 
     // pause manager
     private int pauseCounter = 0;
@@ -33,9 +39,48 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        playerInput = GameObject.FindWithTag("Player").GetComponent<PlayerInput>();
+        GetReferences();
+        goldManager = GetComponent<GoldManager>();
+
+        Score = 0;
     }
 
+    private void GetReferences()
+    {
+        if (SceneManager.GetActiveScene().name != "Level1")
+            return;
+        playerInput = GameObject.FindWithTag("Player").GetComponent<PlayerInput>();
+        hudController = FindAnyObjectByType<HUDController>();
+    }
+
+    #region GameOver Management
+
+    public void GameOver(bool isWin)
+    {
+        if (isWin)
+        {
+            goldManager.AddGold(Mathf.RoundToInt(Score * goldMultiplier));
+            hudController.ShowGameOverScreen(isWin);
+        }
+        else
+        {
+            goldManager.AddGold(Mathf.RoundToInt(Score * goldMultiplier * 0.5f));
+            hudController.ShowGameOverScreen(isWin);
+        }
+            RequestPause();
+    }
+
+    #endregion
+
+    #region Score Management
+
+    public void AddScore(int amount)
+    {
+        Score += amount;
+        hudController.UpdateScore(Score);
+    }
+
+    #endregion
 
     #region Pause Management
     public void RequestPause()

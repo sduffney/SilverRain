@@ -10,16 +10,12 @@ public class UpgradeButton : MonoBehaviour
     [SerializeField] private Button buyButton;
     [SerializeField] private TMP_Text buyButtonText;
 
-    private void Awake()
+    private void Start()
     {
         //if (currentSelectedView == null)
         //{
         //    Debug.LogError("UpgradeDetailsView reference is missing.");
         //}
-        if (goldManager == null)
-        {
-            Debug.LogError("GoldManager reference is missing.");
-        }
 
         currentSelectedView = null;
         UpdateBuyButtonState();

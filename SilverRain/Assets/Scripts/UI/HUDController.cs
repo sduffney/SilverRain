@@ -11,13 +11,15 @@ public class HUDController : MonoBehaviour
 
     [SerializeField] private GameObject buffsList;
     [SerializeField] private GameObject killInfo;
-    [SerializeField] private GameObject[] buffPrefabs;
+    [SerializeField] private GameObject buffPrefab;
     [SerializeField] private GameObject killInfoPrefab;
 
     [SerializeField] private Slider healthBar;
     [SerializeField] private Slider expBar;
 
     [SerializeField] private Image damageOverlay;
+
+    [SerializeField] private GameObject GameOverScreen;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -31,7 +33,7 @@ public class HUDController : MonoBehaviour
         timer.text = Time.time.ToString("00:00");
         healthBar.value = FindAnyObjectByType<PlayerHealth>().GetHealthPercentage();
         expBar.value = FindAnyObjectByType<PlayerLevel>().GetXPPercentage();
-        score.text = FindAnyObjectByType<PlayerStats>().score.ToString();
+        //score.text = FindAnyObjectByType<PlayerStats>().score.ToString();
     }
 
     void Initialize()
@@ -52,17 +54,45 @@ public class HUDController : MonoBehaviour
         }
     }
 
-    public void AddBuff(string buffName)
+    public void UpdateScore(int newScore)
     {
-        foreach (GameObject prefab in buffPrefabs)
+        score.text = newScore.ToString();
+    }
+
+    public void UpdateInventoryIcons()
+    {
+        // Clear existing icons
+        foreach (Transform child in buffsList.transform)
         {
-            if (prefab.name == buffName)
-            {
-                GameObject newBuff = Instantiate(prefab, buffsList.transform);
-                return;
-            }
+            Destroy(child.gameObject);
+        }
+
+        // Get all owned items from PlayerInventory
+        var inventory = FindAnyObjectByType<PlayerInventory>();
+        if (inventory == null) return;
+        foreach (var item in inventory.ownedItems)
+        {
+            // intantiate corresponding buff prefab
+            var newBuff = Instantiate(buffPrefab, buffsList.transform);
+            var iconImage = newBuff.GetComponentInChildren<Image>();
+            iconImage.sprite = item.icon;
+            var tmp = newBuff.GetComponentInChildren<TextMeshProUGUI>();
+            tmp.text = item.currentLevel.ToString();
+
         }
     }
+
+    //public void AddBuff(string buffName)
+    //{
+    //    foreach (GameObject prefab in buffPrefabs)
+    //    {
+    //        if (prefab.name == buffName)
+    //        {
+    //            GameObject newBuff = Instantiate(prefab, buffsList.transform);
+    //            return;
+    //        }
+    //    }
+    //}
 
     public void SpownKillInfo(string enemyType)
     {
@@ -134,5 +164,22 @@ public class HUDController : MonoBehaviour
         }
         color.a = 0f;
         damageOverlay.color = color;
+    }
+
+    public void ShowGameOverScreen(bool isWin)
+    {
+        if (GameOverScreen != null)
+        {
+            GameOverScreen.SetActive(true);
+        }
+
+        if (isWin) 
+        {
+            // Show win message
+        }
+        else
+        {
+            // Show lose message
+        }
     }
 }
