@@ -17,6 +17,7 @@ MonoBehaviour:
   description: 
   currentLevel: 0
   maxLevel: 5
+  icon: {fileID: 0}
   baseDamage: 50
   baseCooldown: 3
   baseDuration: 2.5
@@ -25,5 +26,6 @@ MonoBehaviour:
   projectileSpeed: 0
   baseSize: 0
   throwAngle: 0
-  throwForce: 2000
-  upwardForce: 500
+  playerStats: {fileID: 0}
+  throwForce: 12
+  upwardForce: 5

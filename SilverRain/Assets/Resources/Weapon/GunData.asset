@@ -17,12 +17,13 @@ MonoBehaviour:
   description: 
   currentLevel: 1
   maxLevel: 5
+  icon: {fileID: 0}
   baseDamage: 5
-  baseCooldown: 10
+  baseCooldown: 2
   baseDuration: 5
   cooldownReduction: 1
   damagePerLevel: 2
-  projectileSpeed: 1
+  projectileSpeed: 5
   baseSize: 2
   throwAngle: 2
   playerStats: {fileID: 0}

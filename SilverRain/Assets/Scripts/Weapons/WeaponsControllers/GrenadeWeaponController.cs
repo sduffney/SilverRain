@@ -2,67 +2,90 @@ using UnityEngine;
 
 public class GrenadeWeaponController : MonoBehaviour
 {
-    public TemporaryWeapon weaponData;
-    public GameObject grenadePrefab;
+    [Header("Data & Prefab")]
+    public GrenadeData grenadeData;   // ScriptableObject with damage, cooldown, throwForce, upwardForce
+    public GameObject grenadePrefab;  // Prefab with Rigidbody + Grenade.cs
+
+    [Header("Throw Offsets (from camera)")]
+    public float forwardOffset = 1.2f;
+    public float upwardOffset = 0.0f;
 
     private Transform cam;
-    private float activeUntil;
-
-    // Throw tuning
-    private float forwardOffset = 1.2f;
-    private float throwForce = 12f;
-    private float upwardForce = 4f;
 
     private void Awake()
     {
-        if (Camera.main != null) cam = Camera.main.transform;
-        else Debug.LogWarning("GrenadeWeaponController: no Camera.main found.");
-    }
-
-    private void Update()
-    {
-        if (Time.time > activeUntil)
+        if (Camera.main != null)
         {
-            Destroy(gameObject);
+            cam = Camera.main.transform;
+        }
+        else
+        {
+            Debug.LogError("GrenadeWeaponController: No MainCamera found. Tag your camera as MainCamera.");
         }
     }
 
+    // Called by the KeySpawner when we want to throw
     public void Activate()
     {
+        if (grenadeData == null)
+        {
+            Debug.LogError("GrenadeWeaponController: grenadeData is not assigned.");
+            return;
+        }
 
-        //add playerTrans states
-        if (weaponData == null || !weaponData.IsOffCooldown()) return;
+        if (!grenadeData.IsOffCooldown())
+        {
+            Debug.Log($"Grenade on cooldown ({grenadeData.GetCooldown():0.00}s).");
+            return;
+        }
 
-        weaponData.ResetCooldown();
-        activeUntil = Time.time + weaponData.baseDuration;
-
+        grenadeData.ResetCooldown();
         ThrowGrenade();
     }
 
     private void ThrowGrenade()
     {
-        if (grenadePrefab == null || cam == null || weaponData == null) return;
+        if (grenadePrefab == null)
+        {
+            Debug.LogError("GrenadeWeaponController: grenadePrefab is not assigned.");
+            return;
+        }
 
-        // Casteamos el ScriptableObject para acceder a los valores espec�ficos de la granada
-        GrenadeData grenadeStats = weaponData as GrenadeData;
-        if (grenadeStats == null) { Debug.LogError("weaponData is not GrenadeData"); return; }
+        if (cam == null)
+        {
+            Debug.LogError("GrenadeWeaponController: camera reference is missing.");
+            return;
+        }
 
-        Vector3 spawnPos = cam.position + cam.forward * 1.2f;
-        GameObject grenade = Instantiate(grenadePrefab, spawnPos, Quaternion.identity);
+        // Spawn position in front of the camera
+        Vector3 spawnPos = cam.position + cam.forward * forwardOffset + cam.up * upwardOffset;
+        Quaternion spawnRot = cam.rotation;
+
+        GameObject grenade = Instantiate(grenadePrefab, spawnPos, spawnRot);
 
         Rigidbody rb = grenade.GetComponent<Rigidbody>();
-        if (rb == null) { Debug.LogError("Grenade prefab missing Rigidbody"); return; }
+        if (rb == null)
+        {
+            Debug.LogError("GrenadeWeaponController: grenadePrefab has no Rigidbody.");
+            return;
+        }
 
-        // Usamos los valores del ScriptableObject para calcular la direcci�n del lanzamiento
-        Vector3 throwDirection = cam.forward * grenadeStats.throwForce + cam.up * grenadeStats.upwardForce;
-        rb.linearVelocity = throwDirection;
-        rb.AddForce(throwDirection, ForceMode.VelocityChange);
+        // Build throw direction: tuned in GrenadeData
+        Vector3 throwDirection =
+            (cam.forward * grenadeData.throwForce) +
+            (cam.up * grenadeData.upwardForce);
 
+        // If you liked the slower throw, keep a multiplier here:
+        rb.linearVelocity = throwDirection * 0.8f;
+
+        // Optional: random spin
+        rb.angularVelocity = Random.insideUnitSphere * 5f;
+
+        // Initialize grenade behaviour
         Grenade grenadeScript = grenade.GetComponent<Grenade>();
         if (grenadeScript != null)
         {
-            grenadeScript.Init(grenadeStats.GetDamage(), grenadeStats.baseDuration);
+            grenadeScript.Init(grenadeData.GetDamage(), grenadeData.baseDuration);
         }
     }
-
 }

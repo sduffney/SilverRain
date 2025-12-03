@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2268769162478934879}
   - component: {fileID: 4078219201087156106}
   - component: {fileID: 2954346946830193634}
-  - component: {fileID: 6813249206803635683}
+  - component: {fileID: 1729833424856672301}
   m_Layer: 0
   m_Name: Sword
   m_TagString: Untagged
@@ -141,7 +141,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &6813249206803635683
+--- !u!114 &1729833424856672301
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -153,5 +153,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 805211a614eb7d44f841ebf91fcfb84a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SwordWeaponController
-  weaponData: {fileID: 11400000, guid: 6cf196b45f01aa249ad06fc075e085a9, type: 2}
+  weaponData: {fileID: 11400000, guid: 9222da1eaad4b9f45aff95be99584f9a, type: 2}
   player: {fileID: 0}

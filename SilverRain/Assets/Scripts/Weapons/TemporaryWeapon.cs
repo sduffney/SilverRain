@@ -1,4 +1,3 @@
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "TemporaryWeapon", menuName = "Scriptable Objects/TemporaryWeapon")]
@@ -15,39 +14,74 @@ public abstract class TemporaryWeapon : TemporaryItem
     public int throwAngle;
     public PlayerStats playerStats;
 
-    // Runtime-only state (do not serialize to asset)
     [System.NonSerialized]
     private float lastAttackTime = -999f;
 
-    // If currentLevel is modified at runtime and you don't want to persist it, mark and reset it
-    // [System.NonSerialized]
-    // private int runtimeCurrentLevel = 0;
-
     protected override void OnEnable()
     {
-        // Keep config values as-is (they come from the asset).
-        maxLevel = 5;
-
-        // Reset runtime-only state every time the asset is reloaded/enabled
+        // Reset runtime state
         lastAttackTime = -999f;
-        playerStats = GameObject.FindWithTag("Player").GetComponent<PlayerStats>();
 
-        // If you are using a runtime-only currentLevel, reset it here:
-        // runtimeCurrentLevel = 0;
+        // Keep weapon levels constrained
+        if (maxLevel <= 0) maxLevel = 5;
 
-        // If TemporaryItem has a currentLevel stored on the asset and you want it reset between plays:
-        // SetCurrentLevel(0);
+        // Only search for player during play
+        if (Application.isPlaying)
+        {
+            GameObject playerObj = GameObject.FindWithTag("Player");
+            if (playerObj != null)
+            {
+                playerStats = playerObj.GetComponent<PlayerStats>();
+            }
+            else
+            {
+                playerStats = null;
+                Debug.LogWarning($"{name}: Player with tag 'Player' not found for TemporaryWeapon.");
+            }
+        }
+        else
+        {
+            playerStats = null;
+        }
     }
 
     public float GetDamage()
     {
-        return baseDamage + (currentLevel * damagePerLevel) + playerStats.attackDamage;
+        float baseVal = baseDamage + (currentLevel * damagePerLevel);
+
+        float bonusPercent = (playerStats != null) ? playerStats.attackDamage : 0f;
+
+        return baseVal * (1f + bonusPercent / 100f);
     }
 
     public float GetCooldown()
     {
-        if (baseCooldown <= 0f) Debug.LogWarning($"{name}: baseCooldown is zero or negative");
-        return Mathf.Max(0.1f, baseCooldown - (currentLevel * cooldownReduction) - playerStats.cooldown);
+        float baseCd = baseCooldown - (currentLevel * cooldownReduction);
+        if (baseCd <= 0f)
+        {
+            Debug.LogWarning($"{name}: baseCooldown is zero or negative");
+            baseCd = 0.1f;
+        }
+
+        float cdPercent = (playerStats != null) ? playerStats.cooldown : 0f; // % reduction
+        float cdMult = 1f - cdPercent / 100f;
+        if (cdMult < 0.1f) cdMult = 0.1f;
+
+        return Mathf.Max(0.05f, baseCd * cdMult);
+    }
+
+    public float GetDuration()
+    {
+        float dur = baseDuration;
+        float durPercent = (playerStats != null) ? playerStats.duration : 0f;
+        return dur * (1f + durPercent / 100f);
+    }
+
+    public float GetSize()
+    {
+        float sizeVal = baseSize;
+        float sizePercent = (playerStats != null) ? playerStats.size : 0f;
+        return sizeVal * (1f + sizePercent / 100f);
     }
 
     public void ResetLevel()
@@ -58,7 +92,6 @@ public abstract class TemporaryWeapon : TemporaryItem
 
     public bool IsOffCooldown()
     {
-        Debug.Log(Time.time + " >= " + lastAttackTime + " + " + GetCooldown());
         return Time.time >= lastAttackTime + GetCooldown();
     }
 

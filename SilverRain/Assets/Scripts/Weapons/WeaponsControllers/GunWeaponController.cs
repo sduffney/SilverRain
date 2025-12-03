@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GunWeaponController : MonoBehaviour
 {
@@ -64,8 +64,6 @@ public class GunWeaponController : MonoBehaviour
 
         activeUntil = Time.time + weaponData.baseDuration;
         weaponData.ResetCooldown();
-
-        // Force immediate update so firePoint world pos is correct before firing
         if (cam != null)
         {
             Vector3 desiredPos = cam.position + cam.forward * spawnOffsetForward + cam.up * spawnOffsetUp;
@@ -84,7 +82,7 @@ public class GunWeaponController : MonoBehaviour
 
     private void FireOnce()
     {
-        if (projectilePrefab == null) { Debug.LogError("Projectile prefab not assigned"); return; }
+        if (projectilePrefab == null) return;
 
         Vector3 spawnPos;
         Quaternion spawnRot;
@@ -93,23 +91,25 @@ public class GunWeaponController : MonoBehaviour
         if (firePoint != null)
         {
             spawnPos = firePoint.position;
-            spawnRot = firePoint.rotation;
             dir = firePoint.forward;
         }
         else
         {
             spawnPos = transform.position + transform.forward * muzzleOffset;
-            spawnRot = Quaternion.LookRotation(transform.forward);
             dir = transform.forward;
         }
+        spawnRot = Quaternion.LookRotation(dir, Vector3.up) * Quaternion.Euler(90f, 0f, 0f);
 
         var projObj = Instantiate(projectilePrefab, spawnPos, spawnRot);
-        var proj = projObj.GetComponent<Projectile>();
-        Debug.Log(proj);
-        if (proj == null) { Debug.LogError("Projectile.cs not found on instantiated prefab"); Destroy(projObj); return; }
 
-        var projectileSpeed = player.GetComponent<PlayerStats>().projectileSpeed;
-        proj.Init(weaponData.GetDamage(), dir, (weaponData.projectileSpeed + projectileSpeed));
-        Debug.Log($"Projectile damage:{weaponData.GetDamage()}");
+        var proj = projObj.GetComponent<Projectile>();
+        if (proj == null)
+        {
+            Destroy(projObj);
+            return;
+        }
+
+        float projectileSpeedBonus = player.GetComponent<PlayerStats>().projectileSpeed;
+        proj.Init(weaponData.GetDamage(), dir, weaponData.projectileSpeed + projectileSpeedBonus);
     }
 }

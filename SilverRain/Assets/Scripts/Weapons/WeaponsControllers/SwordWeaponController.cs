@@ -25,12 +25,17 @@ public class SwordWeaponController : MonoBehaviour
             return;
         }
 
-        // Orbit around playerTrans
+        // Orbit around player
         angle += 180f * Time.deltaTime;
         float rad = angle * Mathf.Deg2Rad;
         Vector3 offset = new Vector3(Mathf.Cos(rad), 0, Mathf.Sin(rad)) * weaponData.baseSize;
         transform.position = player.position + offset;
-        transform.LookAt(player.position);
+
+        // Look at player, then apply X = 90° offset
+        Vector3 dir = (player.position - transform.position).normalized;
+        Quaternion look = Quaternion.LookRotation(dir, Vector3.up);
+        transform.rotation = look * Quaternion.Euler(-90f, 0f, 0f);
+
     }
 
     public void Activate()
