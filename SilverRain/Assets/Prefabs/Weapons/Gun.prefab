@@ -258,7 +258,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GunWeaponController
   weaponData: {fileID: 11400000, guid: 2fef6c30c08634d4d8ad7f67c3071988, type: 2}
   firePoint: {fileID: 8719269945044739880}
-  projectilePrefab: {fileID: 2139880809984440600, guid: c72e3dd27e7f21c4080e4b82d4fac998, type: 3}
+  projectilePrefab: {fileID: 2000005594516314921, guid: 1700bca161196544fa60e9a4f8db302b, type: 3}
 --- !u!1 &1748277932983872
 GameObject:
   m_ObjectHideFlags: 0
