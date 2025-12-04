@@ -21,6 +21,8 @@ public class HUDController : MonoBehaviour
 
     [SerializeField] private GameObject GameOverScreen;
 
+    private float timerRemaining = 300f;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -30,15 +32,25 @@ public class HUDController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer.text = Time.time.ToString("00:00");
-        healthBar.value = FindAnyObjectByType<PlayerHealth>().GetHealthPercentage();
+        //timer.text = Time.time.ToString("00:00");
+        if (timerRemaining > 0)
+        {
+            timerRemaining -= Time.deltaTime;
+            UpdateTimer(timerRemaining);
+        }
+        else
+        {
+            Debug.Log("Time's up!");
+            // end game
+        }
+            healthBar.value = FindAnyObjectByType<PlayerHealth>().GetHealthPercentage();
         expBar.value = FindAnyObjectByType<PlayerLevel>().GetXPPercentage();
         //score.text = FindAnyObjectByType<PlayerStats>().score.ToString();
     }
 
     void Initialize()
     {
-        timer.text = "00:00";
+        UpdateTimer(300f);
         score.text = "0";
         level.text = "Level 1";
         healthBar.value = 1;
@@ -52,6 +64,16 @@ public class HUDController : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+    }
+
+    private void UpdateTimer(float time)
+    {
+        time += 1;
+
+        float minutes = Mathf.FloorToInt(time / 60);
+        float seconds = Mathf.FloorToInt(time % 60);
+
+        timer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
     public void UpdateScore(int newScore)
