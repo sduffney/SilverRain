@@ -10,7 +10,7 @@ public class KeySpawner : MonoBehaviour
     [Header("Gun")]
     public TemporaryWeapon gunData;   // GunData
     public GameObject gunPrefab;
-    public KeyCode gunKey = KeyCode.E;
+    public KeyCode gunKey = KeyCode.F;
 
     [Header("Grenade")]
     public GrenadeData grenadeData;              // ScriptableObject for grenade
@@ -70,25 +70,31 @@ public class KeySpawner : MonoBehaviour
     // ---------- GUN ----------
     private void HandleGun()
     {
-        if (!Input.GetKeyDown(gunKey)) return;
-        if (gunData == null || gunPrefab == null)
+        //if (!Input.GetKeyDown(gunKey)) return;
+        //if (gunData == null || gunPrefab == null)
+        //{
+        //    Debug.LogError("KeySpawner: Missing gunData or gunPrefab.");
+        //    return;
+        //}
+        //if (!gunData.IsOffCooldown()) return;
+
+        //GameObject gun = Instantiate(gunPrefab);
+
+        //var controller = gun.GetComponent<GunWeaponController>();
+        //if (controller == null)
+        //{
+        //    Debug.LogError("KeySpawner: Gun prefab missing GunWeaponController.");
+        //    return;
+        //}
+
+        //controller.weaponData = gunData;
+        //controller.Attack();
+
+        if (Input.GetKeyDown(gunKey))
         {
-            Debug.LogError("KeySpawner: Missing gunData or gunPrefab.");
-            return;
+            gunPrefab.SetActive(true);
+            gunPrefab.GetComponent<GunWeaponController>().OnActivate();
         }
-        if (!gunData.IsOffCooldown()) return;
-
-        GameObject gun = Instantiate(gunPrefab);
-
-        var controller = gun.GetComponent<GunWeaponController>();
-        if (controller == null)
-        {
-            Debug.LogError("KeySpawner: Gun prefab missing GunWeaponController.");
-            return;
-        }
-
-        controller.weaponData = gunData;
-        controller.Activate();
     }
 
     // ---------- GRENADE (only one, with correct physics) ----------

@@ -13,6 +13,11 @@ public class PlayerInventory : MonoBehaviour
         {
             ownedItems.Add(newItem);
             newItem.SetCurrentLevel(1);
+
+            if (newItem is TemporaryWeapon temporaryWeapon)
+            {
+                temporaryWeapon.OnActivate();
+            }
         }
         else
         {

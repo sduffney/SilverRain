@@ -1,7 +1,8 @@
+using System.Collections;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "TemporaryWeapon", menuName = "Scriptable Objects/TemporaryWeapon")]
-public abstract class TemporaryWeapon : TemporaryItem
+public class TemporaryWeapon : TemporaryItem
 {
     [Header("TemporaryItem Stats")]
     public float baseDamage;
@@ -13,6 +14,8 @@ public abstract class TemporaryWeapon : TemporaryItem
     public float baseSize;      // orbit radius
     public int throwAngle;
     public PlayerStats playerStats;
+    public GameObject weaponPrefab;
+    //public Transform player;
 
     [System.NonSerialized]
     private float lastAttackTime = -999f;
@@ -100,5 +103,7 @@ public abstract class TemporaryWeapon : TemporaryItem
         lastAttackTime = Time.time;
     }
 
-    public abstract void Attack();
+    public virtual void Attack() { }
+
+    public virtual void OnActivate() { }
 }
