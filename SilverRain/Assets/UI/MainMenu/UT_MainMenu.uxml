@@ -8,6 +8,7 @@
             <ui:Button text="Tutorial" name="TutorialButton" emoji-fallback-support="true" />
             <ui:Button text="Settings" name="SettingsButton" />
             <ui:Button text="Credits" name="CreditsButton" />
+            <ui:Button text="Exit" name="ExitButton" class="unity-button" />
         </ui:GroupBox>
     </ui:VisualElement>
 </ui:UXML>
