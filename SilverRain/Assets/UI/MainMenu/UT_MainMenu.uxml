@@ -1,5 +1,5 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/Menus/silverrain.uss?fileID=7433441132597879392&amp;guid=6258b84f29bb09540ab71f01493ac465&amp;type=3#silverrain" />
+    <Style src="project://database/Assets/UI/silverrain.uss?fileID=7433441132597879392&amp;guid=5b9070dc6eb81ca41a3bad80fb9bf3a3&amp;type=3#silverrain" />
     <ui:VisualElement name="VisualElement" class="visual-element" style="flex-grow: 1; background-color: rgba(15, 20, 26, 0.88);">
         <ui:Label text="Silver Rain&#10;" binding-path="HelloWorld" emoji-fallback-support="false" class="tittle-label" />
         <ui:VisualElement style="flex-grow: 0; flex-shrink: 0; background-image: none;" />
@@ -7,7 +7,7 @@
             <ui:Button text="Play" name="PlayButton" />
             <ui:Button text="Tutorial" name="TutorialButton" emoji-fallback-support="true" />
             <ui:Button text="Settings" name="SettingsButton" />
-            <ui:Button text="Credits" name="Creditsbutton" />
+            <ui:Button text="Credits" name="CreditsButton" />
         </ui:GroupBox>
     </ui:VisualElement>
 </ui:UXML>
