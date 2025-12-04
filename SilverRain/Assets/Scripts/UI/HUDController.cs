@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
+using System;
 
 public class HUDController : MonoBehaviour
 {
@@ -21,16 +22,68 @@ public class HUDController : MonoBehaviour
 
     [SerializeField] private GameObject GameOverScreen;
 
+    private float timerRemaining = 300f;
+    private bool isTimerRunning = true;
+
+    private ConsoleManager consoleManager;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Initialize();
+
+        consoleManager = FindAnyObjectByType<ConsoleManager>();
+        if (consoleManager != null)
+        {
+            RegisterCommands();
+        }
+    }
+
+    private void RegisterCommands()
+    {
+        consoleManager.RegisterCommand("timer", args =>
+        {
+            if (args.Length > 0 && float.TryParse(args[0], out float newTime))
+            {
+                timerRemaining = newTime;
+                consoleManager.AppendOutput($"Reset the timer to {Mathf.FloorToInt(newTime / 60)}:{Mathf.FloorToInt(newTime % 60)}");
+            }
+            else if (args.Length == 0)
+            {
+                timerRemaining = 300f;
+                consoleManager.AppendOutput("Reset the timer to 5:00");
+            }
+            else
+            {
+                consoleManager.AppendOutput("Invalid time amount. (in seconds)");
+            }
+            
+        }, "<value> - Set the timer in seconds");
+        consoleManager.RegisterCommand("pause_timer", args =>
+        {
+            isTimerRunning = !isTimerRunning;
+            consoleManager.AppendOutput(isTimerRunning ? "Resumed the timer" : "Paused the timer");
+        }, "- Switch pause the timer");
     }
 
     // Update is called once per frame
     void Update()
     {
-        timer.text = Time.time.ToString("00:00");
+        //timer.text = Time.time.ToString("00:00");
+        if (isTimerRunning)
+        {    
+            if (timerRemaining > 0)
+            {
+                timerRemaining -= Time.deltaTime;
+                UpdateTimer(timerRemaining);
+            }
+            else
+            {
+                Debug.Log("Time's up!");
+                // end game
+            }
+        }
         healthBar.value = FindAnyObjectByType<PlayerHealth>().GetHealthPercentage();
         expBar.value = FindAnyObjectByType<PlayerLevel>().GetXPPercentage();
         //score.text = FindAnyObjectByType<PlayerStats>().score.ToString();
@@ -38,7 +91,8 @@ public class HUDController : MonoBehaviour
 
     void Initialize()
     {
-        timer.text = "00:00";
+        isTimerRunning = true;
+        UpdateTimer(300f);
         score.text = "0";
         level.text = "Level 1";
         healthBar.value = 1;
@@ -52,6 +106,16 @@ public class HUDController : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+    }
+
+    private void UpdateTimer(float time)
+    {
+        time += 1;
+
+        float minutes = Mathf.FloorToInt(time / 60);
+        float seconds = Mathf.FloorToInt(time % 60);
+
+        timer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
     public void UpdateScore(int newScore)
