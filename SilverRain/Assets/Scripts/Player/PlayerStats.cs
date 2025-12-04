@@ -220,26 +220,26 @@ public class PlayerStats : MonoBehaviour
 
     private void RegisterCommands()
     {
-        consoleManager.RegisterCommand("earnxp", args =>
-        {
-            if (playerLevel != null)
-            {
-                if (args.Length > 0 && float.TryParse(args[0], out float xpAmount))
-                {
-                    playerLevel.GainXP(xpAmount);
-                    consoleManager.AppendOutput($"Gained {xpAmount} XP.");
-                }
-                else if (args.Length == 0)
-                {
-                    playerLevel.GainXP(100f);
-                    consoleManager.AppendOutput("Gained 100 XP.");
-                }
-                else
-                {
-                    consoleManager.AppendOutput("Invalid XP amount.");
-                }
-            }
-        }, "<value> - Gain Xp to player");
+        //consoleManager.RegisterCommand("earnxp", args =>
+        //{
+        //    if (playerLevel != null)
+        //    {
+        //        if (args.Length > 0 && float.TryParse(args[0], out float xpAmount))
+        //        {
+        //            playerLevel.GainXP(xpAmount);
+        //            consoleManager.AppendOutput($"Gained {xpAmount} XP.");
+        //        }
+        //        else if (args.Length == 0)
+        //        {
+        //            playerLevel.GainXP(100f);
+        //            consoleManager.AppendOutput("Gained 100 XP.");
+        //        }
+        //        else
+        //        {
+        //            consoleManager.AppendOutput("Invalid XP amount.");
+        //        }
+        //    }
+        //}, "<value> - Gain Xp to player");
         consoleManager.RegisterCommand("enemykill", args =>
         {
             if (args[0] is string enemyType)
