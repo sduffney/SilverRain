@@ -8,6 +8,7 @@ public class TemporaryItem : ScriptableObject
     public string description;
     public int currentLevel = 0;
     public int maxLevel = 5; 
+    public Sprite icon;
 
     protected virtual void OnEnable()
     {

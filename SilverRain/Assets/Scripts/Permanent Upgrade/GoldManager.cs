@@ -3,21 +3,21 @@ using UnityEngine;
 
 public class GoldManager : MonoBehaviour
 {
-    public static GoldManager Instance;
+    //public static GoldManager Instance;
     public int currentGold;
     public TMP_Text goldText;
 
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            Instance = this;
-        }
-    }
+    //private void Awake()
+    //{
+    //    if (Instance != null && Instance != this)
+    //    {
+    //        Destroy(this.gameObject);
+    //    }
+    //    else
+    //    {
+    //        Instance = this;
+    //    }
+    //}
 
     private void Start()
     {

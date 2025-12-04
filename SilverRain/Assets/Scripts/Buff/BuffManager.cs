@@ -3,10 +3,11 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
+using UnityEngine.SceneManagement;
 
 public class BuffManager : MonoBehaviour
 {
-    public List<TemporaryItem> allTempItems;
+    public List<TemporaryItem> allTempItems; // add three weapons
     public GameObject buffCardPrefab;
     public Transform cardParent;
     
@@ -21,6 +22,16 @@ public class BuffManager : MonoBehaviour
         playerLevel = FindAnyObjectByType<PlayerLevel>();
         //ResetBuff(allTempItems);
         SyncBuffLevelsWithInventory();
+
+        SetDefaultWeapon();
+    }
+
+    private void SetDefaultWeapon()
+    {
+        if (SceneManager.GetActiveScene().name != "Level1")
+            return;
+        var defaultWeapon = allTempItems.Find(item => item.id == "sword");
+        playerInventory.PickItem(defaultWeapon);
     }
 
     //when player levels up, show 3 random buffs to choose from
@@ -108,6 +119,10 @@ public class BuffManager : MonoBehaviour
 
     public void SyncBuffLevelsWithInventory()
     {
+        // if not in the Level scene, skip
+        if (SceneManager.GetActiveScene().name != "Level1")
+            return;
+
         if (playerInventory == null)
             playerInventory = FindAnyObjectByType<PlayerInventory>();
 

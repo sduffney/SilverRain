@@ -17,7 +17,7 @@ public class PlayerStats : MonoBehaviour
     public float maxHealth = 1f;        // Max health multiplier
     public float armor = 1f;            // Damage reduction multiplier
 
-    public int score = 0;
+    //public int score = 0;
 
     private PlayerHealth playerHealth;
     private PlayerController playerController;
