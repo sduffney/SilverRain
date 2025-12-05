@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -185,7 +186,7 @@ public class EnemySpawner : MonoBehaviour
             {
                 Vector3 closest = c.ClosestPoint(point);
                 // If the closest point is exactly the sample, it's on or inside; allow it.
-                // If it's different, then the point is outside this collider — we continue searching.
+                // If it's different, then the point is outside this collider ï¿½ we continue searching.
                 if (Vector3.Distance(closest, point) < 0.001f) return true;
             }
         }
@@ -218,13 +219,18 @@ public class EnemySpawner : MonoBehaviour
         GameObject prefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Count)];
         if (prefab == null) return;
 
-        GameObject go = Instantiate(prefab, pos, Quaternion.identity, spawnParent);
-        // Optional initial look at playerTrans
-        if (player != null)
-        {
-            Vector3 lookDir = (player.transform.position - go.transform.position);
-            lookDir.y = 0f;
-            if (lookDir.sqrMagnitude > 0.001f) go.transform.rotation = Quaternion.LookRotation(lookDir.normalized);
+        //Check if spawning on navmesh
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(pos, out hit, 10.0f, NavMesh.AllAreas))
+        { 
+            GameObject go = Instantiate(prefab, hit.position, Quaternion.identity, spawnParent);
+            // Optional initial look at player
+            if (player != null)
+            {
+              Vector3 lookDir = (player.transform.position - go.transform.position);
+              lookDir.y = 0f;
+              if (lookDir.sqrMagnitude > 0.001f) go.transform.rotation = Quaternion.LookRotation(lookDir.normalized);
+            }
         }
     }
 
