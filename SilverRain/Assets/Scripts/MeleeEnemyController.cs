@@ -64,10 +64,12 @@ public class MeleeEnemyController : EnemyController
     public override void Move()
     {
         //Move towards the player
-        agent.SetDestination(targetPlayer.transform.position);
-        float speed = 0f;
-        speed = agent.velocity.magnitude;
-        animator.SetFloat("speed", speed);
+        if (agent != null && agent.isOnNavMesh && targetPlayer != null)
+        { agent.SetDestination(targetPlayer.transform.position);
+            float speed = 0f;
+            speed = agent.velocity.magnitude;
+            animator.SetFloat("speed", speed);
+        }
     }
 
 }

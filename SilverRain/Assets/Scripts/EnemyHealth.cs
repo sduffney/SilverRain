@@ -13,6 +13,7 @@ public class EnemyHealth : MonoBehaviour
     public Animator animator;
     private Enemy enemy;
     private EnemyController controller;
+    private PlayerLevel player;
 
     void Start()
     {
@@ -20,6 +21,7 @@ public class EnemyHealth : MonoBehaviour
         enemy = GetComponent<Enemy>();
         animator = GetComponentInChildren<Animator>();
         controller = GetComponent<EnemyController>();
+        player = FindFirstObjectByType<PlayerLevel>();
     }
     public void TakeDamage(int damage)
     {
@@ -59,6 +61,7 @@ public class EnemyHealth : MonoBehaviour
         NavMeshAgent agent = gameObject.GetComponent<NavMeshAgent>();
         Destroy(agent);
         Destroy(controller);
+        player.GainXP(enemy.RewardXP());
         yield return new WaitForSeconds(3);
         Destroy(gameObject);
     }

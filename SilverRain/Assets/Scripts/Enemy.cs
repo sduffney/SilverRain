@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
     EnemyHealth health;
     EnemyController controller;
     [SerializeField] private int scoreValue;
-    [SerializeField] private int xpValue;
+    [SerializeField] private float xpValue;
     [SerializeField] public float damage;
     private Renderer[] renderers;
 
@@ -65,5 +65,10 @@ public class Enemy : MonoBehaviour
         Reveal();
         yield return new WaitForSeconds(duration);
         Hide();
+    }
+
+    public float RewardXP() 
+    {
+        return xpValue;
     }
 }
