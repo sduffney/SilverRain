@@ -10,6 +10,11 @@ public class RangedEnemyController : EnemyController
     private Vector3 lastKnownPlayerPos;
 
 
+    [SerializeField]
+    private LayerMask playerLayer;
+    [SerializeField]
+    private float attackRange = 10f;
+
     public override void Attack(PlayerHealth player)
     {
         shootTimer += Time.deltaTime;
@@ -69,19 +74,42 @@ public class RangedEnemyController : EnemyController
     void Update()
     {
         Move();
+        CheckPlayerInRange();
     }
 
-    private void OnTriggerStay(Collider other)
+    private void CheckPlayerInRange() 
     {
-        if (other.GetComponent<PlayerHealth>())
+        if (Physics.CheckSphere(transform.position, attackRange, playerLayer))
         {
-            PlayerHealth target = other.GetComponent<PlayerHealth>();
-            Attack(target);
+            PlayerHealth player = targetPlayer.GetComponent<PlayerHealth>();
+            if (player != null)
+            {
+                Attack(player);
+            }
+        }
+        else 
+        {
+            shootTimer = 0f;
         }
     }
 
-    private void OnTriggerExit(Collider collision)
+    void OnDrawGizmosSelected()
     {
-        shootTimer = 0f;
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
+
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    if (other.GetComponent<PlayerHealth>()) 
+    //    {
+    //        PlayerHealth target = other.GetComponent<PlayerHealth>();
+    //        Attack(target);
+    //    }
+    //}
+
+    //private void OnTriggerExit(Collider collision)
+    //{
+    //    shootTimer = 0f;
+    //}
 }

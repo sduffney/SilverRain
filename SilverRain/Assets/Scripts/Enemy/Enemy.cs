@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int scoreValue;
     [SerializeField] private float xpValue;
     [SerializeField] public float damage;
+    //[SerializeField] private float goldValue;
     private Renderer[] renderers;
 
     private void OnEnable()
@@ -70,5 +71,9 @@ public class Enemy : MonoBehaviour
     public float RewardXP() 
     {
         return xpValue;
+    }
+    public float RewardScore()
+    {
+        return scoreValue;
     }
 }
