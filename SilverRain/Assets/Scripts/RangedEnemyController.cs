@@ -14,7 +14,7 @@ public class RangedEnemyController : EnemyController
     public override void Attack(PlayerHealth player)
     {
         shootTimer += Time.deltaTime;
-        //Spawn projectile targetting player.
+        //Spawn projectile targetting playerTrans.
         if (shootTimer >= timeBetweenShots) 
         {
             if(targetPlayer != null) 
@@ -31,7 +31,7 @@ public class RangedEnemyController : EnemyController
 
     public override void Move()
     {
-        //Move towards the player
+        //Move towards the playerTrans
         agent.SetDestination(targetPlayer.transform.position);
         float speed = 0f;
         speed = agent.velocity.magnitude;
@@ -44,8 +44,8 @@ public class RangedEnemyController : EnemyController
         enemy = GetComponent<Enemy>();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
-        rb = GetComponent<Rigidbody>();
         targetPlayer = GameObject.FindGameObjectWithTag("Player");
+        agent.speed = moveSpeed;
     }
 
     // Update is called once per frame

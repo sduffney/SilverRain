@@ -66,7 +66,7 @@ public class UpgradeButton : MonoBehaviour
         switch (name)
         {
             case "Attack Damage":
-                return $"Increases player attack power from {detailLine}.";
+                return $"Increases playerTrans attack power from {detailLine}.";
             case "Projectile Speed":
                 return $"Increases projectile speed from {detailLine}.";
             case "Duration":
@@ -76,7 +76,7 @@ public class UpgradeButton : MonoBehaviour
             case "Size":
                 return $"Increases attack or effect size from {detailLine}.";
             case "Movement Speed":
-                return $"Increases player movement speed from {detailLine}.";
+                return $"Increases playerTrans movement speed from {detailLine}.";
             case "Health Regen":
                 return $"Increases health regeneration rate from {detailLine}.";
             case "XP Amount":
@@ -84,9 +84,9 @@ public class UpgradeButton : MonoBehaviour
             case "Max Health":
                 return $"Increases maximum health from {detailLine}.";
             case "Armour":
-                return $"Increases player armour from {detailLine}.";
+                return $"Increases playerTrans armour from {detailLine}.";
             default:
-                return $"Improves player stats from {detailLine}.";
+                return $"Improves playerTrans stats from {detailLine}.";
         }
     }
 

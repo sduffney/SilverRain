@@ -15,15 +15,18 @@ MonoBehaviour:
   id: 
   displayName: 
   description: 
-  currentLevel: 0
+  currentLevel: 1
   maxLevel: 5
-  baseDamage: 50
-  baseCooldown: 3
-  baseDuration: 2.5
+  icon: {fileID: 0}
+  baseDamage: 500
+  baseCooldown: 0
+  baseDuration: 1
   cooldownReduction: 0
   damagePerLevel: 0
   projectileSpeed: 0
   baseSize: 0
   throwAngle: 0
-  throwForce: 2000
-  upwardForce: 500
+  playerStats: {fileID: 0}
+  weaponPrefab: {fileID: 1698056052845220, guid: 3f93b755669667b468d96b4b2709a981, type: 3}
+  throwForce: 12
+  upwardForce: 5

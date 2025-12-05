@@ -35,7 +35,7 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
-        //Find player if not assigned
+        //Find playerTrans if not assigned
         if (player == null)
         {
             var p = GameObject.FindGameObjectWithTag(playerTag);
@@ -117,7 +117,7 @@ public class EnemySpawner : MonoBehaviour
             return;
         }
 
-        //Ensure we have a player reference
+        //Ensure we have a playerTrans reference
         if (player == null)
         {
             var p = GameObject.FindGameObjectWithTag(playerTag);
@@ -148,7 +148,7 @@ public class EnemySpawner : MonoBehaviour
 
     Vector3 SamplePositionAroundPlayer()
     {
-        // Sample a point in an annulus around the player in XZ plane
+        // Sample a point in an annulus around the playerTrans in XZ plane
         float r = Random.Range(minDistance, maxDistance);
         float ang = Random.Range(0f, Mathf.PI * 2f);
         Vector3 offset = new Vector3(Mathf.Cos(ang), 0f, Mathf.Sin(ang)) * r;
@@ -219,7 +219,7 @@ public class EnemySpawner : MonoBehaviour
         if (prefab == null) return;
 
         GameObject go = Instantiate(prefab, pos, Quaternion.identity, spawnParent);
-        // Optional initial look at player
+        // Optional initial look at playerTrans
         if (player != null)
         {
             Vector3 lookDir = (player.transform.position - go.transform.position);

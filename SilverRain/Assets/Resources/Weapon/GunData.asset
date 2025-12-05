@@ -9,19 +9,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 523d376ed756b8648bf45a90421849fa, type: 3}
+  m_Script: {fileID: 11500000, guid: cb3a1081da876314c883d8802d17cc63, type: 3}
   m_Name: GunData
-  m_EditorClassIdentifier: Assembly-CSharp::GunData
-  id: 02
-  displayName: Gun number one
+  m_EditorClassIdentifier: Assembly-CSharp::TemporaryWeapon
+  id: 
+  displayName: 
   description: 
   currentLevel: 1
   maxLevel: 5
-  baseDamage: 5
+  icon: {fileID: 0}
+  baseDamage: 100
   baseCooldown: 1
-  baseDuration: 2
-  cooldownReduction: 1
-  damagePerLevel: 2
-  projectileSpeed: 1
-  baseSize: 2
-  throwAngle: 2
+  baseDuration: 0
+  cooldownReduction: 0
+  damagePerLevel: 10
+  projectileSpeed: 5
+  baseSize: 0
+  throwAngle: 0
+  playerStats: {fileID: 0}
+  weaponPrefab: {fileID: 1694449805434718, guid: 1f6afd5c80ce45243b22ad61aa66093f, type: 3}

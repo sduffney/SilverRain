@@ -13,14 +13,14 @@ public class MeleeEnemyController : EnemyController
         enemy = GetComponent<Enemy>();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
-        rb = GetComponent<Rigidbody>();
         targetPlayer = GameObject.FindGameObjectWithTag("Player");
+        agent.speed = moveSpeed;
     }
     private void OnTriggerStay(UnityEngine.Collider collision)
     {
         
         Debug.Log("We have entered");
-        //Check if player
+        //Check if playerTrans
         if (collision.gameObject.GetComponent<PlayerHealth>()) 
         {
             PlayerHealth player = collision.gameObject.GetComponent<PlayerHealth>();
@@ -63,7 +63,7 @@ public class MeleeEnemyController : EnemyController
 
     public override void Move()
     {
-        //Move towards the player
+        //Move towards the playerTrans
         agent.SetDestination(targetPlayer.transform.position);
         float speed = 0f;
         speed = agent.velocity.magnitude;
