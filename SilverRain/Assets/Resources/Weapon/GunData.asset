@@ -15,14 +15,14 @@ MonoBehaviour:
   id: 
   displayName: 
   description: 
-  currentLevel: 0
+  currentLevel: 1
   maxLevel: 5
   icon: {fileID: 0}
   baseDamage: 100
   baseCooldown: 1
   baseDuration: 0
   cooldownReduction: 0
-  damagePerLevel: 0
+  damagePerLevel: 10
   projectileSpeed: 5
   baseSize: 0
   throwAngle: 0

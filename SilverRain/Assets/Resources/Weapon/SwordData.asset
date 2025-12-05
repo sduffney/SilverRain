@@ -15,15 +15,16 @@ MonoBehaviour:
   id: 1
   displayName: 'Sword number one '
   description: 
-  currentLevel: 2
+  currentLevel: 1
   maxLevel: 5
   icon: {fileID: 0}
   baseDamage: 10
-  baseCooldown: 0
+  baseCooldown: 5
   baseDuration: 15
-  cooldownReduction: 10
+  cooldownReduction: 1
   damagePerLevel: 5
-  projectileSpeed: 10
+  projectileSpeed: 15
   baseSize: 2.5
   throwAngle: 10
   playerStats: {fileID: 0}
+  weaponPrefab: {fileID: 323333351367080586, guid: 87b744073f89d274ea9986018a77d4e4, type: 3}

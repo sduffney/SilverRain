@@ -260,6 +260,9 @@ MonoBehaviour:
   firePoint: {fileID: 8719269945044739880}
   projectilePrefab: {fileID: 2000005594516314921, guid: 1700bca161196544fa60e9a4f8db302b, type: 3}
   player: {fileID: 0}
+  spawnOffsetForward: 0.5
+  spawnOffsetUp: -0.1
+  muzzleOffset: 2
 --- !u!1 &1748277932983872
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,9 +1,10 @@
+using System.Collections;
 using UnityEngine;
 
-public class GrenadeWeaponController : MonoBehaviour
+public class GrenadeWeaponController : WeaponController
 {
     [Header("Data & Prefab")]
-    public GrenadeData grenadeData;   // ScriptableObject with damage, cooldown, throwForce, upwardForce
+    public GrenadeData grenadeData;   // ScriptableObject (should behave like TemporaryWeapon)
     public GameObject grenadePrefab;  // Prefab with Rigidbody + Grenade.cs
 
     [Header("Throw Offsets (from camera)")]
@@ -11,8 +12,9 @@ public class GrenadeWeaponController : MonoBehaviour
     public float upwardOffset = 0.0f;
 
     private Transform cam;
+    private bool isRunning = false;
 
-    private void Awake()
+    private void Start()
     {
         if (Camera.main != null)
         {
@@ -22,42 +24,35 @@ public class GrenadeWeaponController : MonoBehaviour
         {
             Debug.LogError("GrenadeWeaponController: No MainCamera found. Tag your camera as MainCamera.");
         }
+        gameObject.SetActive(false);
     }
 
-    // Called by the KeySpawner when we want to throw
-    public void Activate()
+    public override void OnActivate()
     {
         if (grenadeData == null)
         {
             Debug.LogError("GrenadeWeaponController: grenadeData is not assigned.");
             return;
         }
-
-        if (!grenadeData.IsOffCooldown())
-        {
-            Debug.Log($"Grenade on cooldown ({grenadeData.GetCooldown():0.00}s).");
-            return;
-        }
-
-        grenadeData.ResetCooldown();
-        ThrowGrenade();
+        gameObject.SetActive(true);
+        StartCoroutine(OnDuration());
     }
 
-    private void ThrowGrenade()
+    public override IEnumerator OnDuration()
     {
-        if (grenadePrefab == null)
-        {
-            Debug.LogError("GrenadeWeaponController: grenadePrefab is not assigned.");
-            return;
-        }
+        Attack();
+        yield return new WaitForSeconds(grenadeData.GetDuration());
+        StartCoroutine(OnCoolDown());
+    }
 
-        if (cam == null)
-        {
-            Debug.LogError("GrenadeWeaponController: camera reference is missing.");
-            return;
-        }
+    public override IEnumerator OnCoolDown()
+    {
+        yield return new WaitForSeconds(grenadeData.GetCooldown());
+        StartCoroutine(OnDuration());
+    }
 
-        // Spawn position in front of the camera
+    public override void Attack()
+    {
         Vector3 spawnPos = cam.position + cam.forward * forwardOffset + cam.up * upwardOffset;
         Quaternion spawnRot = cam.rotation;
 
@@ -75,10 +70,7 @@ public class GrenadeWeaponController : MonoBehaviour
             (cam.forward * grenadeData.throwForce) +
             (cam.up * grenadeData.upwardForce);
 
-        // If you liked the slower throw, keep a multiplier here:
         rb.linearVelocity = throwDirection * 0.8f;
-
-        // Optional: random spin
         rb.angularVelocity = Random.insideUnitSphere * 5f;
 
         // Initialize grenade behaviour

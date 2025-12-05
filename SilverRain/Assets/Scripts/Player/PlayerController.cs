@@ -60,25 +60,6 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         //if (Time.timeScale == 0f) FreezePlayer(); else UnfreezePlayer();
-
-        if (Keyboard.current.digit1Key.wasPressedThisFrame)
-        {
-            print("Sword Activated!!!");
-            var sword = Instantiate(swordPrefab, transform.position, Quaternion.identity);
-            sword.player = transform;
-            sword.Activate();
-        }
-            
-
-        if (Keyboard.current.digit2Key.wasPressedThisFrame)
-        {
-            //gunController.Activate();
-        }
-
-        if (Keyboard.current.digit3Key.wasPressedThisFrame)
-        {
-            //grenadeController.Activate();
-        }
     }
 
     private void FixedUpdate()
@@ -153,8 +134,29 @@ public class PlayerController : MonoBehaviour
 
     public void EnemyKilled(string enemyType)
     {
-        FindAnyObjectByType<HUDController>().SpownKillInfo(enemyType);
+        // Show kill info on HUD (if any)
+        var hud = FindAnyObjectByType<HUDController>();
+        if (hud != null)
+        {
+            hud.SpownKillInfo(enemyType);
+        }
+
+        // Award XP for the kill
+        var playerLevel = GetComponent<PlayerLevel>();
+        var stats = GetComponent<PlayerStats>();
+
+        if (playerLevel != null)
+        {
+            // Base XP per kill – tweak or vary by enemyType if you want
+            float baseXp = 10f;
+
+            // Use experienceMod from PlayerStats (1 = normal, >1 = more XP)
+            float xpMod = (stats != null) ? stats.experienceMod : 1f;
+
+            playerLevel.GainXP(baseXp * xpMod);
+        }
     }
+
 
     //public void AddBuff(string buff)
     //{
