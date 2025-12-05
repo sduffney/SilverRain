@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -16,15 +15,15 @@ public class MeleeEnemyController : EnemyController
         targetPlayer = GameObject.FindGameObjectWithTag("Player");
         agent.speed = moveSpeed;
     }
-    private void OnTriggerStay(UnityEngine.Collider collision)
+    private void OnTriggerStay(Collider collision)
     {
         
-        Debug.Log("We have entered");
+        //Debug.Log("We have entered");
         //Check if player
-        if (collision.gameObject.GetComponent<PlayerHealth>()) 
+        if (collision.CompareTag("Player")) 
         {
             PlayerHealth player = collision.gameObject.GetComponent<PlayerHealth>();
-            Debug.Log("Found Health");
+            //Debug.Log("Found Health");
             //Add timer to deal damage
             meleeTimer += Time.deltaTime;
             animator.SetBool("isAttacking", true);
@@ -32,7 +31,7 @@ public class MeleeEnemyController : EnemyController
             //Check if time has passed;
             if (meleeTimer >= timeBetweenAttacks)
             {
-                Debug.Log("Timer passed");
+                //Debug.Log("Timer passed");
                 //Attack
                 Attack(player);
                 
@@ -54,7 +53,7 @@ public class MeleeEnemyController : EnemyController
     }
     public override void Attack(PlayerHealth player)
     {
-        Debug.Log("Now Attacking");
+        //Debug.Log("Now Attacking");
         //Deal damage
         player.TakeDamage(enemy.damage);
         //Reset timer

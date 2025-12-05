@@ -4,22 +4,11 @@ using System.Linq;
 
 public class PermanentUpgradeManager : MonoBehaviour
 {
-    public static PermanentUpgradeManager Instance { get; private set; }
     public List<PermanentUpgrade> allPermanentUpgrades;
-
     private Dictionary<string, PermanentUpgrade> upgradesById;
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-
         upgradesById = new Dictionary<string, PermanentUpgrade>();
 
         if (allPermanentUpgrades != null)

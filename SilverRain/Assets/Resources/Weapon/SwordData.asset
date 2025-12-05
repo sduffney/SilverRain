@@ -9,22 +9,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 105077b378d0ff04688a23c3a018d861, type: 3}
+  m_Script: {fileID: 11500000, guid: cb3a1081da876314c883d8802d17cc63, type: 3}
   m_Name: SwordData
-  m_EditorClassIdentifier: Assembly-CSharp::SwordData
-  id: 1
-  displayName: 'Sword number one '
-  description: 
+  m_EditorClassIdentifier: Assembly-CSharp::TemporaryWeapon
+  id: wep_sword
+  displayName: Sword
+  description: Swings a sword around you
   currentLevel: 1
   maxLevel: 5
-  icon: {fileID: 0}
-  baseDamage: 10
+  icon: {fileID: 21300000, guid: 4ad16adfdf2d1a441879a598de742eb6, type: 3}
+  baseDamage: 50
   baseCooldown: 5
-  baseDuration: 15
-  cooldownReduction: 1
-  damagePerLevel: 5
-  projectileSpeed: 15
-  baseSize: 2.5
-  throwAngle: 10
-  playerStats: {fileID: 0}
+  baseDuration: 5
+  baseProjectileSpeed: 5
+  baseSize: 3
+  damagePerLevel: 50
+  cooldownReductionPerLevel: 1
   weaponPrefab: {fileID: 323333351367080586, guid: 87b744073f89d274ea9986018a77d4e4, type: 3}
+  throwAngle: 0

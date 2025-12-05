@@ -4,12 +4,12 @@ using UnityEngine.AI;
 
 public class EnemyHealth : MonoBehaviour
 {
-    [SerializeField]
-    private int maxHealth = 100;
-    [SerializeField]
-    private int currentHealth;
-    [SerializeField] 
-    private ParticleSystem bloodSplatterPrefab;
+    [Header("Health")]
+    [SerializeField] private int maxHealth = 100;
+    [SerializeField] private int currentHealth;
+    [SerializeField] private ParticleSystem bloodSplatterPrefab;
+
+    [Header("Components")]
     public Animator animator;
     private Enemy enemy;
     private EnemyController controller;
@@ -28,7 +28,7 @@ public class EnemyHealth : MonoBehaviour
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
-            Debug.Log("We should die now");
+            //Debug.Log("We should die now");
             Die();
         }
 
@@ -56,7 +56,7 @@ public class EnemyHealth : MonoBehaviour
 
     IEnumerator DeathCoroutine()
     {
-        Debug.Log("We are in the death Corutine");
+        //Debug.Log("We are in the death Corutine");
         animator.SetBool("isDead", true);
         NavMeshAgent agent = gameObject.GetComponent<NavMeshAgent>();
         Destroy(agent);

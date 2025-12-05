@@ -238,7 +238,7 @@ public class ConsoleManager : MonoBehaviour
             }
 
             playerLevel.GainXP(amount);
-            AppendOutput($"Added {amount} XP. Current XP: {playerLevel.currentXP}/{playerLevel.maxXP}");
+            AppendOutput($"Added {amount} XP. Current XP: {playerLevel.CurrentXP}/{playerLevel.MaxXP}");
         }, "<amount> - Add XP to playerTrans");
 
     }

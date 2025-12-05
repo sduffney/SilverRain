@@ -29,7 +29,7 @@ public class Enemy : MonoBehaviour
     }
     public void Reveal()
     {
-        Debug.Log("Enemy is Revealing");
+        //Debug.Log("Enemy is Revealing");
         foreach (var r in renderers) 
         { 
             r.enabled = true;
@@ -46,7 +46,7 @@ public class Enemy : MonoBehaviour
 
     public void RevealTimed(float seconds) 
     {
-        Debug.Log("Timed Reveal Start");
+        //Debug.Log("Timed Reveal Start");
         StopAllCoroutines();
         StartCoroutine(RevealCorutine(seconds));
     }

@@ -1,16 +1,21 @@
+using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class PlayerLevel : MonoBehaviour
 {
     [Header("Level Settings")]
-    public int playerLevel = 1;
-    public float currentXP = 0f;
-    public float maxXP = 100f;
-    public float xpGrowthFactor = 1.5f;
+    [SerializeField] private int currentPlayerLevel = 1;
+    [SerializeField] private float currentXP = 0f;
+    [SerializeField] private float maxXP = 100f;
+    [SerializeField] private float xpGrowthFactor = 1.5f;
 
-    [Header("Events")]
-    public UnityEvent OnLevelUp;
+    //Getters
+    public int CurrentPlayerLevel => currentPlayerLevel;
+    public float CurrentXP => currentXP;
+    public float MaxXP => maxXP;
+
+    //Events
+    public static event Action OnLevelUp;
 
     private void Start()
     {
@@ -21,9 +26,10 @@ public class PlayerLevel : MonoBehaviour
     {
         currentXP += amount;
 
-        if (IsLevelUp())
+        if (currentXP >= maxXP)
         {
-            Debug.Log($"Level Up! Current Level: {playerLevel}");
+            LevelUp();
+            //Debug.Log($"Level Up! Current Level: {currentPlayerLevel}");
         }
     }
 
@@ -39,7 +45,7 @@ public class PlayerLevel : MonoBehaviour
 
     private void LevelUp()
     {
-        playerLevel++;
+        currentPlayerLevel++;
         currentXP -= maxXP;
         CalculateMaxXP();
 
@@ -49,7 +55,7 @@ public class PlayerLevel : MonoBehaviour
 
     private void CalculateMaxXP()
     {
-        maxXP = 100f * Mathf.Pow(xpGrowthFactor, playerLevel - 1);
+        maxXP = 100f * Mathf.Pow(xpGrowthFactor, currentPlayerLevel - 1);
     }
 
     public float GetXPPercentage()

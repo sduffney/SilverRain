@@ -2,20 +2,19 @@ using System.Collections;
 using UnityEngine;
 public class SwordWeaponController : WeaponController
 {
-    public TemporaryWeapon weaponData;  // SwordData should inherit from TemporaryWeapon
-    public Transform player;
+    [SerializeField] private Transform player;
+    [SerializeField] private Collider col;
+    [SerializeField] private Renderer ren;
 
     private float angle;
-    private bool isRunning = false;
     private bool isAttacking = false;
 
-    private void Awake()
+    private void Start()
     {
-        if (player == null)
-        {
-            GameObject go = GameObject.FindGameObjectWithTag("Player");
-            if (go != null) player = go.transform;
-        }
+        //Ensure components arent null
+        if (player == null) player = GameManager.Instance.Player.transform;
+        if (col == null) col = gameObject.GetComponent<Collider>();
+        if (ren == null) ren = gameObject.GetComponent<Renderer>();
 
         gameObject.SetActive(false);
     }
@@ -28,7 +27,7 @@ public class SwordWeaponController : WeaponController
         angle += 180f * Time.deltaTime;
         float rad = angle * Mathf.Deg2Rad;
 
-        float radius = weaponData.GetSize();    // size includes PlayerStats.size
+        float radius = GetSize();    // size includes PlayerStats.size
         Vector3 offset = new Vector3(Mathf.Cos(rad), 0, Mathf.Sin(rad)) * radius;
 
         transform.position = player.position + offset;
@@ -46,27 +45,17 @@ public class SwordWeaponController : WeaponController
             return;
         }
 
-        //Ensure weapon data has the player stats
-        if (player != null && weaponData.playerStats == null)
-        {
-            weaponData.playerStats = player.GetComponent<PlayerStats>();
-        }
-
         if (weaponData.GetCurrentLevel() <= 0)
             return;
 
-        if (isRunning)
-            return;
-
         gameObject.SetActive(true);
-        isRunning = true;
         StartCoroutine(OnDuration());
     }
 
     public override IEnumerator OnDuration()
     {
         Attack(); // start orbit
-        float duration = weaponData.GetDuration();
+        float duration = GetDuration();
         if (duration > 0f)
             yield return new WaitForSeconds(duration);
 
@@ -76,9 +65,12 @@ public class SwordWeaponController : WeaponController
     public override IEnumerator OnCoolDown()
     {
         isAttacking = false;
-        gameObject.SetActive(false);
 
-        float cd = weaponData.GetCooldown();
+        //Disable collider and renderer
+        if (col != null) col.enabled = false;
+        if (ren != null) ren.enabled = false;
+
+        float cd = GetCooldown();
         if (cd > 0f)
             yield return new WaitForSeconds(cd);
 
@@ -86,15 +78,13 @@ public class SwordWeaponController : WeaponController
         {
             StartCoroutine(OnDuration());
         }
-        else
-        {
-            isRunning = false;
-        }
     }
 
     public override void Attack()
     {
-        gameObject.SetActive(true);
+        //Enable collider and renderer
+        if (col != null) col.enabled = true;
+        if (ren != null) ren.enabled = true;
         isAttacking = true;
         angle = 0f;
     }
@@ -107,7 +97,7 @@ public class SwordWeaponController : WeaponController
         if (enemyHealth != null)
         {
             // GetDamage() already uses PlayerStats.attackDamage
-            enemyHealth.TakeDamage(Mathf.RoundToInt(weaponData.GetDamage()));
+            enemyHealth.TakeDamage(Mathf.RoundToInt(GetDamage()));
         }
     }
 }

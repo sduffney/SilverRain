@@ -24,11 +24,6 @@ public class TemporaryUpgrade : TemporaryItem
         return cachedDetailLine;
     }
 
-    public void ResetLevel()
-    {
-        SetCurrentLevel(0);
-    }
-
     public new void LevelUp()
     {
         base.LevelUp();
