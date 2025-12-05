@@ -187,7 +187,7 @@ public class ConsoleManager : MonoBehaviour
             if (ph == null) { AppendOutput("Player does not implement the PlayerHealth component"); return; }
             ph.isInvincible = !ph.isInvincible;
             AppendOutput($"Invincible has switched to {ph.isInvincible}");
-        }, "Set player to invincible");
+        }, "Set playerTrans to invincible");
 
         Register("sethealth", args =>
         {
@@ -199,7 +199,7 @@ public class ConsoleManager : MonoBehaviour
             if (ph == null) { AppendOutput("Player does not implement the PlayerHealth component"); return; }
             ph.SetHealth(v);
             AppendOutput($"Health has been set to {ph.currentHealth}");
-        }, "<value> - Set health of player");
+        }, "<value> - Set health of playerTrans");
 
         Register("teleport", args =>
         {
@@ -214,8 +214,8 @@ public class ConsoleManager : MonoBehaviour
             var player = GameObject.FindWithTag("Player");
             if (player == null) { AppendOutput("Not Found Player"); return; }
             player.transform.position = new Vector3(x, y, z);
-            AppendOutput($"The player has been transported to {x}, {y}, {z}");
-        }, "<x> <y> <z> - Teleport player to location");
+            AppendOutput($"The playerTrans has been transported to {x}, {y}, {z}");
+        }, "<x> <y> <z> - Teleport playerTrans to location");
 
         Register("addxp", args =>
         {
@@ -239,7 +239,7 @@ public class ConsoleManager : MonoBehaviour
 
             playerLevel.GainXP(amount);
             AppendOutput($"Added {amount} XP. Current XP: {playerLevel.currentXP}/{playerLevel.maxXP}");
-        }, "<amount> - Add XP to player");
+        }, "<amount> - Add XP to playerTrans");
 
     }
     #endregion

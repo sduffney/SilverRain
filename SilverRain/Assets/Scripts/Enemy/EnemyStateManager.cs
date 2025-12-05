@@ -60,7 +60,7 @@ public class EnemyStateManager : MonoBehaviour
         agent.stoppingDistance = attackRange;
         currentHealth = maxHealth;
 
-        //Autoassign player if not set in Inspector
+        //Autoassign playerTrans if not set in Inspector
         if (player == null)
         {
             GameObject p = GameObject.FindGameObjectWithTag("Player");

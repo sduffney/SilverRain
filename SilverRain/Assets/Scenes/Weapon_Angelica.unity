@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GunKeySpawner
   grenadeData: {fileID: 11400000, guid: 8e64750ff90e99d4bbf486c593c0d5f2, type: 2}
-  grenadeControllerPrefab: {fileID: 1698056052845220, guid: 3f93b755669667b468d96b4b2709a981, type: 3}
+  grenadeControllerPrefab: {fileID: 1582769752}
   attackKey: 101
 --- !u!1 &416467521
 GameObject:
@@ -1601,8 +1601,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70b4a59ac588b5147988ab90ff844ad0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GrenadeWeaponController
-  weaponData: {fileID: 11400000, guid: 8e64750ff90e99d4bbf486c593c0d5f2, type: 2}
+  grenadeData: {fileID: 11400000, guid: 8e64750ff90e99d4bbf486c593c0d5f2, type: 2}
   grenadePrefab: {fileID: 1698056052845220, guid: 3f93b755669667b468d96b4b2709a981, type: 3}
+  throwKey: 114
+  forwardOffset: 1.2
+  upwardOffset: 1
 --- !u!4 &1582769754
 Transform:
   m_ObjectHideFlags: 0
@@ -1702,6 +1705,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51cfd2648e6df7e40b0c8b844300a7f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  goldManager: {fileID: 0}
+  goldMultiplier: 1
+  player: {fileID: 293584758}
 --- !u!1 &1669719776
 GameObject:
   m_ObjectHideFlags: 0
@@ -2353,6 +2359,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 392942201862323568, guid: 861ba8a6cd70075428a708b0b8320158, type: 3}
+      propertyPath: cooldown
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1181775529053628865, guid: 861ba8a6cd70075428a708b0b8320158, type: 3}
       propertyPath: m_Name
       value: Player
@@ -2488,6 +2498,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1664412128}
   - {fileID: 860143691}
   - {fileID: 3617251132281961193}
   - {fileID: 1431377598}
@@ -2496,5 +2507,4 @@ SceneRoots:
   - {fileID: 1541596658}
   - {fileID: 1906029847}
   - {fileID: 1149256623}
-  - {fileID: 1664412128}
   - {fileID: 1582769754}

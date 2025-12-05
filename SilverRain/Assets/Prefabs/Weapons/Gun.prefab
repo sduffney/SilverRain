@@ -258,7 +258,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GunWeaponController
   weaponData: {fileID: 11400000, guid: 2fef6c30c08634d4d8ad7f67c3071988, type: 2}
   firePoint: {fileID: 8719269945044739880}
-  projectilePrefab: {fileID: 2139880809984440600, guid: c72e3dd27e7f21c4080e4b82d4fac998, type: 3}
+  projectilePrefab: {fileID: 2000005594516314921, guid: 1700bca161196544fa60e9a4f8db302b, type: 3}
+  player: {fileID: 0}
+  spawnOffsetForward: 0.5
+  spawnOffsetUp: -0.1
+  muzzleOffset: 2
 --- !u!1 &1748277932983872
 GameObject:
   m_ObjectHideFlags: 0
@@ -557,13 +561,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4959454125047744754}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -0.0001001358, y: 0.0227, z: -0.15237999}
   m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 4952727429218122}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &2846508102638198419
 MeshFilter:
   m_ObjectHideFlags: 0

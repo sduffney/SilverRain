@@ -20,7 +20,7 @@ public class MeleeEnemyController : EnemyController
     {
         
         Debug.Log("We have entered");
-        //Check if player
+        //Check if playerTrans
         if (collision.gameObject.GetComponent<PlayerHealth>()) 
         {
             PlayerHealth player = collision.gameObject.GetComponent<PlayerHealth>();

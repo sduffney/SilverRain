@@ -7,4 +7,9 @@ public class SwordData : TemporaryWeapon
     {
         // ScriptableObjects hold stats; gameplay runs in MonoBehaviours.
     }
+
+    public override void OnActivate()
+    {
+        throw new System.NotImplementedException();
+    }
 }

@@ -14,7 +14,7 @@ public class RangedEnemyController : EnemyController
     public override void Attack(PlayerHealth player)
     {
         shootTimer += Time.deltaTime;
-        //Spawn projectile targetting player.
+        //Spawn projectile targetting playerTrans.
         if (shootTimer >= timeBetweenShots) 
         {
             if(targetPlayer != null) 
@@ -31,7 +31,7 @@ public class RangedEnemyController : EnemyController
 
     public override void Move()
     {
-        //Move towards the player
+        //Move towards the playerTrans
         agent.SetDestination(targetPlayer.transform.position);
         float speed = 0f;
         speed = agent.velocity.magnitude;

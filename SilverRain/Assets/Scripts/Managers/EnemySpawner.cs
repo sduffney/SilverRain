@@ -36,7 +36,7 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
-        //Find player if not assigned
+        //Find playerTrans if not assigned
         if (player == null)
         {
             var p = GameObject.FindGameObjectWithTag(playerTag);
@@ -118,7 +118,7 @@ public class EnemySpawner : MonoBehaviour
             return;
         }
 
-        //Ensure we have a player reference
+        //Ensure we have a playerTrans reference
         if (player == null)
         {
             var p = GameObject.FindGameObjectWithTag(playerTag);
@@ -149,7 +149,7 @@ public class EnemySpawner : MonoBehaviour
 
     Vector3 SamplePositionAroundPlayer()
     {
-        // Sample a point in an annulus around the player in XZ plane
+        // Sample a point in an annulus around the playerTrans in XZ plane
         float r = Random.Range(minDistance, maxDistance);
         float ang = Random.Range(0f, Mathf.PI * 2f);
         Vector3 offset = new Vector3(Mathf.Cos(ang), 0f, Mathf.Sin(ang)) * r;
@@ -186,7 +186,7 @@ public class EnemySpawner : MonoBehaviour
             {
                 Vector3 closest = c.ClosestPoint(point);
                 // If the closest point is exactly the sample, it's on or inside; allow it.
-                // If it's different, then the point is outside this collider — we continue searching.
+                // If it's different, then the point is outside this collider ï¿½ we continue searching.
                 if (Vector3.Distance(closest, point) < 0.001f) return true;
             }
         }

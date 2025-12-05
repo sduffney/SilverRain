@@ -11,4 +11,9 @@ public class GrenadeData : TemporaryWeapon
     {
         // Leave empty, logic is handled by GrenadeWeaponController
     }
+
+    public override void OnActivate()
+    {
+        throw new System.NotImplementedException();
+    }
 }
