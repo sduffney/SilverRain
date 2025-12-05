@@ -4,20 +4,19 @@ using UnityEngine.AI;
 public class RangedEnemyController : EnemyController
 {
     private float shootTimer = 0f;
-    [SerializeField]
-    private float timeBetweenShots = 2f;
-    [SerializeField]
-    Transform firePoint;
-    [SerializeField]
-    GameObject projectilePrefab;
+    [SerializeField] private float timeBetweenShots = 2f;
+    [SerializeField] Transform firePoint;
+    [SerializeField] GameObject projectilePrefab;
+    private Vector3 lastKnownPlayerPos;
+
 
     public override void Attack(PlayerHealth player)
     {
         shootTimer += Time.deltaTime;
         //Spawn projectile targetting playerTrans.
-        if (shootTimer >= timeBetweenShots) 
+        if (shootTimer >= timeBetweenShots)
         {
-            if(targetPlayer != null) 
+            if (targetPlayer != null)
             {
                 animator.SetTrigger("attacking");
                 Vector3 dir = (targetPlayer.transform.position - firePoint.position).normalized;
@@ -31,11 +30,29 @@ public class RangedEnemyController : EnemyController
 
     public override void Move()
     {
-        //Move towards the playerTrans
-        agent.SetDestination(targetPlayer.transform.position);
-        float speed = 0f;
-        speed = agent.velocity.magnitude;
-        animator.SetFloat("speed", speed);
+        //Check that the player in on the navesh
+        if (agent == null || !agent.isOnNavMesh) { return; }
+        
+        if (targetPlayer != null)
+        {
+            //Check if the player's position is on the NavMesh
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(targetPlayer.transform.position, out hit, 1.0f, NavMesh.AllAreas))
+            {
+                //Move towards the player
+                agent.SetDestination(hit.position);
+                //Cache last known position
+                lastKnownPlayerPos = hit.position;
+            }
+            else
+            {
+                //Player is off the NavMesh, move to last known position
+                agent.SetDestination(lastKnownPlayerPos);
+            }
+            //Set animator speed
+            float speed = agent.velocity.magnitude;
+            animator.SetFloat("speed", speed);
+        }
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -56,7 +73,7 @@ public class RangedEnemyController : EnemyController
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.GetComponent<PlayerHealth>()) 
+        if (other.GetComponent<PlayerHealth>())
         {
             PlayerHealth target = other.GetComponent<PlayerHealth>();
             Attack(target);

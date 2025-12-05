@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "TemporaryWeapon", menuName = "Scriptable Objects/TemporaryWeapon")]
@@ -28,24 +29,18 @@ public class TemporaryWeapon : TemporaryItem
         // Keep weapon levels constrained
         if (maxLevel <= 0) maxLevel = 5;
 
-        // Only search for player during play
-        if (Application.isPlaying)
+
+        GameObject playerObj = GameObject.FindWithTag("Player");
+        if (playerObj != null)
         {
-            GameObject playerObj = GameObject.FindWithTag("Player");
-            if (playerObj != null)
-            {
-                playerStats = playerObj.GetComponent<PlayerStats>();
-            }
-            else
-            {
-                playerStats = null;
-                Debug.LogWarning($"{name}: Player with tag 'Player' not found for TemporaryWeapon.");
-            }
+            playerStats = playerObj.GetComponent<PlayerStats>();
         }
         else
         {
             playerStats = null;
+            Debug.LogWarning($"{name}: Player with tag 'Player' not found for TemporaryWeapon.");
         }
+
     }
 
     public float GetDamage()

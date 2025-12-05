@@ -46,6 +46,12 @@ public class SwordWeaponController : WeaponController
             return;
         }
 
+        //Ensure weapon data has the player stats
+        if (player != null && weaponData.playerStats == null)
+        {
+            weaponData.playerStats = player.GetComponent<PlayerStats>();
+        }
+
         if (weaponData.GetCurrentLevel() <= 0)
             return;
 
@@ -78,7 +84,6 @@ public class SwordWeaponController : WeaponController
 
         if (weaponData != null && weaponData.GetCurrentLevel() > 0)
         {
-            gameObject.SetActive(true);
             StartCoroutine(OnDuration());
         }
         else
@@ -89,6 +94,7 @@ public class SwordWeaponController : WeaponController
 
     public override void Attack()
     {
+        gameObject.SetActive(true);
         isAttacking = true;
         angle = 0f;
     }
