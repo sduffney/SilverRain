@@ -256,6 +256,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   maxHealth: 100
+  currentHealth: 0
   bloodSplatterPrefab: {fileID: 184970821379519350, guid: ed9978dcbfdf861449a54c440d43deab, type: 3}
   animator: {fileID: 0}
 --- !u!114 &156343329
@@ -323,6 +324,120 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!1001 &258657822
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2705628781402508110, guid: c145ad62b0249994a902820995baeb88, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12.91405
+      objectReference: {fileID: 0}
+    - target: {fileID: 2705628781402508110, guid: c145ad62b0249994a902820995baeb88, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2705628781402508110, guid: c145ad62b0249994a902820995baeb88, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 20.168
+      objectReference: {fileID: 0}
+    - target: {fileID: 2705628781402508110, guid: c145ad62b0249994a902820995baeb88, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2705628781402508110, guid: c145ad62b0249994a902820995baeb88, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2705628781402508110, guid: c145ad62b0249994a902820995baeb88, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2705628781402508110, guid: c145ad62b0249994a902820995baeb88, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2705628781402508110, guid: c145ad62b0249994a902820995baeb88, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2705628781402508110, guid: c145ad62b0249994a902820995baeb88, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2705628781402508110, guid: c145ad62b0249994a902820995baeb88, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8034704999624749668, guid: c145ad62b0249994a902820995baeb88, type: 3}
+      propertyPath: m_Name
+      value: GlobalInvisibilityManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c145ad62b0249994a902820995baeb88, type: 3}
+--- !u!1001 &272583693
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3510763164666414736, guid: 0872d8daf510dba4cb3a892b62f17999, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.777687
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510763164666414736, guid: 0872d8daf510dba4cb3a892b62f17999, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510763164666414736, guid: 0872d8daf510dba4cb3a892b62f17999, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.6862345
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510763164666414736, guid: 0872d8daf510dba4cb3a892b62f17999, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510763164666414736, guid: 0872d8daf510dba4cb3a892b62f17999, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510763164666414736, guid: 0872d8daf510dba4cb3a892b62f17999, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510763164666414736, guid: 0872d8daf510dba4cb3a892b62f17999, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510763164666414736, guid: 0872d8daf510dba4cb3a892b62f17999, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510763164666414736, guid: 0872d8daf510dba4cb3a892b62f17999, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510763164666414736, guid: 0872d8daf510dba4cb3a892b62f17999, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8937696551812037509, guid: 0872d8daf510dba4cb3a892b62f17999, type: 3}
+      propertyPath: m_Name
+      value: CactusEnemy
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0872d8daf510dba4cb3a892b62f17999, type: 3}
 --- !u!1 &303104404
 GameObject:
   m_ObjectHideFlags: 0
@@ -541,6 +656,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   maxHealth: 100
+  currentHealth: 0
   bloodSplatterPrefab: {fileID: 184970821379519350, guid: ed9978dcbfdf861449a54c440d43deab, type: 3}
   animator: {fileID: 0}
 --- !u!114 &555317711
@@ -699,6 +815,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   maxHealth: 100
+  currentHealth: 0
   bloodSplatterPrefab: {fileID: 184970821379519350, guid: ed9978dcbfdf861449a54c440d43deab, type: 3}
   animator: {fileID: 0}
 --- !u!114 &766100169
@@ -994,6 +1111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   maxHealth: 100
+  currentHealth: 0
   bloodSplatterPrefab: {fileID: 184970821379519350, guid: ed9978dcbfdf861449a54c440d43deab, type: 3}
   animator: {fileID: 0}
 --- !u!114 &1277903961
@@ -1152,6 +1270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   maxHealth: 100
+  currentHealth: 0
   bloodSplatterPrefab: {fileID: 184970821379519350, guid: ed9978dcbfdf861449a54c440d43deab, type: 3}
   animator: {fileID: 0}
 --- !u!114 &1530802533
@@ -1331,6 +1450,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1738773329
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 774982199035952458, guid: ab84c09aa40455a47815d52a29311496, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10.698388
+      objectReference: {fileID: 0}
+    - target: {fileID: 774982199035952458, guid: ab84c09aa40455a47815d52a29311496, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 774982199035952458, guid: ab84c09aa40455a47815d52a29311496, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.685526
+      objectReference: {fileID: 0}
+    - target: {fileID: 774982199035952458, guid: ab84c09aa40455a47815d52a29311496, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 774982199035952458, guid: ab84c09aa40455a47815d52a29311496, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 774982199035952458, guid: ab84c09aa40455a47815d52a29311496, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 774982199035952458, guid: ab84c09aa40455a47815d52a29311496, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 774982199035952458, guid: ab84c09aa40455a47815d52a29311496, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 774982199035952458, guid: ab84c09aa40455a47815d52a29311496, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 774982199035952458, guid: ab84c09aa40455a47815d52a29311496, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7440275271134425223, guid: ab84c09aa40455a47815d52a29311496, type: 3}
+      propertyPath: m_Name
+      value: MushroomEnemy
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ab84c09aa40455a47815d52a29311496, type: 3}
 --- !u!1001 &1803631239
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1422,6 +1598,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   maxHealth: 100
+  currentHealth: 0
   bloodSplatterPrefab: {fileID: 184970821379519350, guid: ed9978dcbfdf861449a54c440d43deab, type: 3}
   animator: {fileID: 0}
 --- !u!114 &1803631242
@@ -1489,6 +1666,63 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!1001 &1924947644
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 471130600971330446, guid: 912d934b029a9cf42afb6fa252d061aa, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 15.847554
+      objectReference: {fileID: 0}
+    - target: {fileID: 471130600971330446, guid: 912d934b029a9cf42afb6fa252d061aa, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.00000047683716
+      objectReference: {fileID: 0}
+    - target: {fileID: 471130600971330446, guid: 912d934b029a9cf42afb6fa252d061aa, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.22067976
+      objectReference: {fileID: 0}
+    - target: {fileID: 471130600971330446, guid: 912d934b029a9cf42afb6fa252d061aa, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 471130600971330446, guid: 912d934b029a9cf42afb6fa252d061aa, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 471130600971330446, guid: 912d934b029a9cf42afb6fa252d061aa, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 471130600971330446, guid: 912d934b029a9cf42afb6fa252d061aa, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 471130600971330446, guid: 912d934b029a9cf42afb6fa252d061aa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 471130600971330446, guid: 912d934b029a9cf42afb6fa252d061aa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 471130600971330446, guid: 912d934b029a9cf42afb6fa252d061aa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596657270728130862, guid: 912d934b029a9cf42afb6fa252d061aa, type: 3}
+      propertyPath: m_Name
+      value: FairyEnemy
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 912d934b029a9cf42afb6fa252d061aa, type: 3}
 --- !u!1001 &1967048083
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1630,6 +1864,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   maxHealth: 100
+  currentHealth: 0
   bloodSplatterPrefab: {fileID: 184970821379519350, guid: ed9978dcbfdf861449a54c440d43deab, type: 3}
   animator: {fileID: 0}
 --- !u!114 &1967048088
@@ -1738,6 +1973,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   maxHealth: 100
+  currentHealth: 0
   bloodSplatterPrefab: {fileID: 184970821379519350, guid: ed9978dcbfdf861449a54c440d43deab, type: 3}
   animator: {fileID: 0}
 --- !u!114 &2038854437
@@ -1821,3 +2057,7 @@ SceneRoots:
   - {fileID: 555317708}
   - {fileID: 1530802530}
   - {fileID: 135459752}
+  - {fileID: 258657822}
+  - {fileID: 272583693}
+  - {fileID: 1924947644}
+  - {fileID: 1738773329}

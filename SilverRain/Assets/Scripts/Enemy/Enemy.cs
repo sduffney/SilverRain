@@ -72,7 +72,7 @@ public class Enemy : MonoBehaviour
     {
         return xpValue;
     }
-    public float RewardScore()
+    public int RewardScore()
     {
         return scoreValue;
     }
