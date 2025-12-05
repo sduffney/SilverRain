@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -218,13 +219,18 @@ public class EnemySpawner : MonoBehaviour
         GameObject prefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Count)];
         if (prefab == null) return;
 
-        GameObject go = Instantiate(prefab, pos, Quaternion.identity, spawnParent);
-        // Optional initial look at player
-        if (player != null)
-        {
-            Vector3 lookDir = (player.transform.position - go.transform.position);
-            lookDir.y = 0f;
-            if (lookDir.sqrMagnitude > 0.001f) go.transform.rotation = Quaternion.LookRotation(lookDir.normalized);
+        //Check if spawning on navmesh
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(pos, out hit, 2.0f, NavMesh.AllAreas))
+        { 
+            GameObject go = Instantiate(prefab, hit.position, Quaternion.identity, spawnParent);
+            // Optional initial look at player
+            if (player != null)
+            {
+              Vector3 lookDir = (player.transform.position - go.transform.position);
+              lookDir.y = 0f;
+              if (lookDir.sqrMagnitude > 0.001f) go.transform.rotation = Quaternion.LookRotation(lookDir.normalized);
+            }
         }
     }
 
