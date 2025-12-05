@@ -4,15 +4,15 @@ using UnityEngine;
 public class GrenadeWeaponController : WeaponController
 {
     [Header("Data & Prefab")]
-    public GrenadeData grenadeData;   // ScriptableObject (should behave like TemporaryWeapon)
     public GameObject grenadePrefab;  // Prefab with Rigidbody + Grenade.cs
 
-    [Header("Throw Offsets (from camera)")]
+    [Header("Throw Settings")]
+    public float throwForce = 12f;
+    public float upwardForce = 4f;
     public float forwardOffset = 1.2f;
     public float upwardOffset = 0.0f;
 
-    private Transform cam;
-    private bool isRunning = false;
+    [SerializeField] private Transform cam;
 
     private void Start()
     {
@@ -29,7 +29,7 @@ public class GrenadeWeaponController : WeaponController
 
     public override void OnActivate()
     {
-        if (grenadeData == null)
+        if (weaponData == null)
         {
             Debug.LogError("GrenadeWeaponController: grenadeData is not assigned.");
             return;
@@ -41,13 +41,13 @@ public class GrenadeWeaponController : WeaponController
     public override IEnumerator OnDuration()
     {
         Attack();
-        yield return new WaitForSeconds(grenadeData.GetDuration());
+        yield return new WaitForSeconds(GetDuration());
         StartCoroutine(OnCoolDown());
     }
 
     public override IEnumerator OnCoolDown()
     {
-        yield return new WaitForSeconds(grenadeData.GetCooldown());
+        yield return new WaitForSeconds(GetCooldown());
         StartCoroutine(OnDuration());
     }
 
@@ -67,8 +67,8 @@ public class GrenadeWeaponController : WeaponController
 
         // Build throw direction: tuned in GrenadeData
         Vector3 throwDirection =
-            (cam.forward * grenadeData.throwForce) +
-            (cam.up * grenadeData.upwardForce);
+            (cam.forward * throwForce) +
+            (cam.up * upwardForce);
 
         rb.linearVelocity = throwDirection * 0.8f;
         rb.angularVelocity = Random.insideUnitSphere * 5f;
@@ -77,7 +77,7 @@ public class GrenadeWeaponController : WeaponController
         Grenade grenadeScript = grenade.GetComponent<Grenade>();
         if (grenadeScript != null)
         {
-            grenadeScript.Init(grenadeData.GetDamage(), grenadeData.baseDuration);
+            grenadeScript.Init(GetDamage(), weaponData.BaseDuration);
         }
     }
 }

@@ -5,62 +5,66 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement Settings")]
-    public float moveSpeed = 3f;
-    public float jumpHeight = 3f;
-    public float gravityScale = 1f;
-    public float mouseSensitivity = 2f;
+    [SerializeField] private float moveSpeed = 3f;
+    [SerializeField] private float jumpHeight = 3f;
+    [SerializeField] private float groundCheckRayLength = 1.1f;
+    [SerializeField] private float gravityScale = 1f;
+    [SerializeField] private float mouseSensitivity = 2f;
 
-    [Header("Looking Settings")]
-    public Transform cameraTransform;
-    public float rotationSmoothSpeed = 10f;
-    public float minVerticalAngle = -90f;
-    public float maxVerticalAngle = 90f;
-    
+    [Header("Look Settings")]
+    [SerializeField] private Transform cameraTransform;
+    [SerializeField] private float rotationSmoothSpeed = 10f;
+    [SerializeField] private float minVerticalAngle = -90f;
+    [SerializeField] private float maxVerticalAngle = 90f;
+
     private Rigidbody rb;
     private Vector2 movementInput;
     private Vector2 lookInput;
-    private bool isGrounded;
     private float xRotation = 0f;
 
-    //private PlayerInput playerInput;
-
-    [Header("Weapons")]
-    public SwordWeaponController swordPrefab;
-    //public GunWeaponController gunController;      // Angelica added 
-    //public GrenadeWeaponController grenadeController;
+    public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
 
     private void Start()
     {
+        //Get rigidbody and adjust settings
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         rb.useGravity = true;
-        //playerInput = GetComponent<PlayerInput>();
 
+        //Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
-
-    private void OnCollisionEnter(Collision collision)
+    //Ground check
+    public bool IsGrounded()
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        RaycastHit hit;
+        LayerMask groundLayer = LayerMask.GetMask("Ground");
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, groundCheckRayLength, groundLayer))
         {
-            isGrounded = true;
+            return true;
         }
+        return false;
     }
 
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = false;
-        }
-    }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Ground"))
+    //    {
+    //        isGrounded = true;
+    //        print("Grounded");
+    //    }
+    //}
 
-    private void Update()
-    {
-        //if (Time.timeScale == 0f) FreezePlayer(); else UnfreezePlayer();
-    }
+    //private void OnCollisionExit(Collision collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Ground"))
+    //    {
+    //        isGrounded = false;
+    //        print("Not Grounded");
+    //    }
+    //}
 
     private void FixedUpdate()
     {
@@ -80,28 +84,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
-    //public void FreezePlayer()
-    //{
-    //    Time.timeScale = 0f;
-    //    Cursor.lockState = CursorLockMode.None;
-    //    Cursor.visible = true;
-    //    //ResetVelocity();
-    //    playerInput.enabled = false;
-    //    //rb.isKinematic = true;
-    //    //rb.constraints = RigidbodyConstraints.FreezeAll;
-    //}
-    //public void UnfreezePlayer()
-    //{
-    //    Time.timeScale = 1f;
-    //    Cursor.lockState = CursorLockMode.Locked;
-    //    Cursor.visible = false;
-    //    //ResetVelocity();
-    //    playerInput.enabled = true;
-    //    //rb.isKinematic = false;
-    //    //rb.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX;
-    //}
-
     // Input System Callbacks
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -115,7 +97,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.performed && isGrounded)
+        if (context.performed && IsGrounded())
         {
             float jumpForce = Mathf.Sqrt(jumpHeight * -2 * (Physics.gravity.y * gravityScale));
             rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
@@ -156,10 +138,9 @@ public class PlayerController : MonoBehaviour
             playerLevel.GainXP(baseXp * xpMod);
         }
     }
-
-
-    //public void AddBuff(string buff)
-    //{
-    //    FindAnyObjectByType<HUDController>().AddBuff(buff);
-    //}
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.down * groundCheckRayLength);
+    }
 }

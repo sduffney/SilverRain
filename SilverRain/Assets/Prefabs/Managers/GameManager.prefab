@@ -44,6 +44,9 @@ GameObject:
   - component: {fileID: 1498990575796229725}
   - component: {fileID: 22540091270098808}
   - component: {fileID: 5720649245867762652}
+  - component: {fileID: 1455171251585034207}
+  - component: {fileID: 2421736779219562165}
+  - component: {fileID: 2586279526483038899}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -79,6 +82,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51cfd2648e6df7e40b0c8b844300a7f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  player: {fileID: 0}
+  playerInput: {fileID: 0}
+  playerController: {fileID: 0}
+  playerStats: {fileID: 0}
+  goldManager: {fileID: 0}
+  permanentUpgradeManager: {fileID: 0}
+  temporaryUpgradeManager: {fileID: 0}
+  consoleManager: {fileID: 0}
+  buffManager: {fileID: 0}
+  hudController: {fileID: 0}
+  goldMultiplier: 1
 --- !u!114 &1498990575796229725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,6 +116,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ab746e7b90b2ad24ebb53d224a14ac79, type: 2}
   - {fileID: 11400000, guid: 4867d2d574e2e3e45826272f6d3fc74d, type: 2}
   - {fileID: 11400000, guid: 005aa280653c7fe4cbfd41a40ef8fcbd, type: 2}
+  - {fileID: 11400000, guid: 2fef6c30c08634d4d8ad7f67c3071988, type: 2}
+  - {fileID: 11400000, guid: 9222da1eaad4b9f45aff95be99584f9a, type: 2}
+  - {fileID: 11400000, guid: 8e64750ff90e99d4bbf486c593c0d5f2, type: 2}
   buffCardPrefab: {fileID: 8358269796294553481, guid: e5ef082151bb979478f52c079dc1c94d, type: 3}
   cardParent: {fileID: 0}
 --- !u!114 &22540091270098808
@@ -152,3 +169,42 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   spawnParent: {fileID: 305065450986262055}
+--- !u!114 &1455171251585034207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4679578675246524391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7a820ddc06a79a44b32e68a03ef2fdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PermanentUpgradeManager
+  allPermanentUpgrades: []
+--- !u!114 &2421736779219562165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4679578675246524391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7046e49a4b350df43b8dfa9193917233, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TemporaryUpgradeManager
+  activeTemporaryUpgrades: []
+--- !u!114 &2586279526483038899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4679578675246524391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1757841b32e3ded4fb9cc27c96c41049, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GlobalInvisibilityManager
+  isActive: 0

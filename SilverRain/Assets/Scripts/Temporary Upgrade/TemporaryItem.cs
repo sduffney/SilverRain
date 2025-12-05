@@ -10,11 +10,6 @@ public class TemporaryItem : ScriptableObject
     public int maxLevel = 5; 
     public Sprite icon;
 
-    protected virtual void OnEnable()
-    {
-
-    }
-
     public virtual int GetCurrentLevel()
     {
         return currentLevel;
@@ -22,7 +17,7 @@ public class TemporaryItem : ScriptableObject
 
     public void SetCurrentLevel(int level)
     {
-        this.currentLevel = level;
+        currentLevel = level;
     }
 
     public void LevelUp()
@@ -41,6 +36,6 @@ public class TemporaryItem : ScriptableObject
 
     public void ResetLevel()
     {
-        currentLevel = 0;
+        SetCurrentLevel(0);
     }
 }

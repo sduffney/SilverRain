@@ -10,22 +10,31 @@ public class BuffManager : MonoBehaviour
     public List<TemporaryItem> allTempItems; // add three weapons
     public GameObject buffCardPrefab;
     public Transform cardParent;
-    
+
+    private GameObject player;
     private PlayerInventory playerInventory;
     private PlayerController playerController;
     private PlayerLevel playerLevel;
 
     void Start()
     {
-        playerInventory = FindAnyObjectByType<PlayerInventory>();
-        playerController = FindAnyObjectByType<PlayerController>();
-        playerLevel = FindAnyObjectByType<PlayerLevel>();
+        player = GameManager.Instance.Player;
+        playerInventory = player.GetComponent<PlayerInventory>();
+        playerController = player.GetComponent<PlayerController>();
+        playerLevel = player.GetComponent<PlayerLevel>();
         //ResetBuff(allTempItems);
         SyncBuffLevelsWithInventory();
 
         //var defaultWeapon = allTempItems.Find(item => item.id == "sword");
         //playerInventory.PickItem(defaultWeapon);
+
+        //Subscribe to events
+        PlayerLevel.OnLevelUp += ShowBuffOptions;
     }
+
+    //Unsubscribe from events
+    private void OnDisable() { PlayerLevel.OnLevelUp -= ShowBuffOptions; }
+    private void OnDestroy() { PlayerLevel.OnLevelUp -= ShowBuffOptions; }
 
     //when playerTrans levels up, show 3 random buffs to choose from
     public void ShowBuffOptions()
@@ -85,7 +94,7 @@ public class BuffManager : MonoBehaviour
     public void ApplyBuff(TemporaryItem item)
     {
         playerInventory.PickItem(item);
-        Debug.Log($"Applied buff: {item.displayName} to level {item.GetCurrentLevel()}");
+        //Debug.Log($"Applied buff: {item.displayName} to level {item.GetCurrentLevel()}");
 
         if (PlayerStats.Instance != null)
         {
@@ -95,7 +104,7 @@ public class BuffManager : MonoBehaviour
         
 
         cardParent.gameObject.SetActive(false);
-        if (playerLevel.IsLevelUp()) ShowBuffOptions();
+        //if (playerLevel.IsLevelUp()) ShowBuffOptions();
         //Cursor.lockState = CursorLockMode.Locked;
         //Cursor.visible = false;
         //playerController.UnfreezePlayer();
@@ -126,7 +135,7 @@ public class BuffManager : MonoBehaviour
             if (owned != null)
             {
                 buff.SetCurrentLevel(owned.GetCurrentLevel());
-                Debug.Log($"Sync: {buff.displayName} set to level {buff.GetCurrentLevel()}");
+                //Debug.Log($"Sync: {buff.displayName} set to level {buff.GetCurrentLevel()}");
             }
         }
     }
