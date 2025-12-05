@@ -221,7 +221,7 @@ public class EnemySpawner : MonoBehaviour
 
         //Check if spawning on navmesh
         NavMeshHit hit;
-        if (NavMesh.SamplePosition(pos, out hit, 2.0f, NavMesh.AllAreas))
+        if (NavMesh.SamplePosition(pos, out hit, 10.0f, NavMesh.AllAreas))
         { 
             GameObject go = Instantiate(prefab, hit.position, Quaternion.identity, spawnParent);
             // Optional initial look at player

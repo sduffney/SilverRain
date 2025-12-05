@@ -12647,8 +12647,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 171d04e69e856aa4583514567da64109, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  scoreValue: 0
-  xpValue: 0
+  scoreValue: 10
+  xpValue: 10
   damage: 100
 --- !u!114 &6850935498896519798
 MonoBehaviour:
