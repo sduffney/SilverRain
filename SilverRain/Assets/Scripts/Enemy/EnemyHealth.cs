@@ -35,7 +35,8 @@ public class EnemyHealth : MonoBehaviour
         //Instatntiate BloodSplatter
         Vector3 bloodSplatterSpawn = transform.position;
         bloodSplatterSpawn.y += 2;
-        var bloodSplatter = Instantiate(bloodSplatterPrefab, bloodSplatterSpawn, Quaternion.identity);
+        Quaternion rotation = Quaternion.Euler(-90f, 0f, 0f);
+        var bloodSplatter = Instantiate(bloodSplatterPrefab, bloodSplatterSpawn, rotation);
 
         bloodSplatter.Play();
 
@@ -51,6 +52,8 @@ public class EnemyHealth : MonoBehaviour
     }
     private void Die()
     {
+        Collider collider = GetComponent<Collider>();
+        Destroy(collider);
         StartCoroutine(DeathCoroutine());
     }
 
@@ -62,6 +65,7 @@ public class EnemyHealth : MonoBehaviour
         Destroy(agent);
         Destroy(controller);
         player.GainXP(enemy.RewardXP());
+        GameManager.Instance.AddScore(enemy.RewardScore());
         yield return new WaitForSeconds(3);
         Destroy(gameObject);
     }
