@@ -950,6 +950,9 @@ MonoBehaviour:
   jumpsForce: 5
   miniMushScale: 0.3
   explodeDelay: 0.7
+  jumpDelay: 1
+  arcUpFactor: 1
+  explodeVFX: {fileID: 3654741155788002240, guid: ac8053bb68b7997419467a34b74fb975, type: 3}
 --- !u!135 &1305889384
 SphereCollider:
   m_ObjectHideFlags: 0
