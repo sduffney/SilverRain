@@ -3,20 +3,32 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    public List<TemporaryItem> ownedItems = new List<TemporaryItem>();
-    public BuffManager buffManager;
+    [SerializeField] private List<TemporaryItem> ownedItems = new List<TemporaryItem>();
+    [SerializeField] private BuffManager buffManager;
 
-    [Header("Weapon Controllers on Player")]
-    public GunWeaponController gunController;
-    public SwordWeaponController swordController;
-    public GrenadeWeaponController grenadeController;
+    public List<TemporaryItem> OwnedItems => ownedItems;
 
-    [Header("Weapon Data Assets (ScriptableObjects)")]
-    // These can be SwordData / GrenadeData too, as long as they inherit from TemporaryWeapon
-    public TemporaryWeapon gunData;
-    public TemporaryWeapon swordData;
-    public TemporaryWeapon grenadeData;
+    //Initial Weapon
+    [SerializeField] private TemporaryWeapon initialWeapon;
 
+    [Header("Weapon Controllers")]
+    [SerializeField] private GunWeaponController gunController;
+    [SerializeField] private SwordWeaponController swordController;
+    [SerializeField] private GrenadeWeaponController grenadeController;
+
+    //TemporaryWeapon is a scriptable object that holds weapon data
+    [Header("Weapon Data")]
+    [SerializeField] private TemporaryWeapon gunData;
+    [SerializeField] private TemporaryWeapon swordData;
+    [SerializeField] private TemporaryWeapon grenadeData;
+
+    private void Start()
+    {
+        if (initialWeapon != null)
+        {
+            PickItem(initialWeapon);
+        }
+    }
     private void Update()
     {
         // Check levels EVERY FRAME and keep weapons in sync
@@ -32,7 +44,7 @@ public class PlayerInventory : MonoBehaviour
 
         // “Active” means level > 0 (you said > 1 but logically you unlock at 1;
         // change to > 1 if you really want it to start at level 2)
-        bool shouldBeActive = weaponData.GetCurrentLevel() > 0;
+        bool shouldBeActive = weaponData.CurrentLevel > 0;
         bool isActive = controller.gameObject.activeSelf;
 
         // Turn ON + call OnActivate once when we cross from inactive → active
@@ -53,7 +65,7 @@ public class PlayerInventory : MonoBehaviour
         if (!ownedItems.Contains(newItem))
         {
             ownedItems.Add(newItem);
-            newItem.SetCurrentLevel(1);
+            newItem.CurrentLevel = 1;
         }
         else
         {

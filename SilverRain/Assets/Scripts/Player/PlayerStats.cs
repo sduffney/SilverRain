@@ -263,10 +263,10 @@ public class PlayerStats : MonoBehaviour
             playerInventory = FindAnyObjectByType<PlayerInventory>();
         if (playerInventory == null) return;
 
-        foreach (var item in playerInventory.ownedItems)
+        foreach (var item in playerInventory.OwnedItems)
         {
             if (item == null) continue;
-            int level = item.GetCurrentLevel();
+            int level = item.CurrentLevel;
             if (level <= 0) continue;
 
             if (item is TemporaryUpgrade tempUpgrade)

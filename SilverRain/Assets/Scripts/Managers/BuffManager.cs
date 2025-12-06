@@ -44,6 +44,14 @@ public class BuffManager : MonoBehaviour
             //ResetBuff(allTempItems);
             SyncBuffLevelsWithInventory();
         }
+        //Reset all item levels
+        foreach (var item in allTempItems)
+        {
+            if (item != null)
+            {
+                item.CurrentLevel = 0;
+            }
+        }
     }
 
     //when playerTrans levels up, show 3 random buffs to choose from
@@ -121,10 +129,10 @@ public class BuffManager : MonoBehaviour
         foreach (var buff in allTempItems)
         {
             if (buff == null) continue;
-            TemporaryItem owned = playerInventory.ownedItems.Find(item => item.id == buff.id);
+            TemporaryItem owned = playerInventory.OwnedItems.Find(item => item.id == buff.id);
             if (owned != null)
             {
-                buff.SetCurrentLevel(owned.GetCurrentLevel());
+                buff.CurrentLevel = owned.CurrentLevel;
                 //Debug.Log($"Sync: {buff.displayName} set to level {buff.GetCurrentLevel()}");
             }
         }

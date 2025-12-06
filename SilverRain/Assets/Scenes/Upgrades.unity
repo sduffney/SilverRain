@@ -662,7 +662,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeButton
   currentSelectedView: {fileID: 0}
-  goldManager: {fileID: 1254122322}
+  goldManager: {fileID: 0}
   buyButton: {fileID: 241999964}
   buyButtonText: {fileID: 778984305}
 --- !u!1 &305266151
@@ -3631,7 +3631,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7eda469ead0426f4aab001777c04bbb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ResetButton
-  goldManager: {fileID: 1254122322}
   upgrades:
   - {fileID: 11400000, guid: 6dfdce0103e4f8648a1c2cec3b8fd474, type: 2}
   - {fileID: 11400000, guid: 341b82cc11c49c6488f0108838fa73c1, type: 2}
@@ -4121,25 +4120,6 @@ MonoBehaviour:
   costText: {fileID: 470141311}
   detailsBody: {fileID: 649011296}
   miniLvText: {fileID: 8468052}
---- !u!1 &1254122321 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4679578675246524391, guid: 22e35df70c35bfc4eb2a8c88d53d03f2, type: 3}
-  m_PrefabInstance: {fileID: 1965316573}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1254122322
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1254122321}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94085b811b9045341bc2df2d25c5807f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GoldManager
-  currentGold: 10000
-  goldText: {fileID: 1379062028}
 --- !u!1 &1297046582
 GameObject:
   m_ObjectHideFlags: 0
@@ -4974,6 +4954,51 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1786939504
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1786939506}
+  - component: {fileID: 1786939505}
+  m_Layer: 0
+  m_Name: GoldManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1786939505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1786939504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94085b811b9045341bc2df2d25c5807f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GoldManager
+  goldText: {fileID: 1379062028}
+--- !u!4 &1786939506
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1786939504}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.41731, y: 0, z: 45.28863}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1837151573
 GameObject:
   m_ObjectHideFlags: 0
@@ -5292,10 +5317,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4679578675246524391, guid: 22e35df70c35bfc4eb2a8c88d53d03f2, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1254122322}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22e35df70c35bfc4eb2a8c88d53d03f2, type: 3}
 --- !u!1 &2013015733
 GameObject:
@@ -5790,3 +5812,4 @@ SceneRoots:
   - {fileID: 1637585347}
   - {fileID: 1357125266}
   - {fileID: 149505851}
+  - {fileID: 1786939506}

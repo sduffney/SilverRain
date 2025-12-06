@@ -19,7 +19,6 @@ public class GameManager : MonoBehaviour
     public PlayerStats PlayerStats => playerStats;
 
     [Header("Managers")]
-    [SerializeField] private GoldManager goldManager;
     [SerializeField] private PermanentUpgradeManager permanentUpgradeManager;
     [SerializeField] private TemporaryUpgradeManager temporaryUpgradeManager;
     [SerializeField] private ConsoleManager consoleManager;
@@ -27,7 +26,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private HUDController hudController;
 
     //Globally accessible getters
-    public GoldManager GoldManager => goldManager;
     public PermanentUpgradeManager PermanentUpgradeManager => permanentUpgradeManager;
     public TemporaryUpgradeManager TemporaryUpgradeManager => temporaryUpgradeManager;
     public ConsoleManager ConsoleManager => consoleManager;
@@ -60,7 +58,6 @@ public class GameManager : MonoBehaviour
         }
 
         //Get attached components
-        goldManager = GetComponent<GoldManager>();
         permanentUpgradeManager = GetComponent<PermanentUpgradeManager>();
         temporaryUpgradeManager = GetComponent<TemporaryUpgradeManager>();
         consoleManager = GetComponent<ConsoleManager>();
@@ -106,12 +103,12 @@ public class GameManager : MonoBehaviour
     {
         if (isWin)
         {
-            goldManager.AddGold(Mathf.RoundToInt(Score * goldMultiplier));
+            permanentUpgradeManager.AddGold(Mathf.RoundToInt(Score * goldMultiplier));
             hudController.ShowGameOverScreen(isWin);
         }
         else
         {
-            goldManager.AddGold(Mathf.RoundToInt(Score * goldMultiplier * 0.5f));
+            permanentUpgradeManager.AddGold(Mathf.RoundToInt(Score * goldMultiplier * 0.5f));
             hudController.ShowGameOverScreen(isWin);
         }
         RequestPause();

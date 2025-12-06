@@ -152,7 +152,7 @@ public class HUDController : MonoBehaviour
         // Get all owned items from PlayerInventory
         var inventory = FindAnyObjectByType<PlayerInventory>();
         if (inventory == null) return;
-        foreach (var item in inventory.ownedItems)
+        foreach (var item in inventory.OwnedItems)
         {
             // intantiate corresponding buff prefab
             var newBuff = Instantiate(buffPrefab, buffsList.transform);

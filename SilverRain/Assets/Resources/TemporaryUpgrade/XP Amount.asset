@@ -15,10 +15,10 @@ MonoBehaviour:
   id: temp_xpAmount
   displayName: XP Amount
   description: Increases amount of XP gained
-  currentLevel: 1
+  currentLevel: 0
   maxLevel: 5
   icon: {fileID: 0}
   bonusUnit: '%'
-  cachedDetailLine: "20  \u2192  30%"
+  cachedDetailLine: "0  \u2192  10%"
   baseBonus: 10
   bonusPerLevel: 10

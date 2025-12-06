@@ -10,22 +10,24 @@ public class TemporaryItem : ScriptableObject
     public int maxLevel = 5; 
     public Sprite icon;
 
-    public virtual int GetCurrentLevel()
-    {
-        return currentLevel;
-    }
+    public int CurrentLevel {  get { return currentLevel; } set { currentLevel = value; } }
 
-    public void SetCurrentLevel(int level)
-    {
-        currentLevel = level;
-    }
+    //public virtual int GetCurrentLevel()
+    //{
+    //    return currentLevel;
+    //}
+
+    //public void SetCurrentLevel(int level)
+    //{
+    //    currentLevel = level;
+    //}
 
     public void LevelUp()
     {
         if (currentLevel < maxLevel)
         {
             currentLevel++;
-            Debug.Log($"{displayName} upgraded to level {currentLevel}!");
+            //Debug.Log($"{displayName} upgraded to level {currentLevel}!");
         }
     }
 
@@ -36,6 +38,6 @@ public class TemporaryItem : ScriptableObject
 
     public void ResetLevel()
     {
-        SetCurrentLevel(0);
+        currentLevel = 0;
     }
 }

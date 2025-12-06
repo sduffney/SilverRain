@@ -15,10 +15,10 @@ MonoBehaviour:
   id: temp_projectileSpd
   displayName: Projectile Speed
   description: Player projectiles move faster
-  currentLevel: 2
+  currentLevel: 0
   maxLevel: 5
   icon: {fileID: 0}
   bonusUnit: '%'
-  cachedDetailLine: "15  \u2192  20%"
+  cachedDetailLine: "0  \u2192  10%"
   baseBonus: 10
   bonusPerLevel: 5

@@ -15,10 +15,10 @@ MonoBehaviour:
   id: temp_healthRegen
   displayName: Health Regen
   description: Regenerates health every second
-  currentLevel: 1
+  currentLevel: 0
   maxLevel: 5
   icon: {fileID: 0}
   bonusUnit: HP/s
-  cachedDetailLine: "0.5  \u2192  1HP/s"
+  cachedDetailLine: "0  \u2192  0.5HP/s"
   baseBonus: 0.5
   bonusPerLevel: 0.5

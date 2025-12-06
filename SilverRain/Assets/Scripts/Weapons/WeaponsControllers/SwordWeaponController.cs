@@ -45,7 +45,7 @@ public class SwordWeaponController : WeaponController
             return;
         }
 
-        if (weaponData.GetCurrentLevel() <= 0)
+        if (weaponData.CurrentLevel <= 0)
             return;
 
         gameObject.SetActive(true);
@@ -74,7 +74,7 @@ public class SwordWeaponController : WeaponController
         if (cd > 0f)
             yield return new WaitForSeconds(cd);
 
-        if (weaponData != null && weaponData.GetCurrentLevel() > 0)
+        if (weaponData != null && weaponData.CurrentLevel > 0)
         {
             StartCoroutine(OnDuration());
         }

@@ -15,10 +15,10 @@ MonoBehaviour:
   id: temp_moveSpeed
   displayName: Movement Speed
   description: Increases player movement speed
-  currentLevel: 2
+  currentLevel: 0
   maxLevel: 5
   icon: {fileID: 0}
   bonusUnit: '%'
-  cachedDetailLine: "8  \u2192  11%"
+  cachedDetailLine: "0  \u2192  5%"
   baseBonus: 5
   bonusPerLevel: 3
