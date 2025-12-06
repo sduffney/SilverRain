@@ -15,10 +15,10 @@ MonoBehaviour:
   id: temp_maxHealth
   displayName: Max Health
   description: Increases maximum health
-  currentLevel: 1
+  currentLevel: 0
   maxLevel: 5
   icon: {fileID: 0}
   bonusUnit: HP
-  cachedDetailLine: "10  \u2192  20HP"
+  cachedDetailLine: "0  \u2192  10HP"
   baseBonus: 10
   bonusPerLevel: 10

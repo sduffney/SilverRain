@@ -15,15 +15,15 @@ MonoBehaviour:
   id: wep_gun
   displayName: Hand Gun
   description: Fires bullets forward
-  currentLevel: 1
+  currentLevel: 0
   maxLevel: 5
   icon: {fileID: 21300000, guid: 9f69b220176e6964fbd87f5f158d45e3, type: 3}
   baseDamage: 100
-  baseCooldown: 3
+  baseCooldown: 2
   baseDuration: 0
   baseProjectileSpeed: 10
   baseSize: 0
   damagePerLevel: 20
-  cooldownReductionPerLevel: 1
+  cooldownReductionPerLevel: 0.2
   weaponPrefab: {fileID: 1694449805434718, guid: 1f6afd5c80ce45243b22ad61aa66093f, type: 3}
   throwAngle: 0

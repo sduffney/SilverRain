@@ -19,11 +19,11 @@ public class BuffCardUI : MonoBehaviour
         descText.text = data.description;
         if (data is TemporaryWeapon weapon)
         {
-            levelText.text = $"Level: {weapon.GetCurrentLevel()}/{weapon.maxLevel}";
+            levelText.text = $"Level: {weapon.CurrentLevel}/{weapon.maxLevel}";
         }
         else if (data is TemporaryUpgrade upgrade)
         {
-            levelText.text = $"Level: {upgrade.GetCurrentLevel()}/{upgrade.maxLevel}\n{upgrade.GetDetailLine(upgrade.GetCurrentLevel())}";
+            levelText.text = $"Level: {upgrade.CurrentLevel}/{upgrade.maxLevel}\n{upgrade.GetDetailLine(upgrade.CurrentLevel)}";
         }
     }
 

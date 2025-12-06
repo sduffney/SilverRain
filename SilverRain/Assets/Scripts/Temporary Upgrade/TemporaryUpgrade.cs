@@ -24,9 +24,8 @@ public class TemporaryUpgrade : TemporaryItem
         return cachedDetailLine;
     }
 
-    public new void LevelUp()
+    private void OnDestroy()
     {
-        base.LevelUp();
-        GetBonusAtLevel(currentLevel);
+        ResetLevel();
     }
 }

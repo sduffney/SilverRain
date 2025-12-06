@@ -6,12 +6,10 @@ using UnityEngine.UI;
 
 public class ResetButton : MonoBehaviour
 {
-    public GoldManager goldManager;
-    public List<PermanentUpgrade> upgrades;
-    //public UpgradeDetailsView upgradeDetailsView;
-    public int currentLevel;
+    [SerializeField] private List<PermanentUpgrade> upgrades;
+    [SerializeField] private int currentLevel;
+    [SerializeField] private UpgradeButton upgradeButton;
     private int totalRefund;
-    public UpgradeButton upgradeButton;
 
     [SerializeField] private TMP_Text nameText;
     [SerializeField] private TMP_Text lvText;
@@ -41,7 +39,7 @@ public class ResetButton : MonoBehaviour
             }
         }
 
-        goldManager.AddGold(totalRefund);
+        GameManager.Instance.PermanentUpgradeManager.AddGold(totalRefund);
 
         // Clear upgrade details view
         ClearView();
@@ -79,5 +77,4 @@ public class ResetButton : MonoBehaviour
             }
         }
     }
-
 }

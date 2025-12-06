@@ -85,7 +85,6 @@ MonoBehaviour:
   playerInput: {fileID: 0}
   playerController: {fileID: 0}
   playerStats: {fileID: 0}
-  goldManager: {fileID: 0}
   permanentUpgradeManager: {fileID: 0}
   temporaryUpgradeManager: {fileID: 0}
   consoleManager: {fileID: 0}
@@ -152,6 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PermanentUpgradeManager
   allPermanentUpgrades: []
+  currentGold: 1000
 --- !u!114 &2421736779219562165
 MonoBehaviour:
   m_ObjectHideFlags: 0

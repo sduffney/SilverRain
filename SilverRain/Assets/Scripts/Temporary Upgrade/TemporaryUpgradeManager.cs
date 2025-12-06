@@ -35,7 +35,7 @@ public class TemporaryUpgradeManager : MonoBehaviour
             RebuildDictionary();
         }
 
-        upg.LevelUp(); // or your own logic when picked up
+        upg.LevelUp();
     }
 
     /// <summary>
@@ -47,7 +47,7 @@ public class TemporaryUpgradeManager : MonoBehaviour
 
         if (tempsById.TryGetValue(tempUpgradeId, out var upg))
         {
-            int lvl = upg.GetCurrentLevel();
+            int lvl = upg.CurrentLevel;
             return upg.GetBonusAtLevel(lvl);
         }
 

@@ -15,10 +15,10 @@ MonoBehaviour:
   id: temp_size
   displayName: Size
   description: Increases weapons area of effect
-  currentLevel: 1
+  currentLevel: 0
   maxLevel: 5
   icon: {fileID: 0}
   bonusUnit: '%'
-  cachedDetailLine: "10  \u2192  15%"
+  cachedDetailLine: "0  \u2192  10%"
   baseBonus: 10
   bonusPerLevel: 5

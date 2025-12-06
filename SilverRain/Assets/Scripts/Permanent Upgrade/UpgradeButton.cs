@@ -24,7 +24,7 @@ public class UpgradeButton : MonoBehaviour
     public void SelectUpgrades(UpgradeDetailsView clickedView)
     {
         currentSelectedView = clickedView;
-        Debug.Log($"Selected upgrade: {currentSelectedView.upgradeData.displayName}");
+        //Debug.Log($"Selected upgrade: {currentSelectedView.upgradeData.displayName}");
         UpdateBuyButtonState();
     }
 
@@ -32,16 +32,16 @@ public class UpgradeButton : MonoBehaviour
     {
         if (currentSelectedView == null)
         {
-            Debug.LogWarning("No upgrade selected.");
+            //Debug.LogWarning("No upgrade selected.");
             return;
         }
-        if (goldManager.currentGold >= currentSelectedView.upgradeData.currentCost)
+        if (GameManager.Instance.PermanentUpgradeManager.CurrentGold >= currentSelectedView.upgradeData.currentCost)
         {
             //get current level
             int currentLevel = currentSelectedView.upgradeData.GetCurrentLevel();
 
             //purchase upgrade
-            goldManager.RemoveGold(currentSelectedView.upgradeData.currentCost);
+            GameManager.Instance.PermanentUpgradeManager.RemoveGold(currentSelectedView.upgradeData.currentCost);
 
             //increase level
             currentLevel++;
@@ -52,11 +52,11 @@ public class UpgradeButton : MonoBehaviour
             currentSelectedView.upgradeData.description = BuildNaturalDescription(currentSelectedView.upgradeData.displayName, newDetail);
 
             currentSelectedView.UpdateView();
-            Debug.Log($"Purchased upgrade: {currentSelectedView.upgradeData.displayName}");
+            //Debug.Log($"Purchased upgrade: {currentSelectedView.upgradeData.displayName}");
         }
         else
         {
-            Debug.LogWarning("Not enough gold to purchase this upgrade.");
+            //Debug.LogWarning("Not enough gold to purchase this upgrade.");
         }
         UpdateBuyButtonState();
     }

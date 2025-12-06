@@ -15,7 +15,7 @@ MonoBehaviour:
   id: temp_armour
   displayName: Armour
   description: Decreases damage taken
-  currentLevel: 1
+  currentLevel: 0
   maxLevel: 5
   icon: {fileID: 0}
   bonusUnit: '%'

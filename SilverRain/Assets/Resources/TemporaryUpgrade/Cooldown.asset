@@ -15,10 +15,10 @@ MonoBehaviour:
   id: temp_cooldown
   displayName: Cooldown
   description: Weapon cooldown is reduced
-  currentLevel: 1
+  currentLevel: 0
   maxLevel: 5
   icon: {fileID: 0}
   bonusUnit: '%'
-  cachedDetailLine: "5  \u2192  8%"
+  cachedDetailLine: "0  \u2192  5%"
   baseBonus: 5
   bonusPerLevel: 3
