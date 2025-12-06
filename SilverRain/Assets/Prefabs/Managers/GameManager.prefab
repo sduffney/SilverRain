@@ -43,7 +43,6 @@ GameObject:
   - component: {fileID: 4712042225634223256}
   - component: {fileID: 1498990575796229725}
   - component: {fileID: 22540091270098808}
-  - component: {fileID: 5720649245867762652}
   - component: {fileID: 1455171251585034207}
   - component: {fileID: 2421736779219562165}
   - component: {fileID: 2586279526483038899}
@@ -140,35 +139,6 @@ MonoBehaviour:
   startHidden: 1
   pauseWhileOpen: 1
   isEnabled: 1
---- !u!114 &5720649245867762652
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4679578675246524391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efebd1950a73e31458ba85e23bf343e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
-  player: {fileID: 0}
-  playerTag: Player
-  spawnArea: {fileID: 0}
-  minDistance: 20
-  maxDistance: 30
-  spawnDelay: 1
-  maxAttemptsPerSpawn: 20
-  enemyPrefabs:
-  - {fileID: 8937696551812037509, guid: 0872d8daf510dba4cb3a892b62f17999, type: 3}
-  - {fileID: 7440275271134425223, guid: ab84c09aa40455a47815d52a29311496, type: 3}
-  - {fileID: 3286643137425952069, guid: c98890e5d7e3f1844bd9bcfc8f08e3f2, type: 3}
-  - {fileID: 4596657270728130862, guid: 912d934b029a9cf42afb6fa252d061aa, type: 3}
-  spawnCheckRadius: 0.5
-  blockingLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  spawnParent: {fileID: 305065450986262055}
 --- !u!114 &1455171251585034207
 MonoBehaviour:
   m_ObjectHideFlags: 0

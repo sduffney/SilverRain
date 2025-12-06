@@ -22,6 +22,11 @@ public class HUDController : MonoBehaviour
 
     [SerializeField] private GameObject GameOverScreen;
 
+    //Save a reference to card parent so Buff manager can find it
+    [SerializeField] private Transform cardParent;
+
+    public Transform CardParent => cardParent;
+
     private float timerRemaining = 300f;
     private bool isTimerRunning = true;
 

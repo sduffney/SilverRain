@@ -1,66 +1,60 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.UI;
 using UnityEngine.SceneManagement;
 
 public class BuffManager : MonoBehaviour
 {
-    public List<TemporaryItem> allTempItems; // add three weapons
+    public List<TemporaryItem> allTempItems;
     public GameObject buffCardPrefab;
     public Transform cardParent;
 
     private GameObject player;
     private PlayerInventory playerInventory;
-    private PlayerController playerController;
-    private PlayerLevel playerLevel;
 
     void Start()
     {
-        player = GameManager.Instance.Player;
-        playerInventory = player.GetComponent<PlayerInventory>();
-        playerController = player.GetComponent<PlayerController>();
-        playerLevel = player.GetComponent<PlayerLevel>();
-        //ResetBuff(allTempItems);
-        SyncBuffLevelsWithInventory();
-
-        //var defaultWeapon = allTempItems.Find(item => item.id == "sword");
-        //playerInventory.PickItem(defaultWeapon);
-
         //Subscribe to events
         PlayerLevel.OnLevelUp += ShowBuffOptions;
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     //Unsubscribe from events
-    private void OnDisable() { PlayerLevel.OnLevelUp -= ShowBuffOptions; }
-    private void OnDestroy() { PlayerLevel.OnLevelUp -= ShowBuffOptions; }
+    private void OnDisable()
+    {
+        PlayerLevel.OnLevelUp -= ShowBuffOptions;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+    private void OnDestroy()
+    {
+        PlayerLevel.OnLevelUp -= ShowBuffOptions;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        //Get components
+        player = GameManager.Instance.Player;
+        if (player != null)
+        {
+            playerInventory = player.GetComponent<PlayerInventory>();
+        }
+        if (playerInventory != null)
+        {
+            //ResetBuff(allTempItems);
+            SyncBuffLevelsWithInventory();
+        }
+    }
 
     //when playerTrans levels up, show 3 random buffs to choose from
     public void ShowBuffOptions()
     {
-        //var playerController = FindAnyObjectByType<PlayerController>();
-        //if (playerController != null)
-        //{
-        //    playerController.UnfreezePlayer(); 
-        //    Debug.Log("Unfreezing Player for Buff Selection");
-        //}
-
-        //var playerInput = GameObject.FindAnyObjectByType<PlayerInput>();
-        //if (playerInput != null)
-        //{
-        //    playerInput.enabled = true;
-        //}
-
         EventSystem.current.SetSelectedGameObject(null);
-        //Cursor.lockState = CursorLockMode.None;
-        //Cursor.visible = true;
-        //playerController.FreezePlayer();
         GameManager.Instance.RequestPause();
 
 
         cardParent.gameObject.SetActive(true);
-        
+
         // Clear existing cards
         foreach (Transform child in cardParent)
         {
@@ -90,7 +84,7 @@ public class BuffManager : MonoBehaviour
             }
         }
     }
-       
+
     public void ApplyBuff(TemporaryItem item)
     {
         playerInventory.PickItem(item);
@@ -101,21 +95,17 @@ public class BuffManager : MonoBehaviour
             PlayerStats.Instance.ApplyTemporaryUpgrades();
         }
 
-        
+
 
         cardParent.gameObject.SetActive(false);
-        //if (playerLevel.IsLevelUp()) ShowBuffOptions();
-        //Cursor.lockState = CursorLockMode.Locked;
-        //Cursor.visible = false;
-        //playerController.UnfreezePlayer();
         GameManager.Instance.ReleasePause();
     }
 
     public void ResetBuff(List<TemporaryItem> allTempItems)
     {
-         foreach (var item in allTempItems)
-         {
-             item.ResetLevel();
+        foreach (var item in allTempItems)
+        {
+            item.ResetLevel();
         }
     }
 
@@ -139,5 +129,4 @@ public class BuffManager : MonoBehaviour
             }
         }
     }
-
 }

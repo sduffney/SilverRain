@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TemporaryUpgrade
   id: temp_armour
   displayName: Armour
-  description: "Temporarily increases player armour from 0% \u2192 5%."
-  currentLevel: 0
+  description: Decreases damage taken
+  currentLevel: 1
   maxLevel: 5
+  icon: {fileID: 0}
   bonusUnit: '%'
-  cachedDetailLine: "0% \u2192 5%"
+  cachedDetailLine: "5  \u2192  8%"
   baseBonus: 5
   bonusPerLevel: 3

@@ -54,6 +54,11 @@ public abstract class WeaponController : MonoBehaviour
 
     public void ResetLevel()
     {
-        weaponData.SetCurrentLevel(0);
+        weaponData.ResetLevel();
+    }
+
+    private void OnDestroy()
+    {
+        weaponData.ResetLevel();
     }
 }

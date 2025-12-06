@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TemporaryUpgrade
   id: temp_moveSpeed
   displayName: Movement Speed
-  description: "Temporarily increases player movement speed from 0% \u2192 5%."
-  currentLevel: 0
+  description: Increases player movement speed
+  currentLevel: 2
   maxLevel: 5
+  icon: {fileID: 0}
   bonusUnit: '%'
-  cachedDetailLine: "0% \u2192 5%"
+  cachedDetailLine: "8  \u2192  11%"
   baseBonus: 5
   bonusPerLevel: 3

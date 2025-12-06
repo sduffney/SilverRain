@@ -121,13 +121,8 @@ public class EnemySpawner : MonoBehaviour
         //Ensure we have a playerTrans reference
         if (player == null)
         {
-            var p = GameObject.FindGameObjectWithTag(playerTag);
+            var p = GameManager.Instance.Player;
             if (p != null) player = p;
-            if (player == null)
-            {
-                Debug.LogWarning("EnemySpawner: Player not found.");
-                return;
-            }
         }
 
         if (spawnArea != null && !_haveAreaBounds) UpdateSpawnAreaBounds();

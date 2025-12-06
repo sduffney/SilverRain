@@ -59,6 +59,16 @@ public class GameManager : MonoBehaviour
             //Destroy(gameObject);
         }
 
+        //Get attached components
+        goldManager = GetComponent<GoldManager>();
+        permanentUpgradeManager = GetComponent<PermanentUpgradeManager>();
+        temporaryUpgradeManager = GetComponent<TemporaryUpgradeManager>();
+        consoleManager = GetComponent<ConsoleManager>();
+        buffManager = GetComponent<BuffManager>();
+
+        //Reset score
+        Score = 0;
+
         //Subscribe to events
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
@@ -77,26 +87,17 @@ public class GameManager : MonoBehaviour
     //Get scene specific references
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (player == null)
+        //Try to get the player in the scene
+        player = GameObject.FindWithTag("Player");
+        //Get the other components if this scene has a player
+        if (player != null)
         {
-            player = GameObject.FindWithTag("Player");
+            playerInput = player.GetComponent<PlayerInput>();
+            playerController = player.GetComponent<PlayerController>();
+            playerStats = player.GetComponent<PlayerStats>();
+            hudController = FindAnyObjectByType<HUDController>();
+            if (hudController != null) { buffManager.cardParent = hudController.CardParent; }
         }
-        playerInput = player.GetComponent<PlayerInput>();
-        playerController = player.GetComponent<PlayerController>();
-        playerStats = player.GetComponent<PlayerStats>();
-        hudController = FindAnyObjectByType<HUDController>();
-    }
-    private void Start()
-    {
-        //Get attached components
-        goldManager = GetComponent<GoldManager>();
-        permanentUpgradeManager = GetComponent<PermanentUpgradeManager>();
-        temporaryUpgradeManager = GetComponent<TemporaryUpgradeManager>();
-        consoleManager = GetComponent<ConsoleManager>();
-        buffManager = GetComponent<BuffManager>();
-
-        //Reset score
-        Score = 0;
     }
 
     #region GameOver Management

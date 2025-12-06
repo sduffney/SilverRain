@@ -15,7 +15,7 @@ MonoBehaviour:
   id: wep_sword
   displayName: Sword
   description: Swings a sword around you
-  currentLevel: 1
+  currentLevel: 0
   maxLevel: 5
   icon: {fileID: 21300000, guid: 4ad16adfdf2d1a441879a598de742eb6, type: 3}
   baseDamage: 50
