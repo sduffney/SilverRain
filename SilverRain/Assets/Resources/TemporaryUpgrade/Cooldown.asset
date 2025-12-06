@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TemporaryUpgrade
   id: temp_cooldown
   displayName: Cooldown
-  description: "Temporarily reduces skill cooldown time from 0% \u2192 5%."
-  currentLevel: 0
+  description: Weapon cooldown is reduced
+  currentLevel: 1
   maxLevel: 5
+  icon: {fileID: 0}
   bonusUnit: '%'
-  cachedDetailLine: "0% \u2192 5%"
+  cachedDetailLine: "5  \u2192  8%"
   baseBonus: 5
   bonusPerLevel: 3

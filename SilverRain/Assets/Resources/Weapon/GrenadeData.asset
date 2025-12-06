@@ -9,24 +9,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5a4ccf3e185ce94dbe8d98324b409ab, type: 3}
+  m_Script: {fileID: 11500000, guid: cb3a1081da876314c883d8802d17cc63, type: 3}
   m_Name: GrenadeData
-  m_EditorClassIdentifier: Assembly-CSharp::GrenadeData
-  id: 
-  displayName: 
-  description: 
-  currentLevel: 1
+  m_EditorClassIdentifier: Assembly-CSharp::TemporaryWeapon
+  id: wep_grenade
+  displayName: Grenade Launcher
+  description: Throws explosive grenades
+  currentLevel: 0
   maxLevel: 5
-  icon: {fileID: 0}
-  baseDamage: 500
-  baseCooldown: 0
+  icon: {fileID: 21300000, guid: 2be55834e2ff7b144a243413f2979787, type: 3}
+  baseDamage: 100
+  baseCooldown: 5
   baseDuration: 1
-  cooldownReduction: 0
-  damagePerLevel: 0
-  projectileSpeed: 0
-  baseSize: 0
-  throwAngle: 0
-  playerStats: {fileID: 0}
+  baseProjectileSpeed: 5
+  baseSize: 1
+  damagePerLevel: 100
+  cooldownReductionPerLevel: 1
   weaponPrefab: {fileID: 1698056052845220, guid: 3f93b755669667b468d96b4b2709a981, type: 3}
-  throwForce: 12
-  upwardForce: 5
+  throwAngle: 0

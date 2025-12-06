@@ -155,3 +155,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SwordWeaponController
   weaponData: {fileID: 11400000, guid: 9222da1eaad4b9f45aff95be99584f9a, type: 2}
   player: {fileID: 0}
+  col: {fileID: 4078219201087156106}
+  ren: {fileID: 2268769162478934879}

@@ -30,7 +30,7 @@ public class BuffCardUI : MonoBehaviour
     // Called when the card is clicked
     public void OnCardClicked()
     {
-        Debug.Log("Card Click Received!");
+        //Debug.Log("Card Click Received!");
 
         if (data != null && buffManager != null)
         {

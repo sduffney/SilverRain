@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TemporaryUpgrade
   id: temp_size
   displayName: Size
-  description: "Temporarily increases attack or effect size from 0% \u2192 10%."
-  currentLevel: 0
+  description: Increases weapons area of effect
+  currentLevel: 1
   maxLevel: 5
+  icon: {fileID: 0}
   bonusUnit: '%'
-  cachedDetailLine: "0% \u2192 10%"
+  cachedDetailLine: "10  \u2192  15%"
   baseBonus: 10
   bonusPerLevel: 5

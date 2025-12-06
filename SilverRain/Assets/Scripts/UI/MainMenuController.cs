@@ -40,7 +40,7 @@ public class MainMenuController : MonoBehaviour
 
         // Load the game scene or start the game
 
-        SceneManager.LoadScene("Level1"); 
+        SceneManager.LoadScene("LevelSelector"); 
 
     }
     private void OnTutorialClicked()

@@ -75,7 +75,7 @@ public class PlayerStats : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
@@ -124,7 +124,7 @@ public class PlayerStats : MonoBehaviour
                 moveSpeed += amount;
                 if (playerController != null)
                 {
-                    playerController.moveSpeed *= (1f + amount);
+                    playerController.MoveSpeed *= (1f + amount);
                 }
                 break;
 
@@ -156,7 +156,7 @@ public class PlayerStats : MonoBehaviour
 
         if (playerController != null)
         {
-            playerController.moveSpeed *= moveSpeed;
+            playerController.MoveSpeed *= moveSpeed;
         }
     }
     #endregion
@@ -193,12 +193,12 @@ public class PlayerStats : MonoBehaviour
         string permId = "upgrade_" + shortKey;
         string tempId = "temp_" + shortKey;
 
-        float perm = (PermanentUpgradeManager.Instance != null)
-            ? PermanentUpgradeManager.Instance.GetPercent(permId)
+        float perm = (GameManager.Instance.PermanentUpgradeManager != null)
+            ? GameManager.Instance.PermanentUpgradeManager.GetPercent(permId)
             : 0f;
 
-        float temp = (TemporaryUpgradeManager.Instance != null)
-            ? TemporaryUpgradeManager.Instance.GetPercent(tempId)
+        float temp = (GameManager.Instance.TemporaryUpgradeManager != null)
+            ? GameManager.Instance.TemporaryUpgradeManager.GetPercent(tempId)
             : 0f;
 
         return perm + temp;

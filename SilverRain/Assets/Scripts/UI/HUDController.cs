@@ -22,10 +22,16 @@ public class HUDController : MonoBehaviour
 
     [SerializeField] private GameObject GameOverScreen;
 
+    //Save a reference to card parent so Buff manager can find it
+    [SerializeField] private Transform cardParent;
+
+    public Transform CardParent => cardParent;
+
     private float timerRemaining = 300f;
     private bool isTimerRunning = true;
 
     private ConsoleManager consoleManager;
+    private GameObject player;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -33,13 +39,26 @@ public class HUDController : MonoBehaviour
     {
         Initialize();
 
-        consoleManager = FindAnyObjectByType<ConsoleManager>();
+        consoleManager = GameManager.Instance.ConsoleManager;
         if (consoleManager != null)
         {
             RegisterCommands();
         }
+
+        player = GameManager.Instance.Player;
+
+        //Subscribe to events
+        PlayerLevel.OnLevelUp += OnLevelUp;
     }
 
+    //Unsubscribe from events
+    private void OnDisable() { PlayerLevel.OnLevelUp -= OnLevelUp; }
+    private void OnDestroy() { PlayerLevel.OnLevelUp -= OnLevelUp; }
+
+    private void OnLevelUp()
+    {
+        level.text = ($"Level {player.GetComponent<PlayerLevel>().CurrentPlayerLevel.ToString()}");
+    }
     private void RegisterCommands()
     {
         consoleManager.RegisterCommand("timer", args =>
@@ -58,7 +77,7 @@ public class HUDController : MonoBehaviour
             {
                 consoleManager.AppendOutput("Invalid time amount. (in seconds)");
             }
-            
+
         }, "<value> - Set the timer in seconds");
         consoleManager.RegisterCommand("pause_timer", args =>
         {
@@ -70,9 +89,8 @@ public class HUDController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //timer.text = Time.time.ToString("00:00");
         if (isTimerRunning)
-        {    
+        {
             if (timerRemaining > 0)
             {
                 timerRemaining -= Time.deltaTime;
@@ -84,8 +102,8 @@ public class HUDController : MonoBehaviour
                 // end game
             }
         }
-        healthBar.value = FindAnyObjectByType<PlayerHealth>().GetHealthPercentage();
-        expBar.value = FindAnyObjectByType<PlayerLevel>().GetXPPercentage();
+        healthBar.value = player.GetComponent<PlayerHealth>().GetHealthPercentage();
+        expBar.value = player.GetComponent<PlayerLevel>().GetXPPercentage();
         //score.text = FindAnyObjectByType<PlayerStats>().score.ToString();
     }
 
@@ -189,7 +207,7 @@ public class HUDController : MonoBehaviour
 
     private IEnumerator FadeAndDestroyKillInfo(TextMeshProUGUI tmp, GameObject obj, float showTime, float fadeTime)
     {
-        yield  return new WaitForSeconds(showTime);
+        yield return new WaitForSeconds(showTime);
 
         Color color = tmp.color;
         float elapsed = 0f;
@@ -237,7 +255,7 @@ public class HUDController : MonoBehaviour
             GameOverScreen.SetActive(true);
         }
 
-        if (isWin) 
+        if (isWin)
         {
             // Show win message
         }

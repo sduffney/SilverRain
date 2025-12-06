@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TemporaryUpgrade
   id: temp_healthRegen
   displayName: Health Regen
-  description: "Temporarily increases health regeneration rate from 0HP/s \u2192
-    0.5HP/s."
-  currentLevel: 0
+  description: Regenerates health every second
+  currentLevel: 1
   maxLevel: 5
+  icon: {fileID: 0}
   bonusUnit: HP/s
-  cachedDetailLine: "0HP/s \u2192 0.5HP/s"
+  cachedDetailLine: "0.5  \u2192  1HP/s"
   baseBonus: 0.5
   bonusPerLevel: 0.5

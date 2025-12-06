@@ -3,22 +3,12 @@ using UnityEngine;
 
 public class TemporaryUpgradeManager : MonoBehaviour
 {
-    public static TemporaryUpgradeManager Instance { get; private set; }
     public List<TemporaryUpgrade> activeTemporaryUpgrades = new List<TemporaryUpgrade>();
 
     private Dictionary<string, TemporaryUpgrade> tempsById;
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-
         RebuildDictionary();
     }
 

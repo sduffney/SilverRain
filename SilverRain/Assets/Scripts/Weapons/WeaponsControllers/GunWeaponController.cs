@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class GunWeaponController : WeaponController
 {
-    public TemporaryWeapon weaponData;   // configure baseDuration, baseDamage, projectileSpeed
     public Transform firePoint;          // optional; preferably a child at the muzzle
     public GameObject projectilePrefab;  // prefab with Projectile.cs
 
@@ -17,10 +16,10 @@ public class GunWeaponController : WeaponController
     public GameObject player;
     private void Start()
     {
-        player = GameManager.Instance.player;
+        player = GameManager.Instance.Player;
         if (player != null) {
             playerTrans = player.transform;
-            print("Found player transform for GunWeaponController.");
+            //print("Found player transform for GunWeaponController.");
         }
 
         if (Camera.main != null) cam = Camera.main.transform;
@@ -59,13 +58,13 @@ public class GunWeaponController : WeaponController
     public override IEnumerator OnDuration()
     {
         Attack();
-        yield return new WaitForSeconds(weaponData.GetDuration());
+        yield return new WaitForSeconds(GetDuration());
         StartCoroutine(OnCoolDown());
     }
 
     public override IEnumerator OnCoolDown()
     {
-        yield return new WaitForSeconds(weaponData.GetCooldown());
+        yield return new WaitForSeconds(GetCooldown());
         StartCoroutine(OnDuration());
     }
 
@@ -83,6 +82,6 @@ public class GunWeaponController : WeaponController
         }
 
         float projectileSpeedBonus = player.GetComponent<PlayerStats>().projectileSpeed;
-        proj.Init(weaponData.GetDamage(), firePoint.forward , weaponData.projectileSpeed + projectileSpeedBonus);
+        proj.Init(GetDamage(), firePoint.forward , weaponData.BaseProjectileSpeed + projectileSpeedBonus);
     }
 }
