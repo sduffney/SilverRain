@@ -1143,7 +1143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   scoreValue: 100
   xpValue: 10
-  damage: 10
+  damage: 100
 --- !u!114 &8171431734536988271
 MonoBehaviour:
   m_ObjectHideFlags: 0

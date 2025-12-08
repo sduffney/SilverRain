@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         //Trigger reveal when reveal all event is called
-        health.DamageTest();
+        //health.DamageTest();
     }
     public void Reveal()
     {
@@ -59,6 +59,12 @@ public class Enemy : MonoBehaviour
         renderers = GetComponentsInChildren<Renderer>();
 
         Hide();
+
+        if (GlobalInvisibilityManager.Instance.isActive)
+        {
+            float remaining = GlobalInvisibilityManager.Instance.invisibilityTimer;
+            RevealTimed(remaining);
+        }
     }
 
     private IEnumerator RevealCorutine(float duration) 

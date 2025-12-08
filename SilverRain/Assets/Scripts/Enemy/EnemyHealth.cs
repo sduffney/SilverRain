@@ -34,8 +34,8 @@ public class EnemyHealth : MonoBehaviour
 
         //Instatntiate BloodSplatter
         Vector3 bloodSplatterSpawn = transform.position;
-        bloodSplatterSpawn.y += 2;
-        Quaternion rotation = Quaternion.Euler(-90f, 0f, 0f);
+        bloodSplatterSpawn.y += 1f;
+        Quaternion rotation = Quaternion.Euler(0f, 0f, 0f);
         var bloodSplatter = Instantiate(bloodSplatterPrefab, bloodSplatterSpawn, rotation);
 
         bloodSplatter.Play();
@@ -52,8 +52,14 @@ public class EnemyHealth : MonoBehaviour
     }
     private void Die()
     {
-        Collider collider = GetComponent<Collider>();
-        Destroy(collider);
+        foreach (var col in GetComponentsInChildren<Collider>())
+        {
+            col.enabled = false;
+        }
+
+        // Kill NavMeshAgent before physics can re-add colliders
+        var agent = GetComponent<NavMeshAgent>();
+        if (agent != null) Destroy(agent);
         StartCoroutine(DeathCoroutine());
     }
 
@@ -61,8 +67,6 @@ public class EnemyHealth : MonoBehaviour
     {
         //Debug.Log("We are in the death Corutine");
         animator.SetBool("isDead", true);
-        NavMeshAgent agent = gameObject.GetComponent<NavMeshAgent>();
-        Destroy(agent);
         Destroy(controller);
         player.GainXP(enemy.RewardXP());
         GameManager.Instance.AddScore(enemy.RewardScore());
@@ -70,16 +74,16 @@ public class EnemyHealth : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void DamageTest() 
-    {
-        if (Input.GetKeyDown(KeyCode.Q)) 
-        {
-            TakeDamage(1);
-        }
-        else if(Input.GetKeyDown(KeyCode.E))
-        {
-            TakeDamage(currentHealth);
-        }
-    }
+    //public void DamageTest() 
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Q)) 
+    //    {
+    //        TakeDamage(1);
+    //    }
+    //    else if(Input.GetKeyDown(KeyCode.E))
+    //    {
+    //        TakeDamage(currentHealth);
+    //    }
+    //}
 
 }

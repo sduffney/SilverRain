@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GlobalInvisibilityManager : MonoBehaviour
 {
-    float invisibilityTimer = 0f;
+    public float invisibilityTimer = 0f;
     public bool isActive = false;
 
     public static GlobalInvisibilityManager Instance { get; private set; }

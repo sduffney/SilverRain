@@ -589,9 +589,8 @@ GameObject:
   - component: {fileID: 6246851165708670800}
   - component: {fileID: 4061326125157589883}
   - component: {fileID: 1393219349111478000}
-  - component: {fileID: 2374057026307821745}
   - component: {fileID: 5859134246545887740}
-  - component: {fileID: 7743628838712286303}
+  - component: {fileID: 8973529461620218559}
   m_Layer: 8
   m_Name: MushroomEnemy
   m_TagString: Enemy
@@ -627,9 +626,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 171d04e69e856aa4583514567da64109, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  scoreValue: 10
-  xpValue: 10
-  damage: 10
+  scoreValue: 30
+  xpValue: 30
+  damage: 500
 --- !u!114 &4061326125157589883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -648,6 +647,10 @@ MonoBehaviour:
   animator: {fileID: 0}
   enemy: {fileID: 0}
   timeBetweenAttacks: 1
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  attackRange: 2
 --- !u!114 &1393219349111478000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -660,33 +663,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f172d2c42e4281b4ab4bda814b820302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
-  maxHealth: 100
+  maxHealth: 300
   currentHealth: 0
   bloodSplatterPrefab: {fileID: 184970821379519350, guid: ed9978dcbfdf861449a54c440d43deab, type: 3}
   animator: {fileID: 0}
---- !u!136 &2374057026307821745
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7440275271134425223}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 384
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.6
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!195 &5859134246545887740
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -709,7 +689,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!136 &7743628838712286303
+--- !u!136 &8973529461620218559
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -722,14 +702,14 @@ CapsuleCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 384
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
-  m_Height: 2
+  m_Radius: 0.6
+  m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &7960910677987272505
