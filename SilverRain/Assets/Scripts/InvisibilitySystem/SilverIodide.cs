@@ -12,6 +12,7 @@ public class SilverIodide : MonoBehaviour
             Debug.Log("Pick Up Silver");
             EnemyEvents.OnGlobalReveal?.Invoke(revealTime);
             GlobalInvisibilityManager.Instance.SetTimer(revealTime);
+
             Destroy(gameObject);
         }
     }
