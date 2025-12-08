@@ -33,6 +33,9 @@ public class HUDController : MonoBehaviour
     private ConsoleManager consoleManager;
     private GameObject player;
 
+    //Events
+    public static event Action OnWinGame;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -99,7 +102,8 @@ public class HUDController : MonoBehaviour
             else
             {
                 Debug.Log("Time's up!");
-                // end game
+                OnWinGame?.Invoke();
+                ShowGameOverScreen(true);
             }
         }
         healthBar.value = player.GetComponent<PlayerHealth>().GetHealthPercentage();

@@ -90,7 +90,7 @@ public class PlayerStats : MonoBehaviour
         // Initialize weapon-related percent bonuses from managers
         RecalculateFromUpgrades();
 
-        consoleManager = FindAnyObjectByType<ConsoleManager>();
+        consoleManager = GameManager.Instance.ConsoleManager;
         if (consoleManager != null)
         {
             RegisterCommands();
