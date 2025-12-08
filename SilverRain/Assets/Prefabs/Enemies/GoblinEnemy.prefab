@@ -12594,7 +12594,7 @@ GameObject:
   - component: {fileID: 2283378382430031975}
   - component: {fileID: 6850935498896519798}
   - component: {fileID: 5259496583533953622}
-  - component: {fileID: 595509005187659013}
+  - component: {fileID: 6800714957696055568}
   m_Layer: 8
   m_Name: GoblinEnemy
   m_TagString: Enemy
@@ -12648,7 +12648,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   scoreValue: 10
   xpValue: 10
-  damage: 250
+  damage: 100
 --- !u!114 &6850935498896519798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12661,15 +12661,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edf3c3d3fb952f24ca318ab2bafc1c69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeleeEnemyController
-  moveSpeed: 6
+  moveSpeed: 3
   targetPlayer: {fileID: 0}
   agent: {fileID: 0}
   animator: {fileID: 0}
   enemy: {fileID: 0}
-  timeBetweenAttacks: 0.5
+  timeBetweenAttacks: 2
   playerLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
   attackRange: 2
 --- !u!195 &5259496583533953622
 NavMeshAgent:
@@ -12685,7 +12685,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 1.5
+  m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -12693,7 +12693,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!136 &595509005187659013
+--- !u!136 &6800714957696055568
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -12712,10 +12712,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.6
+  m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0.9, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &3304793297269552998
 GameObject:
   m_ObjectHideFlags: 0
