@@ -19,7 +19,7 @@ MonoBehaviour:
   maxLevel: 5
   icon: {fileID: 21300000, guid: 2be55834e2ff7b144a243413f2979787, type: 3}
   baseDamage: 100
-  baseCooldown: 5
+  baseCooldown: 10
   baseDuration: 1
   baseProjectileSpeed: 5
   baseSize: 1

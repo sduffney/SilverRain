@@ -68,17 +68,23 @@ public class GameManager : MonoBehaviour
 
         //Subscribe to events
         SceneManager.sceneLoaded += OnSceneLoaded;
+        PlayerHealth.onDie += GameOver;
+        HUDController.OnWinGame += GameOver;
     }
 
     //Unsubscribe from events
     public void OnDestroy()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
+        PlayerHealth.onDie -= GameOver;
+        HUDController.OnWinGame -= GameOver;
     }
 
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
+        PlayerHealth.onDie -= GameOver;
+        HUDController.OnWinGame -= GameOver;
     }
 
     //Get scene specific references
@@ -94,6 +100,7 @@ public class GameManager : MonoBehaviour
             playerStats = player.GetComponent<PlayerStats>();
             hudController = FindAnyObjectByType<HUDController>();
             if (hudController != null) { buffManager.cardParent = hudController.CardParent; }
+            ReleasePause();
         }
     }
 

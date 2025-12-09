@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class TutorialBehaviour : MonoBehaviour
 {
     [SerializeField]
@@ -8,14 +8,6 @@ public class TutorialBehaviour : MonoBehaviour
     public GameObject pasueUI;
     public void Back()
     {
-        if (mainUI != null)
-        {
-            mainUI.SetActive(true);
-        }
-        else if (pasueUI != null)
-        {
-            pasueUI.SetActive(true);
-        }
-        gameObject.SetActive(false);
+            SceneManager.LoadScene("MainMenu");
     }
 }

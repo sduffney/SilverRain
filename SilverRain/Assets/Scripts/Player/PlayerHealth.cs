@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -9,7 +11,7 @@ public class PlayerHealth : MonoBehaviour
 
     [Header("Events")]
     public UnityEvent onTakeDamage;
-    public UnityEvent onDie;
+    public static event Action<bool> onDie;
 
     public bool isInvincible = false;
 
@@ -57,8 +59,11 @@ public class PlayerHealth : MonoBehaviour
     private void Die()
     {
         // Death logic here
-        onDie?.Invoke();
+        onDie?.Invoke(false);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         Debug.Log("Player Died");
+        SceneManager.LoadScene("LevelSelector");
     }
 
     public float GetHealthPercentage()

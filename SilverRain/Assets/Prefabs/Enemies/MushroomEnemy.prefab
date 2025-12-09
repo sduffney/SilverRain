@@ -627,7 +627,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   scoreValue: 30
-  xpValue: 30
+  xpValue: 50
   damage: 500
 --- !u!114 &4061326125157589883
 MonoBehaviour:
