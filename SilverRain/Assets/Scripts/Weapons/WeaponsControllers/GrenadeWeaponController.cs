@@ -4,7 +4,8 @@ using UnityEngine;
 public class GrenadeWeaponController : WeaponController
 {
     [Header("Data & Prefab")]
-    public GameObject grenadePrefab;  // Prefab with Rigidbody + Grenade.cs
+    public GameObject grenadePrefab;
+    [SerializeField] private AudioClip attackSound;
 
     [Header("Throw Settings")]
     public float throwForce = 12f;
@@ -13,6 +14,7 @@ public class GrenadeWeaponController : WeaponController
     public float upwardOffset = 0.0f;
 
     [SerializeField] private Transform cam;
+    private AudioSource audioSource;
 
     private void Start()
     {
@@ -24,6 +26,8 @@ public class GrenadeWeaponController : WeaponController
         {
             Debug.LogError("GrenadeWeaponController: No MainCamera found. Tag your camera as MainCamera.");
         }
+
+        audioSource = gameObject.AddComponent<AudioSource>();
         gameObject.SetActive(false);
     }
 
@@ -58,6 +62,11 @@ public class GrenadeWeaponController : WeaponController
 
         GameObject grenade = Instantiate(grenadePrefab, spawnPos, spawnRot);
 
+        if (attackSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(attackSound);
+        }
+
         Rigidbody rb = grenade.GetComponent<Rigidbody>();
         if (rb == null)
         {
@@ -65,7 +74,6 @@ public class GrenadeWeaponController : WeaponController
             return;
         }
 
-        // Build throw direction: tuned in GrenadeData
         Vector3 throwDirection =
             (cam.forward * throwForce) +
             (cam.up * upwardForce);
@@ -73,7 +81,6 @@ public class GrenadeWeaponController : WeaponController
         rb.linearVelocity = throwDirection * 0.8f;
         rb.angularVelocity = Random.insideUnitSphere * 5f;
 
-        // Initialize grenade behaviour
         Grenade grenadeScript = grenade.GetComponent<Grenade>();
         if (grenadeScript != null)
         {

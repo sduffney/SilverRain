@@ -6,17 +6,20 @@ public class PlayerHealth : MonoBehaviour
     [Header("Health Settings")]
     public float maxHealth;
     public float currentHealth;
+    [SerializeField] private AudioClip hurtSound;
 
     [Header("Events")]
     public UnityEvent onTakeDamage;
     public UnityEvent onDie;
 
     public bool isInvincible = false;
+    private AudioSource audioSource;
 
     private void Start()
     {
         maxHealth = 100f * FindAnyObjectByType<PlayerStats>().maxHealth;
         currentHealth = maxHealth;
+        audioSource = gameObject.AddComponent<AudioSource>();
     }
 
     public void TakeDamage(float amount)
@@ -24,6 +27,12 @@ public class PlayerHealth : MonoBehaviour
         if (isInvincible) return;
         currentHealth -= amount;
         currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
+
+        if (hurtSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(hurtSound);
+        }
+
         onTakeDamage?.Invoke();
 
         if (currentHealth <= 0f)
@@ -56,7 +65,6 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die()
     {
-        // Death logic here
         onDie?.Invoke();
         Debug.Log("Player Died");
     }

@@ -1,20 +1,24 @@
 using System.Collections;
 using UnityEngine;
+
 public class SwordWeaponController : WeaponController
 {
     [SerializeField] private Transform player;
     [SerializeField] private Collider col;
     [SerializeField] private Renderer ren;
+    [SerializeField] private AudioClip attackSound;
 
     private float angle;
     private bool isAttacking = false;
+    private AudioSource audioSource;
 
     private void Start()
     {
-        //Ensure components arent null
         if (player == null) player = GameManager.Instance.Player.transform;
         if (col == null) col = gameObject.GetComponent<Collider>();
         if (ren == null) ren = gameObject.GetComponent<Renderer>();
+
+        audioSource = gameObject.AddComponent<AudioSource>();
 
         gameObject.SetActive(false);
     }
@@ -27,7 +31,7 @@ public class SwordWeaponController : WeaponController
         angle += 180f * Time.deltaTime;
         float rad = angle * Mathf.Deg2Rad;
 
-        float radius = GetSize();    // size includes PlayerStats.size
+        float radius = GetSize();
         Vector3 offset = new Vector3(Mathf.Cos(rad), 0, Mathf.Sin(rad)) * radius;
 
         transform.position = player.position + offset;
@@ -54,7 +58,7 @@ public class SwordWeaponController : WeaponController
 
     public override IEnumerator OnDuration()
     {
-        Attack(); // start orbit
+        Attack();
         float duration = GetDuration();
         if (duration > 0f)
             yield return new WaitForSeconds(duration);
@@ -66,7 +70,6 @@ public class SwordWeaponController : WeaponController
     {
         isAttacking = false;
 
-        //Disable collider and renderer
         if (col != null) col.enabled = false;
         if (ren != null) ren.enabled = false;
 
@@ -82,11 +85,15 @@ public class SwordWeaponController : WeaponController
 
     public override void Attack()
     {
-        //Enable collider and renderer
         if (col != null) col.enabled = true;
         if (ren != null) ren.enabled = true;
         isAttacking = true;
         angle = 0f;
+
+        if (attackSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(attackSound);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -96,7 +103,6 @@ public class SwordWeaponController : WeaponController
         var enemyHealth = other.GetComponent<EnemyHealth>() ?? other.GetComponentInParent<EnemyHealth>();
         if (enemyHealth != null)
         {
-            // GetDamage() already uses PlayerStats.attackDamage
             enemyHealth.TakeDamage(Mathf.RoundToInt(GetDamage()));
         }
     }
