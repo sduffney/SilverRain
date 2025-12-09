@@ -5,7 +5,10 @@ public class GunWeaponController : WeaponController
 {
     public Transform firePoint;
     public GameObject projectilePrefab;
+
+    [Header("Audio Settings")]
     [SerializeField] private AudioClip attackSound;
+    [Range(0f, 1f)][SerializeField] private float soundVolume = 0.5f; // Slider to control volume
 
     private Transform playerTrans;
     private Transform cam;
@@ -73,9 +76,10 @@ public class GunWeaponController : WeaponController
         Quaternion spawnRot = Quaternion.LookRotation(firePoint.forward, Vector3.up) * Quaternion.Euler(90f, 0f, 0f);
         var projObj = Instantiate(projectilePrefab, firePoint.position, spawnRot);
 
+        // Play sound with the specific volume
         if (attackSound != null && audioSource != null)
         {
-            audioSource.PlayOneShot(attackSound);
+            audioSource.PlayOneShot(attackSound, soundVolume);
         }
 
         var proj = projObj.GetComponent<Projectile>();

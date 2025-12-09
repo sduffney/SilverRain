@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float groundCheckRayLength = 1.1f;
     [SerializeField] private float gravityScale = 1f;
     [SerializeField] private float mouseSensitivity = 2f;
+    [SerializeField] private AudioClip jumpSound;
 
     [Header("Look Settings")]
     [SerializeField] private Transform cameraTransform;
@@ -21,22 +22,22 @@ public class PlayerController : MonoBehaviour
     private Vector2 movementInput;
     private Vector2 lookInput;
     private float xRotation = 0f;
+    private AudioSource audioSource;
 
     public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
 
     private void Start()
     {
-        //Get rigidbody and adjust settings
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         rb.useGravity = true;
 
-        //Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        audioSource = gameObject.AddComponent<AudioSource>();
     }
 
-    //Ground check
     public bool IsGrounded()
     {
         RaycastHit hit;
@@ -47,24 +48,6 @@ public class PlayerController : MonoBehaviour
         }
         return false;
     }
-
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Ground"))
-    //    {
-    //        isGrounded = true;
-    //        print("Grounded");
-    //    }
-    //}
-
-    //private void OnCollisionExit(Collision collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Ground"))
-    //    {
-    //        isGrounded = false;
-    //        print("Not Grounded");
-    //    }
-    //}
 
     private void FixedUpdate()
     {
@@ -84,7 +67,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Input System Callbacks
     public void OnMove(InputAction.CallbackContext context)
     {
         movementInput = context.ReadValue<Vector2>();
@@ -99,6 +81,11 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed && IsGrounded())
         {
+            if (jumpSound != null && audioSource != null)
+            {
+                audioSource.PlayOneShot(jumpSound);
+            }
+
             float jumpForce = Mathf.Sqrt(jumpHeight * -2 * (Physics.gravity.y * gravityScale));
             rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
         }
@@ -116,25 +103,19 @@ public class PlayerController : MonoBehaviour
 
     public void EnemyKilled(string enemyType)
     {
-        // Show kill info on HUD (if any)
         var hud = FindAnyObjectByType<HUDController>();
         if (hud != null)
         {
             hud.SpownKillInfo(enemyType);
         }
 
-        // Award XP for the kill
         var playerLevel = GetComponent<PlayerLevel>();
         var stats = GetComponent<PlayerStats>();
 
         if (playerLevel != null)
         {
-            // Base XP per kill – tweak or vary by enemyType if you want
             float baseXp = 10f;
-
-            // Use experienceMod from PlayerStats (1 = normal, >1 = more XP)
             float xpMod = (stats != null) ? stats.experienceMod : 1f;
-
             playerLevel.GainXP(baseXp * xpMod);
         }
     }
