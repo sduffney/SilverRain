@@ -1,8 +1,9 @@
-using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
-using System.Collections;
 using System;
+using System.Collections;
+using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class HUDController : MonoBehaviour
 {
@@ -27,14 +28,14 @@ public class HUDController : MonoBehaviour
 
     public Transform CardParent => cardParent;
 
-    private float timerRemaining = 300f;
+    private float timerRemaining = 90f;
     private bool isTimerRunning = true;
 
     private ConsoleManager consoleManager;
     private GameObject player;
 
     //Events
-    public static event Action OnWinGame;
+    public static event Action<bool> OnWinGame;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -101,8 +102,11 @@ public class HUDController : MonoBehaviour
             }
             else
             {
-                Debug.Log("Time's up!");
-                OnWinGame?.Invoke();
+                OnWinGame?.Invoke(true);
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                Debug.Log("Player Won");
+                SceneManager.LoadScene("LevelSelector");
                 ShowGameOverScreen(true);
             }
         }
